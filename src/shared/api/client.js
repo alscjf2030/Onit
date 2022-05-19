@@ -1,12 +1,15 @@
 import axios from "axios";
 
 const client = axios.create({
-    baseURL: 'URL',
+    baseURL: 'https://imonint.shop',
+    withCredentials: true,
 })
 
-export const setClient = (token) => {
-    client.defaults.headers.common['Authorization'] = `Bearer ${token}`
-}
+client.interceptors.request.use(function (config) {
+    const accessToken = localStorage.getItem('token')
+    config.headers.common['Authorization'] = `${accessToken}`;
+    return config;
+});
 
 export const getApi = (path, config) => {
     return client.get(path, config)
