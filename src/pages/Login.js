@@ -4,11 +4,13 @@ import {useNavigate, useParams} from 'react-router-dom'
 import styled from "styled-components";
 import Swal from "sweetalert2";
 
+import { KAKAO_AUTH_URL } from "../service/OAuth";
+import KakaoSymbol from "../img/icon/KakaoSymbol.svg"
 import {login, login2, setLoading} from "../redux/modules/user";
 import { LoginP } from "../img";
 import eyeOff from "../img/icon/eyeOff.svg";
 import eyeOn from "../img/icon/eyeOn.svg";
-// import KakaoButton from "../components/KakaoButton";
+import KakaoButton from "../components/KakaoButton";
 
 const Login = (props) => {
     const {join} = useParams();
@@ -104,14 +106,7 @@ const Login = (props) => {
                     >로그인
                     </button>
 
-                    {/* <KakaoButton/> */}
-
-                    {/*<KakaoBox>*/}
-                    {/*    <a href={KAKAO_AUTH_URL}>*/}
-                    {/*        <img src={KakaoSymbol}/>*/}
-                    {/*        카카오로 시작하기*/}
-                    {/*    </a>*/}
-                    {/*</KakaoBox>*/}
+                    <KakaoButton/>
                 </LoginBox>
 
                 <SignupBox>
