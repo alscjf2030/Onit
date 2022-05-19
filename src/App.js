@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
 
@@ -14,10 +14,11 @@ import Detail from "./pages/Detail";
 import PlanSetName from "./pages/PlanSetName";
 // import PastPlan from "./pages/PastPlan";
 // import EditPlan from "./pages/EditPlan";
-// import NotFound from "./pages/NotFound";
+import NotFound from "./pages/NotFound";
 
 
 function App() {
+
   return (
    <>
    <GlobalStyle/>
@@ -37,7 +38,9 @@ function App() {
         <Route path="/past" element={<PastPlan/>}/>
         <Route path="/edit/:planUrl" element={<EditPlan/>}/>
         <Route path="/users/kakao/callback" element={<OAuthHandler/>}/>
-        <Route path="*" element={<NotFound/>}/> */}
+         */
+        }
+        <Route path="*" element={<NotFound/>}/>
       </Routes>
    </>
   );

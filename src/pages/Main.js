@@ -12,6 +12,7 @@ import PlanList from '../components/PlanList';
 
 //redux
 import {logout} from "../redux/modules/user";
+import FCMtoken from "../components/FCMtoken";
 
 dayjs.locale('ko')
 
@@ -22,7 +23,7 @@ const Main = (props) => {
     const userData = useSelector(state => state.user.user_info)
     const resetStore = useResetStore()
     const [isOpen, setMenu] = useState(false);
-
+    console.log(userData)
     const logoutBtn = () => {
         localStorage.removeItem('token')
         resetStore()
@@ -39,6 +40,7 @@ const Main = (props) => {
 
     return (
         <Container>
+          <FCMtoken/>
             <Logo
                 className='logo'
                 onClick={() => {navigate('/main')}}

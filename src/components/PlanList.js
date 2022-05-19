@@ -32,7 +32,6 @@ const PlanList = (props) => {
             setPage(page + 1)
         }
     }
-
     useEffect(() => {
         if (userData) {
             dispatch(getPlan(1))
@@ -67,8 +66,8 @@ const PlanList = (props) => {
                 {planList.length > 0 ? (
                     <>
                         {planList.map((plan, idx) => {
-                            const planDate = dayjs(plan.planDate).format('YYYY년 MM월 DD일')
-                            const planTime = dayjs(plan.planDate).format('hh시 mm분')
+                            // const planDate = dayjs(plan.planDate).format('YYYY년 MM월 DD일')
+                            // const planTime = dayjs(plan.planDate).format('hh시 mm분')
                             return (
                                 <div className='lists'
                                      key={idx}
@@ -76,10 +75,9 @@ const PlanList = (props) => {
                                          navigate(`/detail/${plan.url}`)
                                      }}
                                 >
-                                    <h3>{planDate}</h3>
-                                    <h3>{planTime}</h3>
+                                    <h3>{plan.planDate}</h3>
                                     <p>{plan.planName}</p>
-                                    <p>{plan.locationDetail?.name}</p>
+                                    <p>{plan.address}</p>
                                     <p>{plan.penalty}</p>
                                 </div>
                             )
