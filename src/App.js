@@ -9,9 +9,10 @@ import SignUp from "./pages/SignUp";
 import CompleteSignup from "./pages/CompleteSignup";
 import Main from "./pages/Main";
 import AddPlans from "./pages/AddPlans";
-// import Detail from "./pages/Detail";
+import KakaoMap from "./shared/KakaoMap";
+import Detail from "./pages/Detail";
+import PlanSetName from "./pages/PlanSetName";
 // import PastPlan from "./pages/PastPlan";
-// import PlanSetName from "./pages/PlanSetName";
 // import EditPlan from "./pages/EditPlan";
 // import NotFound from "./pages/NotFound";
 
@@ -29,9 +30,10 @@ function App() {
         <Route path="/complete" element={<CompleteSignup/>}/>
         <Route path="/main" element={<Main/>}/>
         <Route path="/add" element={<AddPlans/>}/>
-        {/*
+        <Route path="/test" element={<KakaoMap/>}/>
         <Route path="/detail/:planUrl" element={<Detail/>}/>
-        <Route path="/details/:url" element={<PlanSetName islogin={islogin} userNick={userNick} />} />
+        <Route path="/details/:url" element={<PlanSetName/>} />
+        {/*
         <Route path="/past" element={<PastPlan/>}/>
         <Route path="/edit/:planUrl" element={<EditPlan/>}/>
         <Route path="/users/kakao/callback" element={<OAuthHandler/>}/>
