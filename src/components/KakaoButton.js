@@ -9,7 +9,7 @@ const KakaoButton = (props) => {
         <Container>
             <KakaoBox>
                 <a href={KAKAO_AUTH_URL}>
-                    <img src={KakaoSymbol}/>
+                    <img alt='kakao login' src={KakaoSymbol}/>
                     카카오로 시작하기
                 </a>
             </KakaoBox>

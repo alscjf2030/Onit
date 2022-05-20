@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-import { Input, Grid, Button } from '../elements';
+import { Grid } from '../elements';
 import theme from '../styles/theme';
 import PlanName from '../components/PlanName';
 import SetLocation from '../components/SetLocation';
@@ -11,8 +11,6 @@ import KakaoMap from '../shared/KakaoMap';
 import { useDispatch } from 'react-redux';
 import { addPlan } from '../redux/modules/plan';
 import {useNavigate} from "react-router-dom";
-import dayjs from "dayjs";
-import {PlanComplete} from "../img";
 
 const AddPlans = (props) => {
     const navigate = useNavigate()

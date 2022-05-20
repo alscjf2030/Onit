@@ -17,6 +17,9 @@ const FCMtoken = (props) => {
 
     useEffect(() => {
         if (username) {
+            if(localStorage.getItem('FCMtoken')) {
+                return
+            }
             getToken(messaging, {
                 vapidKey: "BLg2NeG06gdfa1DbdDn1E6VFSD8a82zuaxgPXS5drdMaqUSf_lY421iglOkbev53HaDsl2jkw5vxgM" +
                         "aA4b6wfug"

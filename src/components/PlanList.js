@@ -23,7 +23,6 @@ const PlanList = (props) => {
     const totalPage = useSelector(state => state.plan.totalPage);
     const loading = useSelector((state) => state.plan.loading)
     const planList = useSelector(state => state.plan.plans);
-
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight
         const scrollTop = document.documentElement.scrollTop
@@ -85,7 +84,7 @@ const PlanList = (props) => {
                                     "오전 " + time.join("시 ") + "분까지"
                                     }</h3>
                                     <p>{plan.planName}</p>
-                                    <p>{plan.address}</p>
+                                    <p>{plan.locationName}</p>
                                     <p>{plan.penalty}</p>
                                 </div>
                             )
