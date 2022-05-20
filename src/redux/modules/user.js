@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import {getApi, postApi} from "../../shared/api/client";
+import {getApi, getApi2, postApi} from "../../shared/api/client";
 import Swal from "sweetalert2";
 
 const initialState = {
@@ -155,7 +155,7 @@ export const kakaoLogin = createAsyncThunk(
     async ({code, navigate}, {rejectedWithValue}) => {
         console.log(code)
         try {
-            const res = await getApi(`users/kakao/callback?code=${code}`,{
+            const res = await getApi2(`users/kakao/callback?code=${code}`,{
                 withCredentials: true,
             })
             console.log(res)
