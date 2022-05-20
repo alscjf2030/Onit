@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
 
 //pages
@@ -15,35 +15,37 @@ import PlanSetName from "./pages/PlanSetName";
 // import PastPlan from "./pages/PastPlan";
 // import EditPlan from "./pages/EditPlan";
 import NotFound from "./pages/NotFound";
+import KakaoHandler from "./service/KakaoHandler";
 
 
 function App() {
 
-  return (
-   <>
-   <GlobalStyle/>
-      <Routes>
-        <Route path='/' element={<Home/>} />
-        <Route path="/login" element={<Login/>}>
-          <Route path=":join" element={<Login/>} />
-        </Route>
-        <Route path="/signup" element={<SignUp/>}/>
-        <Route path="/complete" element={<CompleteSignup/>}/>
-        <Route path="/main" element={<Main/>}/>
-        <Route path="/add" element={<AddPlans/>}/>
-        <Route path="/test" element={<KakaoMap/>}/>
-        <Route path="/detail/:planUrl" element={<Detail/>}/>
-        <Route path="/details/:url" element={<PlanSetName/>} />
-        {/*
+    return (
+        <>
+            <GlobalStyle/>
+            <Routes>
+                <Route path='/' element={<Home/>}/>
+                <Route path="/login" element={<Login/>}>
+                    <Route path=":join" element={<Login/>}/>
+                </Route>
+                <Route path="/signup" element={<SignUp/>}/>
+                <Route path="/complete" element={<CompleteSignup/>}/>
+                <Route path="/main" element={<Main/>}/>
+                <Route path="/add" element={<AddPlans/>}/>
+                <Route path="/test" element={<KakaoMap/>}/>
+                <Route path="/detail/:planUrl" element={<Detail/>}/>
+                <Route path="/details/:url" element={<PlanSetName/>}/>
+                <Route path="/users/kakao/callback" element={<KakaoHandler/>}/>
+                {/*
         <Route path="/past" element={<PastPlan/>}/>
         <Route path="/edit/:planUrl" element={<EditPlan/>}/>
         <Route path="/users/kakao/callback" element={<OAuthHandler/>}/>
          */
-        }
-        <Route path="*" element={<NotFound/>}/>
-      </Routes>
-   </>
-  );
+                }
+                <Route path="*" element={<NotFound/>}/>
+            </Routes>
+        </>
+    );
 }
 
 export default App;

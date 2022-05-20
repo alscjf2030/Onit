@@ -23,7 +23,7 @@ const Main = (props) => {
     const userData = useSelector(state => state.user.user_info)
     const resetStore = useResetStore()
     const [isOpen, setMenu] = useState(false);
-    console.log(userData)
+    // console.log(userData)
     const logoutBtn = () => {
         localStorage.removeItem('token')
         resetStore()

@@ -153,12 +153,14 @@ export const getUserToken = createAsyncThunk(
 export const kakaoLogin = createAsyncThunk(
     'user/kakaoLogin',
     async ({code, navigate}, {rejectedWithValue}) => {
+        console.log(code)
         try {
             const res = await getApi(`users/kakao/callback?code=${code}`,{
                 withCredentials: true,
             })
             console.log(res)
-            const ACCESS_TOKEN = res.data.accessToken;
+            const ACCESS_TOKEN = res.headers.authorization;
+            // const ACCESS_TOKEN2 = res.data.accessToken;
             localStorage.setItem('token', ACCESS_TOKEN);
             navigate('/main')
         } catch (err) {
