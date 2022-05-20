@@ -66,8 +66,9 @@ const PlanList = (props) => {
                 {planList.length > 0 ? (
                     <>
                         {planList.map((plan, idx) => {
-                            // const planDate = dayjs(plan.planDate).format('YYYY년 MM월 DD일')
-                            // const planTime = dayjs(plan.planDate).format('hh시 mm분')
+                            const planDate = plan.planDate.split(" ")
+                            const date = planDate.splice(0, 3).join(" ")
+                            const time = planDate.pop().split(":")
                             return (
                                 <div className='lists'
                                      key={idx}
@@ -75,7 +76,14 @@ const PlanList = (props) => {
                                          navigate(`/detail/${plan.url}`)
                                      }}
                                 >
-                                    <h3>{plan.planDate}</h3>
+                                    <h3>{date}</h3>
+                                    <h3>{
+                                    time[0] > 12 ?
+                                    (time[0] -= 12,
+                                    "오후 " + time.join("시 ") + "분까지")
+                                    :
+                                    "오전 " + time.join("시 ") + "분까지"
+                                    }</h3>
                                     <p>{plan.planName}</p>
                                     <p>{plan.address}</p>
                                     <p>{plan.penalty}</p>

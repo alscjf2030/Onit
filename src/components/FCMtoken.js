@@ -11,8 +11,10 @@ import { messaging } from '../firebase';
 const FCMtoken = (props) => {
     const dispatch = useDispatch();
     const username = useSelector(state => state.user.user_info?.nickname)
+
     //이게 있으면 모바일이 하얀 화면
     // const browsernoti = Notification.permission === 'granted' ? true : false;
+
     useEffect(() => {
         if (username) {
             getToken(messaging, {
