@@ -9,18 +9,19 @@ self.addEventListener('fetch', e => {
   // console.log("데이터 요청!(fetch)", e.request);
 });
 
-self.addEventListener('message', event => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    // console.log('message', event);
-    self.skipWaiting();
-  }
-});
+// self.addEventListener('message', event => {
+//   if (event.data && event.data.type === 'SKIP_WAITING') {
+//     // console.log('message', event);
+//     self.skipWaiting();
+//   }
+// });
 // Any other custom service worker logic can go here.
 self.addEventListener('push', function (event) {
   console.log(event);
-  const title = event.data
+  console.log(event.data.json())
+  const title = event.data.json().notification.title
   const options = {
-    body: event.data,
+    body: event.data.json().notification.body,
     icon: 'favicon.ico',
   };
 
