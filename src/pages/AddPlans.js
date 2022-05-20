@@ -110,7 +110,11 @@ const AddPlans = (props) => {
                 <PlanDiv>
                     <p>{name}</p>
                     <h2>{year}년 {month}월 {day}일</h2>
-                    <h2>{hour}시 {minute}분</h2>
+                    {parseInt(hour) > 12 ?
+                    <h2>오후 {hour-12}시 {minute}분</h2>
+                    :
+                    <h2>오전 {hour}시 {minute}분</h2>
+                    }
                     <p>{place.address}</p>
                     <p>{penalty}</p>
                     <KakaoMap place={place.name} lat={place.lat} lng={place.lng}/>
