@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { dest_marker } from '../img';
 import { useNavigate } from 'react-router-dom';
 
-const Test = (props) => {
+const DetailMap = (props) => {
     const nav = useNavigate();
     const [state, setState] = useState({
         center: {
@@ -77,4 +77,4 @@ color: white;
 border: 0px;
 border-radius: 7px;
 `;
-export default Test;
+export default DetailMap;

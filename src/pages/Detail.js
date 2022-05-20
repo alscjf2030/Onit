@@ -5,7 +5,7 @@ import {editPlan, deletePlan, getOnePlan, joinPlan} from "../redux/modules/plan"
 import {useDispatch, useSelector} from "react-redux";
 import {ReactComponent as LeftArrow } from '../img/icon/arrowl.svg';
 import { deleteIcon, editIcon } from "../img";
-import Test from "./Test";
+import DetailMap from "./DetailMap";
 import dayjs from "dayjs";
 import Swal from "sweetalert2";
 
@@ -17,9 +17,8 @@ const Detail = (props) => {
     const plan = useSelector(state => state.plan.showplan)
     console.log(plan)
     const token = localStorage.getItem("token")
-    const planDay = dayjs(plan?.planDate).format('YYYY년 MM월 DD일')
-    const planTime = dayjs(plan?.planDate).format('hh시 mm분')
-    console.log(plan.planDate)
+    const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd')
+    const planTime = dayjs(plan?.planDate).format('HH시 mm분')
     const handleShared = () => {
         if (navigator.share) {
             navigator.share({
@@ -113,7 +112,7 @@ const Detail = (props) => {
             </ScheduleBox>
             <MapBox>
                 {plan.locationDetail ? (
-                    <Test
+                    <DetailMap
                         {...plan.locationDetail}
                         ws={planUrl}
                     />
