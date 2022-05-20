@@ -228,7 +228,7 @@ const ShowMenu = styled.div`
   .member {
     position: relative;
     width: 80%;
-    height: 10%;
+    height: 85px;
     border-radius: 10px;
     background-color: #fff;
     display: flex;
@@ -254,7 +254,7 @@ const ShowMenu = styled.div`
 
   .past-plan {
     width: 80%;
-    height: 6%;
+    height: 40px;
     background-color: #fff;
     border-radius: 10px;
     display: flex;
@@ -266,7 +266,7 @@ const ShowMenu = styled.div`
 
   .logout {
     width: 80%;
-    height: 6%;
+    height: 40px;
     background-color: #fff;
     border-radius: 10px;
     display: flex;

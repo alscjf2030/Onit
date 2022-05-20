@@ -7,6 +7,7 @@ import NotFoundLogo from './NotFoundLogo.svg';
 import deleteIcon from './icon/delete-icon.svg';
 import editIcon from './icon/edit-icon.svg';
 import leftArrow from './icon/arrowl.svg'
+import PlanComplete from './PlanComplete.svg'
 
 export {
     dest_marker,
@@ -18,4 +19,5 @@ export {
     deleteIcon,
     editIcon,
     leftArrow,
+    PlanComplete,
 };

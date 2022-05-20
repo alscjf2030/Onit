@@ -11,6 +11,8 @@ import KakaoMap from '../shared/KakaoMap';
 import { useDispatch } from 'react-redux';
 import { addPlan } from '../redux/modules/plan';
 import {useNavigate} from "react-router-dom";
+import dayjs from "dayjs";
+import {PlanComplete} from "../img";
 
 const AddPlans = (props) => {
     const navigate = useNavigate()
@@ -88,31 +90,48 @@ const AddPlans = (props) => {
     const year = date.split('-')[0]
     const month = date.split('-')[1]
     const day = date.split('-')[2]
-    const hour = time.split(':')[0]
+    let hour = time.split(':')[0]
     const minute = time.split(':')[1]
 
     return (
-        <React.Fragment>
-            <Grid padding="16px">
+        <Container>
+            <div style={{
+                position:'relative',
+                textAlign: 'center',
+                padding:"16px",
+            }} >
                 <LeftArrow
-                    size="24px"
+                    style={{
+                        position: 'absolute',
+                        display: 'flex',
+                        justifyContent: 'flex-start',
+                        alignItems: 'flex-start',
+                        top: 8
+                    }}
+                    size="100px"
                     cursor="pointer"
                     onClick={goBack}
                 />
-            </Grid>
-            <Grid padding="16px">
                 <p
                     style={{
                         fontSize: '24px',
                         fontWeight: 'bold',
-                        paddingBottom: '16px',
                     }}>약속이 생성되었습니다!</p>
+            </div>
+            <Grid padding="16px">
+
                 <PlanDiv>
-                    <p>{name}</p>
-                    <h2>{year}년 {month}월 {day}일</h2>
-                    <h2>{hour}시 {minute}분</h2>
-                    <p>{place.address}</p>
-                    <p>{penalty}</p>
+                    <Grid padding="10px">
+                        <p>{name}</p>
+                        <br/>
+                        <h2>{year}년 {month}월 {day}일</h2>
+                        {hour > 12 ? <h2> 오후 {hour - 12} 시 {minute} 분 입니다 </h2> :
+                            <h2>오전 {hour} 시 {minute} 분 입니다</h2>}
+                        <br/>
+                        <p>{place.address}</p>
+                        <br/>
+                        <p>{penalty}</p>
+                    </Grid>
                     <KakaoMap place={place.name} lat={place.lat} lng={place.lng}/>
                 </PlanDiv>
             </Grid>
@@ -129,24 +148,33 @@ const AddPlans = (props) => {
                     }}
                     onClick={create}>완성!</button>
             </Grid>
-            </React.Fragment>
+            </Container>
         )
 }
 
-
 export default AddPlans;
 
+const Container = styled.div`
+  min-height: 100vh;
+  background-color: ${theme.color.gray6};
+`
+
 const PlanDiv = styled.div`
-  p {
-    padding-bottom: 8px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  padding: 6px;
+  height: 75vh;
+  
+  p:first-of-type {
+    font-weight: bold;
   }
-  p + h2 {
-    padding-bottom: 8px;
+  h2 {
     font-size: 20px;
     font-weight: bold;
   }
   h2 + h2 {
-    padding-bottom: 8px;
+    padding-top: 5px;
     font-size: 20px;
     font-weight: bold;
   }

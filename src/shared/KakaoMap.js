@@ -21,7 +21,7 @@ const KakaoMap = (props) => {
       }}
       style={{
         width: "100%",
-        height: "250px",
+        height: "67.5%",
       }}
       level={3}
       onCreate={setMap}

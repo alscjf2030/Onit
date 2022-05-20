@@ -30,6 +30,7 @@ const color = {
   gray3: '#C4C4C4',
   gray4: '#9E9E9E',
   gray5: '#E9E9E9',
+  gray6: '#eee',
   orange: '#F84914',
   green: '#A1ED00',
   black: '#292929',

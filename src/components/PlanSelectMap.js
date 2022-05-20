@@ -141,7 +141,7 @@ const PlanSelectMap = props => {
               }}
               style={{
                 width: '90%',
-                height: 'calc(97% - 100px)',
+                height: '80%',
                 margin: 'auto'
               }}
               level={3}
