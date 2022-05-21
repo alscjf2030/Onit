@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
-import NotFoundLogo from '../img/NotFoundLogo.svg'
+import { NotFoundLogo } from '../img';
 
 const NotFound = (props) => {
 
@@ -10,7 +10,7 @@ const NotFound = (props) => {
     return (
         <Container>
             <ImgBox>
-                <img src={NotFoundLogo}/>
+                <img alt='error page' src={NotFoundLogo}/>
             </ImgBox>
             <h2>빈 페이지를 발견하셨어요..!</h2>
             <p>페이지 주소를 잘못 입력하셨거나</p>
@@ -28,7 +28,7 @@ export default NotFound;
 
 const Container = styled.div`
   min-height: 100vh;
-  
+
   h2 {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -36,7 +36,7 @@ const Container = styled.div`
     font-size: 20px;
     color: #EB7567;
   }
-  
+
   p {
     padding-left: 40px;
     padding-bottom: 5px;
@@ -46,7 +46,7 @@ const Container = styled.div`
 const ImgBox = styled.div`
   width: 100%;
   height: 50%;
-  
+
   img {
     width: 70%;
     height: 70%;
@@ -61,7 +61,7 @@ const ButtonBox = styled.div`
   justify-content: center;
   flex-direction: row;
   align-items: center;
-  
+
   button {
     background-color: #eee;
     border: none;
@@ -71,7 +71,7 @@ const ButtonBox = styled.div`
     width: 35%;
     font-weight: bold;
   }
-  
+
   button:last-of-type {
     background-color: #EB7567;
   }

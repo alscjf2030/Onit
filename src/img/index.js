@@ -1,13 +1,13 @@
 import dest_marker from './map/dest_marker.png'
 import my_marker from './map/my_marker.png'
-import OnBoard from './OnBoard.svg';
-import Complete from './Complete.svg';
-import LoginP from './Login.svg';
-import NotFoundLogo from './NotFoundLogo.svg';
+import OnBoard from './OnBoard.png';
+import Complete from './Complete.png';
+import LoginP from './Login.png';
+import NotFoundLogo from './NotFoundLogo.png';
 import deleteIcon from './icon/delete-icon.svg';
 import editIcon from './icon/edit-icon.svg';
 import leftArrow from './icon/arrowl.svg'
-import PlanComplete from './PlanComplete.svg'
+import PlanComplete from './PlanComplete.svg';
 
 export {
     dest_marker,
