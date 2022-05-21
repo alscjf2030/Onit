@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useNavigate} from 'react-router-dom';
-import {ReactComponent as Logo} from '../img/icon/logo-619.svg'
 import { OnBoard } from '../img';
-// import KakaoButton from "../components/KakaoButton";
+import Logo from '../img/Logo.svg'
+import KakaoButton from "../components/KakaoButton";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -14,14 +14,12 @@ const Home = () => {
                 <h3>만들고, 공유하고, 확인하는</h3>
                 <h3>모임 약속 공유 플랫폼</h3>
             </TitleBox>
-
-            <Logo alt='logo' className='logo'/>
-
+              <img alt='logo' className='logo' src={Logo}/>
             <OnBoardingBox>
-                <img alt='cover'src={OnBoard}/>
+                <img alt='cover' src={OnBoard}/>
             </OnBoardingBox>
-
             <LoginDiv>
+              <KakaoButton/>
                 <LoginBox>
                     <button
                         onClick={() => {
@@ -30,8 +28,6 @@ const Home = () => {
                     >아이디로 로그인하기
                     </button>
                 </LoginBox>
-
-                {/* <KakaoButton/> */}
                 <SignupBox>
                     <span>아직 회원이 아니신가요?</span>
                     <p onClick={() => {navigate('/signup')}}>회원가입하기</p>
@@ -50,15 +46,16 @@ const Container = styled.div`
   .logo {
     width: 30%;
     margin-left: 35px;
+    padding-bottom: 20px;
   }
 `
 
 const TitleBox = styled.div`
   width: 100%;
-  padding: 50px 0 30px 35px;
+  padding: 100px 0 20px 35px;
 
   h3 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     padding-bottom: 10px;
   }
@@ -71,6 +68,7 @@ const OnBoardingBox = styled.div`
   img {
     width: 100%;
     height: 100%;
+    margin: 40px 0px 30px 0px;
   }
 `
 
@@ -81,36 +79,6 @@ const LoginDiv = styled.div`
   justify-content: center;
   align-items: center;
 `
-// const KakaoBox = styled.div`
-//   position: relative;
-//   background-color: #FEE500;
-//   display: flex;
-//   width: 90%;
-//   margin-bottom: 15px;
-//   border: none;
-//   border-radius: 10px;
-//   cursor: pointer;
-
-//   a {
-//     width: 100%;
-//     height: 40px;
-//     color: black;
-//     font-size: 14px;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     text-decoration-line: none;
-//     font-weight: bold;
-//   }
-
-//   img {
-//     position: absolute;
-//     left: 10px;
-//     width: 40px;
-//     height: 40px;
-//   }
-// `
-
 const LoginBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -138,7 +106,8 @@ const SignupBox = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin-bottom: 15px;
+  margin-top: 16px;
+  padding-bottom: 16px;
 
   span {
     display: flex;

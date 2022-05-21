@@ -10,7 +10,7 @@ const KakaoButton = (props) => {
             <KakaoBox>
                 <a href={KAKAO_AUTH_URL}>
                     <img alt='kakao login' src={KakaoSymbol}/>
-                    카카오로 시작하기
+                    카카오톡으로 간편 로그인
                 </a>
             </KakaoBox>
         </Container>
@@ -25,14 +25,13 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 14px auto;
 `
 
 const KakaoBox = styled.div`
   position: relative;
   background-color: #FEE500;
   width: 100%;
-  margin-bottom: 15px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -50,9 +49,8 @@ const KakaoBox = styled.div`
   }
 
   img {
-    position: absolute;
-    left: 10px;
     width: 24px;
     height: 24px;
+    margin: 8px;
   }
 `
