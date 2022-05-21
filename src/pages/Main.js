@@ -93,7 +93,7 @@ const Main = (props) => {
                      style={{
                     backgroundImage: `url(${userData?.profileImg})`,
                 }}/>
-                <p>{userData?.nickname || '손'} 님 <br/>{nowDate} 입니다.</p>
+                <p>{userData.nickname ? userData.nickname : '손'} 님 <br/>{nowDate} 입니다.</p>
             </UserInfo>
             <PlanList/>
         </Container>

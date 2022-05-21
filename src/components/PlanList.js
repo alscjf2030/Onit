@@ -62,7 +62,6 @@ const PlanList = (props) => {
         return 'loading...'
     }
 
-    console.log(planList)
     return (
         <>
             <List>

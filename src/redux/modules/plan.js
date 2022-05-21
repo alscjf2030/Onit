@@ -60,7 +60,6 @@ export const getHistoryPlan = createAsyncThunk(
 export const addPlan = createAsyncThunk(
     'plan/addPlan',
     async ({data, navigate}, {rejectedWithValue}) => {
-        console.log(data)
         try {
             const res = await postApi('/member/plan', data)
             navigate('/main')
@@ -86,7 +85,7 @@ export const joinPlan = createAsyncThunk(
             })
             return res.data
         } catch (err) {
-            console.log(err)
+            console.log(err.response.data.error)
             return rejectWithValue(err.response)
         }
     }

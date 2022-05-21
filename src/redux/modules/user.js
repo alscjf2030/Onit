@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {getApi, getApi2, postApi} from "../../shared/api/client";
+import history from "../../index"
 import Swal from "sweetalert2";
 
 const initialState = {
@@ -144,19 +145,21 @@ export const getUserToken = createAsyncThunk(
 
 export const kakaoLogin = createAsyncThunk(
     'user/kakaoLogin',
-    async ({code, navigate}, {rejectedWithValue}) => {
+    async (code, {rejectedWithValue}) => {
         try {
-            const res = await getApi(`users/kakao/callback?code=${code}`,{
-            })
-            console.log(res)
-            if(res.data.authorization){
-            const ACCESS_TOKEN = res.data.authorization;
+            const res = await getApi(`/users/kakao/callback?code=${code}`)
+            if(res.headers.authorization){
+            const ACCESS_TOKEN = res.headers.authorization;
             localStorage.setItem('token', ACCESS_TOKEN);
-            navigate('/main')}
+            history.push("/main");
+            return res.data
+            } else {
+                history.push("/login")
+            }
             return
         } catch (err) {
             console.log("카카오 로그인 실패")
-            navigate('/login')
+            history.push("/login")
             return rejectedWithValue(err)
         }
     }
@@ -206,6 +209,9 @@ export const userSlice = createSlice({
         [getUserToken.fulfilled]: (state, action) => {
             state.is_login = true
         },
+        [kakaoLogin.fulfilled]: (state, action) => {
+            state.user_info = action.payload
+        }
     },
 })
 
