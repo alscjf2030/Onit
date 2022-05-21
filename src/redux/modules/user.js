@@ -12,9 +12,7 @@ export const signUp = createAsyncThunk(
     'user/signup',
     async ({data, navigate}, {rejectedWithValue}) => {
         try {
-            const res = await postApi('/user/signup', data, {
-                withCredentials: true,
-            })
+            const res = await postApi('/user/signup', data)
             console.log(res.data)
             Swal.fire({
                 position: 'center',
@@ -40,9 +38,7 @@ export const login = createAsyncThunk(
     'user/login',
     async ({data, navigate}, {rejectedWithValue}) => {
         try {
-            const res = await postApi('/user/login', data, {
-                withCredentials: true,
-            })
+            const res = await postApi('/user/login', data)
             console.log(res)
             Swal.fire({
                 position: 'center',
@@ -65,9 +61,7 @@ export const login2 = createAsyncThunk(
     'user/login',
     async ({data, join, navigate}, {rejectedWithValue}) => {
         try {
-            const res = await postApi('/user/login', data, {
-                withCredentials: true,
-            })
+            const res = await postApi('/user/login', data)
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -136,9 +130,7 @@ export const getUserToken = createAsyncThunk(
     'user/getUserToken',
     async (_, {rejectedWithValue}) => {
         try {
-            const res = await getApi('/users/kakao/callback', {
-                withCredentials: true,
-            })
+            const res = await getApi('/users/kakao/callback')
             console.log(res)
             return {
                 data: res.data.data,
@@ -154,16 +146,16 @@ export const kakaoLogin = createAsyncThunk(
     'user/kakaoLogin',
     async ({code, navigate}, {rejectedWithValue}) => {
         try {
-            const res = await getApi2(`users/kakao/callback?code=${code}`,{
-                withCredentials: true,
+            const res = await getApi(`users/kakao/callback?code=${code}`,{
             })
             console.log(res)
-            const ACCESS_TOKEN = res.headers.authorization;
-            // const ACCESS_TOKEN2 = res.data.accessToken;
+            if(res.data.authorization){
+            const ACCESS_TOKEN = res.data.authorization;
             localStorage.setItem('token', ACCESS_TOKEN);
-            navigate('/main')
+            navigate('/main')}
+            return
         } catch (err) {
-            console.log(err)
+            console.log("카카오 로그인 실패")
             navigate('/login')
             return rejectedWithValue(err)
         }

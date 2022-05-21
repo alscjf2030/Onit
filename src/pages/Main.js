@@ -23,7 +23,6 @@ const Main = (props) => {
     const userData = useSelector(state => state.user.user_info)
     const resetStore = useResetStore()
     const [isOpen, setMenu] = useState(false);
-    // console.log(userData)
     const logoutBtn = () => {
         localStorage.removeItem('token')
         resetStore()
@@ -224,7 +223,6 @@ const ShowMenu = styled.div`
   height: 100%;
   position: fixed;
   right: 0;
-  //top: 40px;
   top: 0;
   padding: 10px;
   transform: ${({isOpen}) => `translateX(${isOpen ? 0 : '100%'})`};
@@ -233,6 +231,7 @@ const ShowMenu = styled.div`
   .side-bar-header {
     display: flex;
     justify-content: flex-end;
+    padding: 5px 0px 30px 0px;
   }
 
   .member {

@@ -35,9 +35,9 @@ function App() {
                 <Route path="/test" element={<KakaoMap/>}/>
                 <Route path="/detail/:planUrl" element={<Detail/>}/>
                 <Route path="/details/:url" element={<PlanSetName/>}/>
-                <Route path="/users/kakao/callback" element={<KakaoHandler/>}/>
                 <Route path="/past" element={<PastPlan/>}/>
                 <Route path="/edit/:planUrl" element={<EditPlan/>}/>
+                <Route path="/oauth/callback/kakao" element={<KakaoHandler/>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
         </>

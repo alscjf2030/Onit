@@ -8,7 +8,6 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   // console.log("데이터 요청!(fetch)", e.request);
 });
-
 // self.addEventListener('message', event => {
 //   if (event.data && event.data.type === 'SKIP_WAITING') {
 //     // console.log('message', event);

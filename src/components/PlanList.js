@@ -6,10 +6,11 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 import 'dayjs/locale/ko'
 
-import {Text} from "../elements";
+
 import theme from "../styles/theme";
 import {ReactComponent as Plus} from '../img/icon/Plus.svg'
-
+import {ReactComponent as Share} from '../img/icon/share-icon.svg'
+import {bomb} from '../img'
 import {getMorePlan, getPlan, setLoading} from "../redux/modules/plan";
 
 dayjs.locale('ko')
@@ -31,6 +32,7 @@ const PlanList = (props) => {
             setPage(page + 1)
         }
     }
+
     useEffect(() => {
         if (userData) {
             dispatch(getPlan(1))
@@ -59,6 +61,8 @@ const PlanList = (props) => {
     if (!planList.length && loading === 'pending') {
         return 'loading...'
     }
+
+    console.log(planList)
     return (
         <>
             <List>
@@ -67,7 +71,19 @@ const PlanList = (props) => {
                         {planList.map((plan, idx) => {
                             const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd')
                             const planTime = dayjs(plan?.planDate).format('A hh시 mm분')
-
+                            const handleShared = () => {
+                                if (navigator.share) {
+                                    navigator.share({
+                                        title: plan.planName,
+                                        text: plan.planName,
+                                        url: `https://imonit.co.kr/detail/${plan.url}`
+                                    })
+                                        .then(() => console.log('성공'))
+                                        .catch((err) => console.log(err))
+                                } else {
+                                    alert("공유하기가 지원되지 않는 환경 입니다.")
+                                }
+                            }
                             return (
                                 <div className='lists'
                                      key={idx}
@@ -75,11 +91,22 @@ const PlanList = (props) => {
                                          navigate(`/detail/${plan.url}`)
                                      }}
                                 >
-                                    <h3>{planDay}</h3>
+                                    <Content>
+                                        <h3>{planDay}</h3>
+                                        <Share
+                                            style={{
+                                                marginLeft: "auto"
+                                            }}
+                                            onClick={handleShared}
+                                        />
+                                    </Content>
                                     <h3>{planTime}</h3>
                                     <p>{plan.planName}</p>
                                     <p>{plan.locationName}</p>
-                                    <p>{plan.penalty}</p>
+                                    <Penalty>
+                                        <img alt='penalty icon' src={bomb}/>
+                                        <span>{plan.penalty}</span>
+                                    </Penalty>
                                 </div>
                             )
                         })}
@@ -112,9 +139,27 @@ const PlanList = (props) => {
 
 export default PlanList;
 
+const Content = styled.div`
+display: flex;
+align-items: center;
+`;
+
+const Penalty = styled.div`
+display: flex;
+background: ${theme.color.gray5};
+border-radius: 9px;
+padding: 2px 8px;
+width: fit-content;
+align-items: center;
+
+span {
+    font-size: 12px;
+    margin: 0px 5px;
+}
+`;
+
 const List = styled.div`
-  padding: 0 30px;
-  margin-bottom: 30px;
+  padding: 30px 30px;
   overflow: hidden;
   //text-align: center;
   overflow-y: scroll;
@@ -137,17 +182,18 @@ const List = styled.div`
 
   .lists:first-of-type {
     display: flex;
-    justify-content: center;
     flex-direction: column;
 
     background-color: ${theme.color.green};
     width: 100%;
     height: 25vh;
     font-size: 20px;
+    box-shadow: 0 0 15px #d1d1d1;
   }
 
   .lists:first-of-type > h3 {
-    font-size: 24px;
+    font-size: 20px;
+    padding-bottom: 15px;
   }
 
   .lists {
@@ -158,16 +204,13 @@ const List = styled.div`
     border-radius: 10px;
     padding: 16px 10px;
     margin-bottom: 16px;
+    box-shadow: 0 0 15px #d1d1d1;
   }
 
   h3 {
-    padding-bottom: 8px;
     font-weight: bold;
     font-size: 20px;
-  }
-
-  h3 + h3 {
-    padding-bottom: 16px;
+    padding-bottom: 5px;
   }
 
   p {
@@ -181,7 +224,7 @@ const List = styled.div`
     margin-top: 130px;
     margin-bottom: 30px;
   }
-  
+
   .no-list > p {
     font-size: 14px;
     color: ${theme.color.gray1};
