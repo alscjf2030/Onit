@@ -90,8 +90,11 @@ const Main = (props) => {
                 </ShowMenu>
             </HeadBox>
             <UserInfo>
-                <p>{userData?.nickname || '손'} 님</p>
-                <p>{nowDate} 입니다.</p>
+                <div className='member-profile'
+                     style={{
+                    backgroundImage: `url(${userData?.profileImg})`,
+                }}/>
+                <p>{userData?.nickname || '손'} 님 <br/>{nowDate} 입니다.</p>
             </UserInfo>
             <PlanList/>
         </Container>
@@ -194,16 +197,23 @@ const HeadBox = styled.div`
 const UserInfo = styled.div`
   background-color: #eee;
   width: 100%;
-  padding: 10px 20px;
-  margin-bottom: 30px;
+  padding: 10px 10px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
 
   p: first-of-type {
-    font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
   }
-
-    p + p {
-    padding-top: 10px;
+  
+  .member-profile {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid #fff;
   }
 `
 

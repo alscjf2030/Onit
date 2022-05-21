@@ -65,9 +65,9 @@ const PlanList = (props) => {
                 {planList.length > 0 ? (
                     <>
                         {planList.map((plan, idx) => {
-                            const planDate = plan.planDate.split(" ")
-                            const date = planDate.splice(0, 3).join(" ")
-                            const time = planDate.pop().split(":")
+                            const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd')
+                            const planTime = dayjs(plan?.planDate).format('A hh시 mm분')
+
                             return (
                                 <div className='lists'
                                      key={idx}
@@ -75,14 +75,8 @@ const PlanList = (props) => {
                                          navigate(`/detail/${plan.url}`)
                                      }}
                                 >
-                                    <h3>{date}</h3>
-                                    <h3>{
-                                    time[0] > 12 ?
-                                    (time[0] -= 12,
-                                    "오후 " + time.join("시 ") + "분까지")
-                                    :
-                                    "오전 " + time.join("시 ") + "분까지"
-                                    }</h3>
+                                    <h3>{planDay}</h3>
+                                    <h3>{planTime}</h3>
                                     <p>{plan.planName}</p>
                                     <p>{plan.locationName}</p>
                                     <p>{plan.penalty}</p>
@@ -134,7 +128,7 @@ const List = styled.div`
   .create-on-it {
     width: 70%;
     height: 35px;
-    background-color: #A1ED00;
+    background-color: ${theme.color.green};
     border-radius: 10px;
     border: none;
     font-weight: bold;
@@ -146,7 +140,7 @@ const List = styled.div`
     justify-content: center;
     flex-direction: column;
 
-    background-color: #A1ED00;
+    background-color: ${theme.color.green};
     width: 100%;
     height: 25vh;
     font-size: 20px;
@@ -157,7 +151,7 @@ const List = styled.div`
   }
 
   .lists {
-    background-color: white;
+    background-color: ${theme.color.white};
     width: 100%;
     height: 20vh;
     border: 1px none #ddd;

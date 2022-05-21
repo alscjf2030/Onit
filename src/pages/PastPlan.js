@@ -26,10 +26,10 @@ const PastPlan = (props) => {
                 <LeftArrow
                     style={{
                         position: 'absolute',
-                        padding: '20px 0',
                         display: 'flex',
                         justifyContent: 'flex-start',
-                        alignItems: 'flex-start'
+                        alignItems: 'flex-start',
+                        top: 12,
                     }}
                     size="64px"
                     cursor="pointer"

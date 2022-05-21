@@ -12,8 +12,8 @@ import AddPlans from "./pages/AddPlans";
 import KakaoMap from "./shared/KakaoMap";
 import Detail from "./pages/Detail";
 import PlanSetName from "./pages/PlanSetName";
-// import PastPlan from "./pages/PastPlan";
-// import EditPlan from "./pages/EditPlan";
+import PastPlan from "./pages/PastPlan";
+import EditPlan from "./pages/EditPlan";
 import NotFound from "./pages/NotFound";
 import KakaoHandler from "./service/KakaoHandler";
 
@@ -36,12 +36,8 @@ function App() {
                 <Route path="/detail/:planUrl" element={<Detail/>}/>
                 <Route path="/details/:url" element={<PlanSetName/>}/>
                 <Route path="/users/kakao/callback" element={<KakaoHandler/>}/>
-                {/*
-        <Route path="/past" element={<PastPlan/>}/>
-        <Route path="/edit/:planUrl" element={<EditPlan/>}/>
-        <Route path="/users/kakao/callback" element={<OAuthHandler/>}/>
-         */
-                }
+                <Route path="/past" element={<PastPlan/>}/>
+                <Route path="/edit/:planUrl" element={<EditPlan/>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
         </>

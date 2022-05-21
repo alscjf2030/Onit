@@ -4,8 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
 import {Grid} from "../elements";
 import {editPlan, getOnePlan} from "../redux/modules/plan";
-import {ReactComponent as LeftArrow } from '../img/icon/arrowl.svg';
-import {formatDate2, formatTime2} from "../shared/utils/common";
+import {ReactComponent as LeftArrow} from '../img/icon/arrowl.svg';
+import {formatDate, formatTime} from "../shared/utils/common";
 import Modal from "../components/Modal";
 import ModalPortal from "../components/ModalPortal";
 import dayjs from "dayjs";
@@ -31,8 +31,8 @@ const EditPlan = (props) => {
     const [minute, setMinute] = useState(null)
     const [amPmType, setAmPmType] = useState('')
 
-    const planDay = formatDate2(plan?.planDate)
-    const planTime = formatTime2(plan?.planDate)
+    const planDay = formatDate(plan?.planDate)
+    const planTime = formatTime(plan?.planDate)
 
     useEffect(() => {
         dispatch(getOnePlan(planUrl))
@@ -41,7 +41,7 @@ const EditPlan = (props) => {
     useEffect(() => {
         if (plan) {
             setName(plan.planName)
-            setTime(formatTime2(plan.planDate))
+            setTime(formatTime(plan.planDate))
             setDate(plan.planDate)
             const penaltyData = penaltyModel.find((model) => model.value === plan.penalty)
             setPenalty(penaltyData)
@@ -56,7 +56,7 @@ const EditPlan = (props) => {
             const hourData = hourModel.find((model) => model.value === calcHour.toString())
             const minuteData = minuteModel.find((model) => model.value === _minute.toString())
             setHour(hourData)
-            setMinute(minuteData.id)
+            setMinute(minuteData?.id)
         }
     }, [plan])
 
@@ -71,24 +71,24 @@ const EditPlan = (props) => {
     const changeName = (e) => {
         setName(e.target.value)
     }
-    const changePenalty = () => {
-        setPenalty(penaltyModel.value)
+    const changePenalty = (data) => {
+        setPenalty(data.value)
     }
 
     const editPlanBtn = () => {
-        if ( !validModify() ) {
+        if (!validModify()) {
             return
         }
         const data = {
             planUrl,
             planName: name,
-            planDate: `${formatDate2(date)} ${formatTime2(time)}`,
+            planDate: `${formatDate(date)} ${time}`,
             location: place,
             penalty,
         }
         dispatch(editPlan({data, navigate}));
     }
-    
+
     const [editDateModal, setEditDateModal] = useState(false)
     const [editTimeModal, setEditTimeModal] = useState(false)
 
@@ -101,7 +101,7 @@ const EditPlan = (props) => {
     }
 
     const validModify = () => {
-        const modifiedDate = dayjs(`${date} ${time}`).toISOString()
+        const modifiedDate = dayjs(`${date} ${time}`)
         return name !== plan.planName || modifiedDate !== plan.planDate || penalty !== plan.penalty
     }
 
@@ -115,12 +115,12 @@ const EditPlan = (props) => {
                 <LeftArrow
                     style={{
                         position: 'absolute',
-                        padding: '20px 0',
                         display: 'flex',
                         justifyContent: 'flex-start',
-                        alignItems: 'flex-start'
+                        alignItems: 'flex-start',
+                        top: 12,
                     }}
-                    size="64px"
+                    size="20px"
                     cursor="pointer"
                     onClick={() => {
                         navigate(-1)
@@ -140,7 +140,7 @@ const EditPlan = (props) => {
             <InputBox>
                 <input
                     readOnly
-                    value={formatDate2(date)}
+                    value={formatDate(date)}
                     placeholder={planDay}
                     onClick={handleEditDateModal}
                 />
@@ -180,7 +180,8 @@ const EditPlan = (props) => {
                     style={{
                         width: '100%',
                         margin: '14px auto 0 auto',
-                        background: '#ffffff'}}
+                        background: '#ffffff'
+                    }}
                     dataKey="id"
                     textField="value"
                     value={penalty}
@@ -193,7 +194,7 @@ const EditPlan = (props) => {
                 <button
                     onClick={editPlanBtn}
                     style={{
-                        backgroundColor: validModify() ? '#A1ED00' : '#eee',
+                        backgroundColor: '#A1ED00',
                         width: '100%',
                         height: '100%',
                         padding: '12px',
@@ -202,6 +203,7 @@ const EditPlan = (props) => {
                         borderRadius: '10px',
                         cursor: "pointer",
                         fontWeight: 'bold',
+                        opacity: validModify ? 0.3 : 1,
                     }}>수정완료
                 </button>
             </Grid>

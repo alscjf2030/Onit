@@ -18,7 +18,7 @@ const Detail = (props) => {
     console.log(plan)
     const token = localStorage.getItem("token")
     const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd')
-    const planTime = dayjs(plan?.planDate).format('HH시 mm분')
+    const planTime = dayjs(plan?.planDate).format('A hh시 mm분')
     const handleShared = () => {
         if (navigator.share) {
             navigator.share({
@@ -81,10 +81,10 @@ const Detail = (props) => {
                 <LeftArrow
                     style={{
                         position: 'absolute',
-                        padding: '20px 0',
                         display: 'flex',
                         justifyContent: 'flex-start',
-                        alignItems: 'flex-start'
+                        alignItems: 'flex-start',
+                        top: 12,
                     }}
                     size="64px"
                     cursor="pointer"

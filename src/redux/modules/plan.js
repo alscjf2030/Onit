@@ -106,7 +106,7 @@ export const editPlan = createAsyncThunk(
                 showConfirmButton: false,
                 timer: 1500
             })
-            // navigate(`/detail/${planId}`)
+            navigate(`/detail/${data.planUrl}`)
             return res.data
         } catch (err) {
             console.log(err)

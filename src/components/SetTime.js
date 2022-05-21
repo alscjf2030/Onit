@@ -7,7 +7,10 @@ import Modal2 from "./Modal2";
 import ModalPortal from "./ModalPortal";
 
 import {hourModel, minuteModel} from "../statics/time";
-import {formatDate2} from "../shared/utils/common";
+import {formatDate} from "../shared/utils/common";
+import styled from "styled-components";
+import SetDrawerTime from "./SetDrawerTime";
+import SetDropdown from "./SetDropdown";
 
 const SetTime = ({setDate, setTime, clickHandler}) => {
     let today = new Date();
@@ -56,9 +59,19 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
             alert('날짜를 정해 주세요')
             return
         }
-        setDate(formatDate2(_date))
+        setDate(formatDate(_date))
         setTime(_time)
         clickHandler()
+    }
+
+    const [open, setOpen] = useState(false)
+
+    const toggleMenu = () => {
+        setOpen(open => !open);
+    }
+
+    const closeMenu = () => {
+        setOpen(false)
     }
 
 
@@ -71,23 +84,38 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
                     readonly
                     labelColor={theme.color.gray1}
                     labelText="먼저 날짜를 알려주세요"
-                    textAlign="center"
                     placeholder={today = yyyy + '년 ' + mm + '월 ' + dd + '일 '}
-                    value={formatDate2(_date)}
+                    value={formatDate(_date)}
                     _onClick={handleDateModal}
                 />
+                {/*<Input*/}
+                {/*    islabel*/}
+                {/*    labelBold*/}
+                {/*    readonly*/}
+                {/*    labelColor={theme.color.gray1}*/}
+                {/*    labelText="시간은 몇시가 좋을까요?"*/}
+                {/*    textAlign="center"*/}
+                {/*    value={_time}*/}
+                {/*    placeholder={timePlaceholder}*/}
+                {/*    _onClick={handleTimeModal}*/}
+                {/*/>*/}
                 <Input
                     islabel
                     labelBold
                     readonly
                     labelColor={theme.color.gray1}
                     labelText="시간은 몇시가 좋을까요?"
-                    textAlign="center"
                     value={_time}
                     placeholder={timePlaceholder}
-                    _onClick={handleTimeModal}
+                    _onClick={toggleMenu}
                 />
             </Grid>
+
+            <ShowMenu open={open} onClick={closeMenu}>
+                    <SetDrawerTime open={open} onClose={toggleMenu} hour={hour} setHour={setHour} minute={minute}
+                                   setMinute={setMinute} amPmType={amPmType} setAmPmType={setAmPmType}/>
+            </ShowMenu>
+
             <ModalPortal>
                 {openedDateModal && <Modal onClose={handleDateModal} date={_date} setDate={_setDate}/>}
             </ModalPortal>
@@ -115,5 +143,19 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
         </React.Fragment>
     )
 }
-// !_date || !_time ? '#eee' : '#A1ED00'
+
 export default SetTime;
+
+const ShowMenu = styled.div`
+  background-color: rgba(255, 255, 255, 0);
+  display: flex;
+  visibility: ${({open}) => open ? 'visible' : 'hidden'};
+  top: 0;
+  left: 0;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  transition: visibility 0.2s;
+`

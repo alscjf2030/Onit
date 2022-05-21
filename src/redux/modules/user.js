@@ -153,7 +153,6 @@ export const getUserToken = createAsyncThunk(
 export const kakaoLogin = createAsyncThunk(
     'user/kakaoLogin',
     async ({code, navigate}, {rejectedWithValue}) => {
-        console.log(code)
         try {
             const res = await getApi2(`users/kakao/callback?code=${code}`,{
                 withCredentials: true,
