@@ -1,21 +1,15 @@
-import React, {useState, useEffect} from "react";
+import {getMorePlan, getPlan, setLoading} from "../redux/modules/plan";
 import {useSelector, useDispatch} from "react-redux";
+import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
-
+import theme from "../styles/theme";
+import {bomb} from '../img'
 import dayjs from "dayjs";
 import 'dayjs/locale/ko'
-
-
-import theme from "../styles/theme";
-import {ReactComponent as Plus} from '../img/icon/Plus.svg'
-import {ReactComponent as Share} from '../img/icon/share-icon.svg'
-import {bomb} from '../img'
-import {getMorePlan, getPlan, setLoading} from "../redux/modules/plan";
-
 dayjs.locale('ko')
 
-const PlanList = (props) => {
+const InvitedList = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -70,19 +64,6 @@ const PlanList = (props) => {
                         {planList.map((plan, idx) => {
                             const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd')
                             const planTime = dayjs(plan?.planDate).format('A hh시 mm분')
-                            const handleShared = () => {
-                                if (navigator.share) {
-                                    navigator.share({
-                                        title: plan.planName,
-                                        text: plan.planName,
-                                        url: `https://imonit.co.kr/detail/${plan.url}`
-                                    })
-                                        .then(() => console.log('성공'))
-                                        .catch((err) => console.log(err))
-                                } else {
-                                    alert("공유하기가 지원되지 않는 환경 입니다.")
-                                }
-                            }
                             return (
                                 <div className='lists'
                                      key={idx}
@@ -92,12 +73,6 @@ const PlanList = (props) => {
                                 >
                                     <Content>
                                         <h3>{planDay}</h3>
-                                        <Share
-                                            style={{
-                                                marginLeft: "auto"
-                                            }}
-                                            onClick={handleShared}
-                                        />
                                     </Content>
                                     <h3>{planTime}</h3>
                                     <p>{plan.planName}</p>
@@ -109,26 +84,12 @@ const PlanList = (props) => {
                                 </div>
                             )
                         })}
-                        <Plus className='plus-icon' src='Plus.svg'
-                              onClick={() => {
-                                  navigate('/add')
-                              }}/>
                     </>
                 ) : (
                     <div className='no-list'>
                         <p size="14px" color={theme.color.gray1}>
-                            아직 약속이 없습니다!
+                            아직 참여한 약속이 없습니다!
                         </p>
-                        <p size="14px" color={theme.color.gray1}>
-                            즐거운 모임 온잇에서 어떠신가요?
-                        </p>
-                        <button
-                            className='create-on-it'
-                            onClick={() => {
-                                navigate('/add')
-                            }}
-                        >온잇으로 모임 만들기
-                        </button>
                     </div>
                 )}
             </List>
@@ -136,7 +97,7 @@ const PlanList = (props) => {
     )
 }
 
-export default PlanList;
+export default InvitedList;
 
 const Content = styled.div`
 display: flex;
@@ -167,17 +128,6 @@ const List = styled.div`
 
   ::-webkit-scrollbar {
     display: none; /* Chrome , Safari , Opera */
-  }
-
-  .create-on-it {
-    width: 70%;
-    height: 35px;
-    background-color: ${theme.color.green};
-    border-radius: 10px;
-    border: none;
-    font-weight: bold;
-    margin-top: 20px;
-    color: #181818;
   }
 
   .lists:first-of-type {
@@ -229,9 +179,4 @@ const List = styled.div`
     color: ${theme.color.gray1};
   }
 
-  .plus-icon {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-  }
 `

@@ -73,7 +73,7 @@ const Detail = (props) => {
     if (!plan) {
         return <div>loading...</div>
     }
-    
+
     console.log(plan)
     return (
         <Container>

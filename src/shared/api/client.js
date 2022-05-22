@@ -2,7 +2,7 @@ import axios from "axios";
 
 const client = axios.create({
     baseURL: 'https://imonint.shop',
-    withCredentials: true,
+    withCredentials: true
 })
 
 client.interceptors.request.use(function (config) {
