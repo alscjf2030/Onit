@@ -1,4 +1,3 @@
-import {ReactComponent as Logo} from '../img/icon/logo-619.svg'
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
@@ -14,7 +13,6 @@ import SideMenu from "../components/SideMenu";
 dayjs.locale('ko')
 
 const Main = (props) => {
-    const navigate = useNavigate();
     const userData = useSelector(state => state.user.user_info)
     const nowDate = dayjs()
         .format('YYYY년MM월DD일 dddd')
@@ -22,10 +20,6 @@ const Main = (props) => {
     return (
         <Container>
           <FCMtoken/>
-            <Logo
-                className='logo'
-                onClick={() => {navigate('/main')}}
-            />
             <SideMenu/>
             <UserInfo>
                 <div className='member-profile'
@@ -37,7 +31,6 @@ const Main = (props) => {
             <Tab>
                 <PlanTab/>
             </Tab>
-            {/* <PlanList/> */}
         </Container>
     )
 }
@@ -60,7 +53,7 @@ const Container = styled.div`
 `
 
 const UserInfo = styled.div`
-  background-color: #eee;
+  background-color: transparent;
   width: 100%;
   padding: 10px 10px;
   margin-bottom: 20px;

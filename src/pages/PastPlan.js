@@ -15,7 +15,7 @@ const PastPlan = (props) => {
     console.log(pastPlan)
 
     useEffect(() => {
-        if (pastPlan?.status === 1) {
+        if (pastPlan?.status === -1) {
             dispatch(getHistoryPlan())
         }
     }, [pastPlan])

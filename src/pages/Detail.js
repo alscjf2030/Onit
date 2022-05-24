@@ -74,7 +74,6 @@ const Detail = (props) => {
         return <div>loading...</div>
     }
 
-    console.log(plan)
     return (
         <Container>
             <HeadLine>

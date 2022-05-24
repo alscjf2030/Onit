@@ -7,7 +7,6 @@ import NotFoundLogo from './NotFoundLogo.png';
 import deleteIcon from './icon/delete-icon.svg';
 import editIcon from './icon/edit-icon.svg';
 import leftArrow from './icon/arrowl.svg';
-import PlanComplete from './PlanComplete.svg';
 import bomb from './icon/bomb.svg';
 import Share from './icon/share-icon.svg'
 
@@ -21,7 +20,6 @@ export {
     deleteIcon,
     editIcon,
     leftArrow,
-    PlanComplete,
     bomb,
     Share,
 };

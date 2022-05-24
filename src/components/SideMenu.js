@@ -5,7 +5,7 @@ import {ReactComponent as BsBell} from '../img/icon/bell.svg'
 import useResetStore from "../hooks/useResetStore";
 import {logout} from "../redux/modules/user";
 import {useNavigate} from "react-router-dom";
-
+import {ReactComponent as Logo} from '../img/icon/logo-619.svg'
 const SideMenu = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -21,8 +21,16 @@ const SideMenu = (props) => {
     const toggleMenu = () => {
         setMenu(isOpen => !isOpen);
     }
+    const location = () => {
+      navigator.geolocation.getCurrentPosition(function(position) {
+      });
+    }
     return (
         <HeadBox>
+            <Logo
+                className='logo'
+                onClick={() => {navigate('/main')}}
+            />
                 <div className='hamburger-bell'>
                     <BsBell style={{
                         cursor: "pointer",
@@ -53,16 +61,21 @@ const SideMenu = (props) => {
                         </div>
                         <p>{userData?.nickname || '손'} 님</p>
                     </div>
-                    <div className='past-plan'
+                    <div className='button'
                          onClick={() => {
                              navigate('/past')
                          }}>
                         <p>지난 일정</p>
                     </div>
-                    <div className='logout'
+                    <div className='button'
                          onClick={logoutBtn}
                     >
                         <p>로그아웃</p>
+                    </div>
+                    <div className='button'
+                         onClick={location}
+                    >
+                         <p>위치 활성화 하기</p>
                     </div>
                 </ShowMenu>
             </HeadBox>
@@ -78,6 +91,7 @@ const HeadBox = styled.div`
   padding: 10px 0;
   display: flex;
   justify-content: flex-end;
+  box-shadow: 0 0 10px #d1d1d1;
 
   .hamburger-bell {
     height: 100%;
@@ -160,7 +174,7 @@ const ShowMenu = styled.div`
   padding: 10px;
   transform: ${({isOpen}) => `translateX(${isOpen ? 0 : '100%'})`};
   transition: transform 0.2s ease-in-out;
-  z-index: 1;
+  z-index: 2;
 
   .side-bar-header {
     display: flex;
@@ -195,7 +209,7 @@ const ShowMenu = styled.div`
     margin-top: 28px;
   }
 
-  .past-plan {
+  .button {
     width: 80%;
     height: 40px;
     background-color: #fff;
@@ -205,17 +219,5 @@ const ShowMenu = styled.div`
     justify-content: center;
     margin: 10px auto;
     cursor: pointer;
-  }
-
-  .logout {
-    width: 80%;
-    height: 40px;
-    background-color: #fff;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    margin: 0 auto;
   }
 `

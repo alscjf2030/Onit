@@ -15,9 +15,9 @@ const InvitedList = (props) => {
 
     const [page, setPage] = useState(1);
     const userData = useSelector(state => state.user.user_info);
-    const totalPage = useSelector(state => state.plan.totalPage);
+    const totalPage = useSelector(state => state.plan.invited.totalPage);
     const loading = useSelector((state) => state.plan.loading)
-    const planList = useSelector(state => state.plan.plans);
+    const planList = useSelector(state => state.plan.invited?.plans);
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight
         const scrollTop = document.documentElement.scrollTop
@@ -27,11 +27,11 @@ const InvitedList = (props) => {
         }
     }
 
-    useEffect(() => {
-        if (userData) {
-            dispatch(getPlan(1))
-        }
-    }, [userData])
+    // useEffect(() => {
+    //     if (userData) {
+    //         dispatch(getPlan(1))
+    //     }
+    // }, [userData])
 
     useEffect(() => {
         if (userData && page > 1) {
@@ -119,31 +119,15 @@ span {
 `;
 
 const List = styled.div`
-  padding: 30px 30px;
   overflow: hidden;
-  //text-align: center;
+  height: 68vh;
+  padding: 24px;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 
   ::-webkit-scrollbar {
     display: none; /* Chrome , Safari , Opera */
-  }
-
-  .lists:first-of-type {
-    display: flex;
-    flex-direction: column;
-
-    background-color: ${theme.color.green};
-    width: 100%;
-    height: 25vh;
-    font-size: 20px;
-    box-shadow: 0 0 15px #d1d1d1;
-  }
-
-  .lists:first-of-type > h3 {
-    font-size: 20px;
-    padding-bottom: 15px;
   }
 
   .lists {

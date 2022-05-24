@@ -17,6 +17,7 @@ const StyledTabs = styled((props) => (
     display: 'flex',
     justifyContent: 'center',
     backgroundColor: 'transparent',
+    marginBottom: "15px"
   },
   '& .MuiTabs-indicatorSpan': {
     maxWidth: 70,
@@ -24,7 +25,8 @@ const StyledTabs = styled((props) => (
     backgroundColor: '#181818',
   },
   '& .MuiTabs-flexContainer': {
-      marginLeft: "15px"
+      marginLeft: "15px",
+      marginBottom: "15px"
   },
   '& .MuiButtonBase-root': {
       justifyContent: 'flex-end',
@@ -63,7 +65,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box>
             {children}
         </Box>
       )}

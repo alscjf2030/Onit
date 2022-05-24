@@ -21,9 +21,24 @@ const PlanList = (props) => {
 
     const [page, setPage] = useState(1);
     const userData = useSelector(state => state.user.user_info);
-    const totalPage = useSelector(state => state.plan.totalPage);
+    const totalPage = useSelector(state => state.plan.created.totalPage);
     const loading = useSelector((state) => state.plan.loading)
-    const planList = useSelector(state => state.plan.plans);
+    const planList = useSelector(state => state.plan.created.plans);
+    const today = useSelector((state) => state.plan.today)
+    const todayPlan = dayjs(today.planDate).format(' A hh시 mm분까지')
+    const handleShared = () => {
+                                if (navigator.share) {
+                                    navigator.share({
+                                        title: today.planName,
+                                        text: today.planName,
+                                        url: `https://imonit.co.kr/detail/${today.url}`
+                                    })
+                                        .then(() => console.log('성공'))
+                                        .catch((err) => console.log(err))
+                                } else {
+                                    alert("공유하기가 지원되지 않는 환경 입니다.")
+                                }
+                            }
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight
         const scrollTop = document.documentElement.scrollTop
@@ -32,7 +47,6 @@ const PlanList = (props) => {
             setPage(page + 1)
         }
     }
-
     useEffect(() => {
         if (userData) {
             dispatch(getPlan(1))
@@ -58,18 +72,51 @@ const PlanList = (props) => {
         }
     }, [])
 
-    if (!planList.length && loading === 'pending') {
+    if (!planList?.length && loading === 'pending') {
         return 'loading...'
     }
-
     return (
         <>
             <List>
+                {today ?
+                <>
+                <Today
+                    key={today.planId}
+                    onClick={() => {
+                        navigate(`/detail/${today.url}`)
+                    }}
+                >
+                    <Content>
+                        <h3>{todayPlan}</h3>
+                        <div
+                            onClick={handleShared}
+                            style={{
+                                zIndex: 1,
+                                marginLeft: "auto"
+                            }}
+                        >
+                            <Share/>
+                        </div>
+                    </Content>
+                    <h3>{today.planName}</h3>
+                    <br/>
+                    <h2>{today.locationName}</h2>
+                    <Penalty
+                        style={{position: "absolute", bottom: "16px"}}
+                    >
+                        <img alt='penalty icon' src={bomb}/>
+                        <span>{today.penalty}</span>
+                    </Penalty>
+                </Today>
+                </>
+                :
+                null
+                }
                 {planList.length > 0 ? (
                     <>
                         {planList.map((plan, idx) => {
-                            const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd')
-                            const planTime = dayjs(plan?.planDate).format('A hh시 mm분')
+                            const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd,')
+                            const planTime = dayjs(plan?.planDate).format(' A hh시 mm분')
                             const handleShared = () => {
                                 if (navigator.share) {
                                     navigator.share({
@@ -91,16 +138,15 @@ const PlanList = (props) => {
                                      }}
                                 >
                                     <Content>
-                                        <h3>{planDay}</h3>
+                                        <h3>{planDay}{planTime}</h3>
                                         <Share
                                             style={{
+                                                zIndex: 1,
                                                 marginLeft: "auto"
                                             }}
                                             onClick={handleShared}
                                         />
                                     </Content>
-                                    <h3>{planTime}</h3>
-                                    <p>{plan.planName}</p>
                                     <p>{plan.locationName}</p>
                                     <Penalty>
                                         <img alt='penalty icon' src={bomb}/>
@@ -158,15 +204,25 @@ span {
 `;
 
 const List = styled.div`
-  padding: 30px 30px;
   overflow: hidden;
-  //text-align: center;
+  height: 68vh;
+  padding: 24px;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 
   ::-webkit-scrollbar {
     display: none; /* Chrome , Safari , Opera */
+  }
+
+  .lists {
+    background-color: ${theme.color.white};
+    width: 100%;
+    border: 1px none #ddd;
+    border-radius: 10px;
+    padding: 12px 10px;
+    margin-bottom: 16px;
+    box-shadow: 0 0 15px #d1d1d1;
   }
 
   .create-on-it {
@@ -180,41 +236,14 @@ const List = styled.div`
     color: #181818;
   }
 
-  .lists:first-of-type {
-    display: flex;
-    flex-direction: column;
-
-    background-color: ${theme.color.green};
-    width: 100%;
-    height: 25vh;
-    font-size: 20px;
-    box-shadow: 0 0 15px #d1d1d1;
-  }
-
-  .lists:first-of-type > h3 {
-    font-size: 20px;
-    padding-bottom: 15px;
-  }
-
-  .lists {
-    background-color: ${theme.color.white};
-    width: 100%;
-    height: 20vh;
-    border: 1px none #ddd;
-    border-radius: 10px;
-    padding: 16px 10px;
-    margin-bottom: 16px;
-    box-shadow: 0 0 15px #d1d1d1;
-  }
-
   h3 {
     font-weight: bold;
-    font-size: 20px;
-    padding-bottom: 5px;
+    font-size: 16px;
   }
 
   p {
     padding-bottom: 8px;
+    font-wight: bold;
   }
 
   .no-list {
@@ -233,5 +262,23 @@ const List = styled.div`
     position: absolute;
     bottom: 15px;
     right: 15px;
+    z-index: 1;
   }
 `
+
+const Today = styled.div`
+    position: relative;
+    background-color: ${theme.color.green};
+    height: 25vh;
+    width: 100%;
+    border: 1px none #ddd;
+    border-radius: 10px;
+    padding: 12px 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 0 15px #d1d1d1;
+
+  h3 {
+    font-size: 20px;
+    padding: 5px 0px;
+  }
+`;

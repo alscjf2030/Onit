@@ -7,6 +7,7 @@ export const getPlan = createAsyncThunk(
     async (page, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/member/plans/${page}`)
+            // console.log(res)
             return res.data
         } catch (err) {
             console.log(err)
@@ -60,6 +61,7 @@ export const getHistoryPlan = createAsyncThunk(
 export const addPlan = createAsyncThunk(
     'plan/addPlan',
     async ({data, navigate}, {rejectedWithValue}) => {
+        console.log(data)
         try {
             const res = await postApi('/member/plan', data)
             navigate('/main')
@@ -155,8 +157,16 @@ export const setFCMTokenplan = createAsyncThunk(
 );
 
 const initialState = {
-    plans: [],
-    totalPage: 1,
+    today: [],
+    created: {
+            plans: [],
+            totalPage: 1,
+            },
+    _today: [],
+    invited: {
+            plans: [],
+            totalPage: 0,
+            },
     showplan: null,
     loading: 'idle',
 }
@@ -179,8 +189,12 @@ export const planSlice = createSlice({
         builder
             .addCase(getPlan.fulfilled, (state, action) => {
                 const {totalPage, planLists} = action.payload.myPlanList
-                state.plans = planLists;
-                state.totalPage = totalPage
+                state.today = action.payload.myFirstPlanDto
+                state.created.plans = planLists;
+                state.created.totalPage = totalPage
+                state.invited.plans = action.payload.invitedPlanList.planLists
+                state.invited.totalPage = action.payload.invitedPlanList.totalPage
+                state._today = action.payload.myFristInvitedPlanDto
             })
             .addCase(getMorePlan.pending, state => {
                 if (state?.loading === 'idle'){

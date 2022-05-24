@@ -1,6 +1,5 @@
 import React from "react";
 import {Route, Routes} from "react-router-dom";
-import GlobalStyle from "./styles/GlobalStyle";
 
 //pages
 import Home from "./pages/Home";
@@ -22,7 +21,6 @@ function App() {
 
     return (
         <>
-            <GlobalStyle/>
             <Routes>
                 <Route path='/' element={<Home/>}/>
                 <Route path="/login" element={<Login/>}>

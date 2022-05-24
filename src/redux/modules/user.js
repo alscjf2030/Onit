@@ -28,7 +28,7 @@ export const signUp = createAsyncThunk(
                 status: res.status
             }
         } catch (err) {
-            console.log(err)
+            alert(err.response.data)
             return rejectedWithValue(err.response)
         }
     }
