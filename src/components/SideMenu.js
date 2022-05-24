@@ -21,10 +21,7 @@ const SideMenu = (props) => {
     const toggleMenu = () => {
         setMenu(isOpen => !isOpen);
     }
-    const location = () => {
-      navigator.geolocation.getCurrentPosition(function(position) {
-      });
-    }
+
     return (
         <HeadBox>
             <Logo
@@ -71,11 +68,6 @@ const SideMenu = (props) => {
                          onClick={logoutBtn}
                     >
                         <p>로그아웃</p>
-                    </div>
-                    <div className='button'
-                         onClick={location}
-                    >
-                         <p>위치 활성화 하기</p>
                     </div>
                 </ShowMenu>
             </HeadBox>

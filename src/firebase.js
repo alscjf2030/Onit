@@ -23,7 +23,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging();
 onMessage(messaging, (payload) => {
-  console.log('Message received. ', payload);
+    console.log('Message received. ', payload);
 });
-
-export {messaging, app};
+//알람 사용할건지 확인하는 대화상자
+// Notification
+//     .requestPermission()
+//     .then(function (permission) {
+//         if (permission === 'granted') {
+//             console.log('Notification permission granted.');
+//         } else {
+//             console.log('Unable to get permission to notify.');
+//         }
+//     });
+export {
+    messaging,
+    app
+};

@@ -32,7 +32,6 @@ const Plansocket = props => {
     connected: false,
     message: null,
   });
-
   const publicChats = useSelector(state => state.map.publicChats);
   const publicMaps = useSelector(state => state.map.publicMaps);
   const MapRef = useRef();
@@ -53,15 +52,15 @@ const Plansocket = props => {
   const connect = () => {
     // client.debug = null;
     client.connect({}, onConnected, onError);
-    sock.addEventListener('open', () => {
-      // console.log('Connected to Browser!!!😀');
-    });
+    // sock.addEventListener('open', () => {
+    //   console.log('Connected to Browser!!!😀');
+    // });
     // sock.addEventListener('message', message => {
     //   console.log('Got this:', message, '😀');
     // });
-    sock.addEventListener('close', () => {
-      // console.log('Disconnected to Server😀');
-    });
+    // sock.addEventListener('close', () => {
+    //   console.log('Disconnected to Server😀');
+    // });
   };
 
   //연결
@@ -71,9 +70,8 @@ const Plansocket = props => {
     // client.debug = null;
     // client.subscribe(`/topic/chat/${planId}`, onMessageReceived, onError);
     client.subscribe(`/topic/map/${pId}`, onMessageReceived2, onError);
-
     userJoin();
-    // console.log('연결 / 구독 / 유저 입장');
+    console.log('연결 / 구독 / 유저 입장');
   };
 
 

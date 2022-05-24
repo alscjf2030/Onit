@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const client = axios.create({
-    baseURL: 'https://zsoon.shop',
+    baseURL: 'https://imonint.shop',
     withCredentials: true
 })
 

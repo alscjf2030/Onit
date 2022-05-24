@@ -18,6 +18,8 @@ const InvitedList = (props) => {
     const totalPage = useSelector(state => state.plan.invited.totalPage);
     const loading = useSelector((state) => state.plan.loading)
     const planList = useSelector(state => state.plan.invited?.plans);
+    const today = useSelector((state) => state.plan._today)
+    const todayPlan = dayjs(today?.planDate).format(' A hh시 mm분까지')
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight
         const scrollTop = document.documentElement.scrollTop
@@ -27,11 +29,11 @@ const InvitedList = (props) => {
         }
     }
 
-    // useEffect(() => {
-    //     if (userData) {
-    //         dispatch(getPlan(1))
-    //     }
-    // }, [userData])
+    useEffect(() => {
+        if (userData) {
+            dispatch(getPlan(1))
+        }
+    }, [userData])
 
     useEffect(() => {
         if (userData && page > 1) {
@@ -59,6 +61,31 @@ const InvitedList = (props) => {
     return (
         <>
             <List>
+            {today ?
+                <>
+                <Today
+                    key={today.planId}
+                    onClick={() => {
+                        navigate(`/detail/${today.url}`)
+                    }}
+                >
+                    <Content>
+                        <h3>{todayPlan}</h3>
+                    </Content>
+                    <h3>{today.planName}</h3>
+                    <br/>
+                    <h2>{today.locationName}</h2>
+                    <Penalty
+                        style={{position: "absolute", bottom: "16px"}}
+                    >
+                        <img alt='penalty icon' src={bomb}/>
+                        <span>{today.penalty}</span>
+                    </Penalty>
+                </Today>
+                </>
+                :
+                null
+                }
                 {planList.length > 0 ? (
                     <>
                         {planList.map((plan, idx) => {
@@ -98,6 +125,23 @@ const InvitedList = (props) => {
 }
 
 export default InvitedList;
+
+const Today = styled.div`
+    position: relative;
+    background-color: ${theme.color.green};
+    height: 25vh;
+    width: 100%;
+    border: 1px none #ddd;
+    border-radius: 10px;
+    padding: 12px 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 0 15px #d1d1d1;
+
+  h3 {
+    font-size: 20px;
+    padding: 5px 0px;
+  }
+`;
 
 const Content = styled.div`
 display: flex;

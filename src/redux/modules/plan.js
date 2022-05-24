@@ -7,7 +7,7 @@ export const getPlan = createAsyncThunk(
     async (page, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/member/plans/${page}`)
-            // console.log(res)
+            console.log(res)
             return res.data
         } catch (err) {
             console.log(err)
@@ -194,7 +194,7 @@ export const planSlice = createSlice({
                 state.created.totalPage = totalPage
                 state.invited.plans = action.payload.invitedPlanList.planLists
                 state.invited.totalPage = action.payload.invitedPlanList.totalPage
-                state._today = action.payload.myFristInvitedPlanDto
+                state._today = action.payload.myFirstInvitedPlanDto
             })
             .addCase(getMorePlan.pending, state => {
                 if (state?.loading === 'idle'){

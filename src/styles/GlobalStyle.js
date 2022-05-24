@@ -1,8 +1,9 @@
 // GlobalStyle.js
 import { createGlobalStyle } from 'styled-components';
-import PretendardBold from './font/Pretendard-Bold.woff';
-import PretendardMedium from './font/Pretendard-Medium.woff';
+// import PretendardBold from './font/Pretendard-Bold.woff';
+// import PretendardMedium from './font/Pretendard-Medium.woff';
 import PretendardRegular from './font/Pretendard-Regular.woff';
+
 
 const GlobalStyle = createGlobalStyle`
 
@@ -18,21 +19,21 @@ const GlobalStyle = createGlobalStyle`
     cursor:pointer;
   }
 
-  @font-face {
-    font-family:'Pretendard' ;
-    font-weight: 700;
-    src: url(${PretendardBold});
-  }
+  // @font-face {
+  //   font-family:'Pretendard' ;
+  //   font-weight: 700;
+  //   src: url($PretendardBold});
+  // }
+
+  // @font-face {
+  //   font-family:'Pretendard' ;
+  //   font-weight: 500;
+  //   src: url($PretendardMedium});
+  // }
 
   @font-face {
     font-family:'Pretendard' ;
-    font-weight: 500;
-    src: url(${PretendardMedium});
-  }
-
-  @font-face {
-    font-family:'Pretendard' ;
-    font-weight: 400;
+    // font-weight: 400;
     src: url(${PretendardRegular});
   }
 

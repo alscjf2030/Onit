@@ -25,7 +25,7 @@ const PlanList = (props) => {
     const loading = useSelector((state) => state.plan.loading)
     const planList = useSelector(state => state.plan.created.plans);
     const today = useSelector((state) => state.plan.today)
-    const todayPlan = dayjs(today.planDate).format(' A hh시 mm분까지')
+    const todayPlan = dayjs(today?.planDate).format(' A hh시 mm분까지')
     const handleShared = () => {
                                 if (navigator.share) {
                                     navigator.share({
@@ -54,7 +54,7 @@ const PlanList = (props) => {
     }, [userData])
 
     useEffect(() => {
-        if (userData && page > 1) {
+        if (userData && page >= 1) {
             dispatch(getMorePlan({page: page}))
         }
     }, [userData, page])
@@ -72,13 +72,10 @@ const PlanList = (props) => {
         }
     }, [])
 
-    if (!planList?.length && loading === 'pending') {
-        return 'loading...'
-    }
     return (
         <>
             <List>
-                {today ?
+                {today?.length > 0 ?
                 <>
                 <Today
                     key={today.planId}
@@ -112,7 +109,7 @@ const PlanList = (props) => {
                 :
                 null
                 }
-                {planList.length > 0 ? (
+                {planList?.length > 0 || today?.length > 0 ? (
                     <>
                         {planList.map((plan, idx) => {
                             const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd,')

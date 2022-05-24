@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Route, Routes} from "react-router-dom";
 
 //pages
@@ -18,7 +18,6 @@ import KakaoHandler from "./service/KakaoHandler";
 
 
 function App() {
-
     return (
         <>
             <Routes>

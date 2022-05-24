@@ -7,9 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 //카카오 맵
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
-import PlanMapInfo from './PlanMapInfo.js';
 import { dest_marker, my_marker } from '../img'
-import { useSelector } from 'react-redux';
 
 /**
  * @param {*} props
@@ -113,6 +111,7 @@ import { useSelector } from 'react-redux';
 
       return bounds;
     }, [points]);
+
     useEffect(() => {
       //현재 내위치 얻기
       if (navigator.geolocation) {
@@ -122,8 +121,8 @@ import { useSelector } from 'react-redux';
             setSetMyLocation(prev => ({
               ...prev,
               center: {
-                lat: position.coords.latitude.toFixed(5), // 위도
-                lng: position.coords.longitude.toFixed(5), // 경도
+                lat: position.coords.latitude.toFixed(10), // 위도
+                lng: position.coords.longitude.toFixed(10), // 경도
               },
               isLoading: false,
             }));
@@ -144,7 +143,7 @@ import { useSelector } from 'react-redux';
           isLoading: false,
         }));
       }
-      setPoints([myLocation.center]);
+      setPoints([myLocation]);
       return () => {};
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
