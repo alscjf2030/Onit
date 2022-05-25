@@ -25,6 +25,7 @@ const Main = (props) => {
                 <div className='member-profile'
                      style={{
                          backgroundImage: `url(${userData?.profileImg})`,
+                         backgroundSize: 'cover',
                      }}/>
                 <p>{userData?.nickname ? userData.nickname : '손'} 님 <br/>{nowDate} 입니다.</p>
             </UserInfo>
