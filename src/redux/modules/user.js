@@ -1,6 +1,7 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import {getApi, getApi2, postApi} from "../../shared/api/client";
+import {getApi, getApi2, postApi, putApi} from "../../shared/api/client";
 import history from "../../index"
+import axios from 'axios';
 import Swal from "sweetalert2";
 
 const initialState = {
@@ -108,6 +109,24 @@ export const logout = createAsyncThunk(
         } catch (err) {
             console.log(err)
             return rejectedWithValue(err.response)
+        }
+    }
+)
+
+export const changePic = createAsyncThunk(
+    'member/profile',
+    async (file, {rejectWithValue}) => {
+        console.log(file)
+        const profileImg = new FormData();
+        profileImg.append("profileImg", file);
+        try {
+            await putApi('/member/profile', profileImg, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }
+            })
+        } catch (err) {
+            return rejectWithValue(err.response.data.msg)
         }
     }
 )

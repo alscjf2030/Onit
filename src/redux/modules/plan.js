@@ -1,16 +1,16 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {postApi, getApi, putApi, deleteApi} from "../../shared/api/client";
 import Swal from "sweetalert2";
+import history from '../../index'
 
 export const getPlan = createAsyncThunk(
     'plan/getPlan',
     async (page, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/member/plans/${page}`)
-            console.log(res)
             return res.data
         } catch (err) {
-            console.log(err)
+            console.log(err.response)
             return rejectedWithValue(err.response)
         }
     }
@@ -21,7 +21,7 @@ export const getMorePlan = createAsyncThunk(
     async ({page}, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/member/plans/${page}`)
-            return res.data.data.planList
+            return res.data.myPlanList.planLists
         } catch (err) {
             console.log(err)
             return rejectedWithValue(err.response)
@@ -59,11 +59,10 @@ export const getHistoryPlan = createAsyncThunk(
 
 export const addPlan = createAsyncThunk(
     'plan/addPlan',
-    async ({data, navigate}, {rejectedWithValue}) => {
-        console.log(data)
+    async (data, {rejectedWithValue}) => {
         try {
             const res = await postApi('/member/plan', data)
-            navigate('/main')
+            history.push('/main')
             return res.data
         } catch (err) {
             Swal.fire({
@@ -144,23 +143,6 @@ export const deletePlan = createAsyncThunk(
     }
 )
 
-export const setFCMTokenplan = createAsyncThunk(
-    'plan/setFCMTokenplan',
-    async (data, { rejectWithValue }) => {
-        const newdata = {
-            ...data,
-            planId: 1,
-        };
-        try {
-            return await postApi(`/api/fcm`, newdata)
-                .then(response => response.data.data);
-        } catch (error) {
-            console.log(error);
-            return rejectWithValue(error.response.data);
-        }
-    },
-);
-
 const initialState = {
     today: [],
     created: {
@@ -184,7 +166,7 @@ export const planSlice = createSlice({
             state.loading = action.payload
         },
         getPlanList: (state, action) => {
-            state.plans = action.payload
+            state = action.payload
         },
         resetPlan: (state) => {
             Object.assign(state, initialState)
@@ -193,13 +175,13 @@ export const planSlice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(getPlan.fulfilled, (state, action) => {
-                const {totalPage, planLists} = action.payload.myPlanList
-                state.today = action.payload.myFirstPlanDto
+                const {totalPage, planLists} = action.payload.myPlanList;
+                state.today = action.payload.myFirstPlanDto;
                 state.created.plans = planLists;
-                state.created.totalPage = totalPage
-                state.invited.plans = action.payload.invitedPlanList.planLists
-                state.invited.totalPage = action.payload.invitedPlanList.totalPage
-                state._today = action.payload.myFirstInvitedPlanDto
+                state.created.totalPage = totalPage;
+                state.invited.plans = action.payload.invitedPlanList.planLists;
+                state.invited.totalPage = action.payload.invitedPlanList.totalPage;
+                state._today = action.payload.myFirstInvitedPlanDto;
             })
             .addCase(getMorePlan.pending, state => {
                 if (state?.loading === 'idle'){
@@ -209,7 +191,8 @@ export const planSlice = createSlice({
             .addCase(getMorePlan.fulfilled, (state, action) => {
                 if (state.loading === 'pending') {
                     state.loading = 'succeeded'
-                    state.plans = [...state.plans, ...action.payload];
+                    // state.created.plans = [...state.created.plans, ...action.payload.myPlanList];
+                    // state.invited.plans = [...state.invited.plans, ...action.payload.invitedPlanlist];
                 }
             })
             .addCase(getMorePlan.rejected, state => {
@@ -228,13 +211,14 @@ export const planSlice = createSlice({
             .addCase(editPlan.fulfilled, (state, action) => {
                 const data = {...state.showplan, ...action.payload}
                 state.showplan = data
-                state.plans = state.plans.map((plan) => plan.planId === action.payload.planId ? action.payload : plan)
+                state.today = state.today.map((plan) => plan.planId === action.payload.planId ? action.payload : plan)
+                state.created.plans = state.created.plans.map((plan) => plan.planId === action.payload.planId ? action.payload : plan)
+                window.location.reload()
             })
             .addCase(deletePlan.fulfilled, (state, action) => {
                 state.showplan = null
-                state.plans = state.plans.filter((plan) => plan.planId !== action.payload)
+                // state.plans = state.plans.filter((plan) => plan.planId !== action.payload)
             })
-            .addCase(setFCMTokenplan.fulfilled, (state, action) => {});
     }
 })
 

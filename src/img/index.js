@@ -8,7 +8,8 @@ import deleteIcon from './icon/delete-icon.svg';
 import editIcon from './icon/edit-icon.svg';
 import leftArrow from './icon/arrowl.svg';
 import bomb from './icon/bomb.svg';
-import Share from './icon/share-icon.svg'
+import Share from './icon/share-icon.svg';
+import editPic from './icon/edit.svg'
 
 export {
     dest_marker,
@@ -22,4 +23,5 @@ export {
     leftArrow,
     bomb,
     Share,
+    editPic,
 };

@@ -91,7 +91,12 @@ const EditPlan = (props) => {
             planUrl,
             planName: name,
             planDate: `${formatDate(date)} ${time}`,
-            location: place,
+            location: {
+                name: placename,
+                lat: lat,
+                lng: lng,
+                address: address
+            },
             penalty,
         }
         dispatch(editPlan({data, navigate}));
@@ -204,7 +209,7 @@ const EditPlan = (props) => {
 
             <InputBox>
                 <Input
-                    placeholder={plan.locationDetail.name}
+                    placeholder={placename? placename : plan.locationDetail.name}
                     _onClick={() => {
                         setShowMap(true);
                     }}

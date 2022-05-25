@@ -48,13 +48,12 @@ const PlanList = (props) => {
         }
     }
     useEffect(() => {
-        if (userData) {
-            dispatch(getPlan(1))
-        }
+        if(userData)
+            dispatch(getPlan(page))
     }, [userData])
 
     useEffect(() => {
-        if (userData && page <= totalPage) {
+        if (userData && page) {
             dispatch(getMorePlan({page: page}))
         }
     }, [userData, page])
@@ -72,10 +71,15 @@ const PlanList = (props) => {
         }
     }, [])
 
+    // if (!today && loading === 'pending') {
+    //     return 'loading...'
+    // }
+
+    console.log()
     return (
         <>
             <List>
-                {today?.length > 0 ?
+                {today ?
                     <>
                         <Today
                             key={today.planId}
@@ -109,7 +113,7 @@ const PlanList = (props) => {
                     :
                     null
                 }
-                {planList?.length > 0 || today?.length > 0 ? (
+                {planList.length > 0 || today ? (
                     <>
                         {planList.map((plan, idx) => {
                             const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd,')

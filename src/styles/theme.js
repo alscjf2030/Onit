@@ -36,19 +36,12 @@ const color = {
   black: '#292929',
   realblack: '#000000',
   white: '#fff',
-  BackGround: '#363F4E',
-  mainBlue: '#5327ff',
-  mainMint: '#83ffca',
-  mainGray: '#dedfe0',
-  mint: '#bcffe2',
-  blue1: '#8689ff',
-  blue2: '#afb1ff',
-  blue3: '#d8d9ff',
   red1: '#FF3030',
   red2: '#FFF2F2',
-
+  BackGround: '#F5F5F5',
   darkLine: '#3F4448',
   danger: '#ff8b6f',
+
 };
 
 export const DeviceSizes = {

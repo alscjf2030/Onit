@@ -5,8 +5,11 @@ import {ReactComponent as BsBell} from '../img/icon/bell.svg'
 import useResetStore from "../hooks/useResetStore";
 import {logout} from "../redux/modules/user";
 import {useNavigate} from "react-router-dom";
+import { editPic } from "../img";
 import {ReactComponent as Logo} from '../img/icon/logo-619.svg'
 import MobilePortal from "./MobilePortal";
+import { changePic } from "../redux/modules/user";
+
 
 const SideMenu = (props) => {
     const dispatch = useDispatch();
@@ -14,6 +17,7 @@ const SideMenu = (props) => {
     const resetStore = useResetStore()
     const userData = useSelector(state => state.user.user_info)
     const [isOpen, setMenu] = useState(false);
+    const hidden = React.useRef(null);
     const logoutBtn = () => {
         localStorage.removeItem('token')
         resetStore()
@@ -22,6 +26,12 @@ const SideMenu = (props) => {
 
     const toggleMenu = () => {
         setMenu(isOpen => !isOpen);
+    }
+    const selectFile = (e) => {
+        dispatch(changePic(e.target.files[0]))
+    }
+    const handleClick = (e) => {
+        hidden.current.click();
     }
 
     return (
@@ -60,6 +70,12 @@ const SideMenu = (props) => {
                             backgroundImage: `url(${userData?.profileImg})`,
                             backgroundSize: 'cover',
                         }}>
+                        <img
+                          alt='edit'
+                          src={editPic}
+                          style={{display: "flex", marginLeft: "auto"}}
+                          onClick={handleClick}
+                        />
                         </div>
                         <p>{userData?.nickname || '손'} 님</p>
                     </div>
@@ -75,6 +91,14 @@ const SideMenu = (props) => {
                         <p>로그아웃</p>
                     </div>
                 </ShowMenu>
+              <input
+                type="file"
+                onChange={selectFile}
+                ref={hidden}
+                id="fileUpload"
+                accept="image/jpeg, image/png, image/jpg"
+                style={{ display: "none" }}
+              />
             </MobilePortal>
         </HeadBox>
     )
@@ -201,7 +225,6 @@ const ShowMenu = styled.div`
     align-items: center;
     justify-content: center;
     margin: 10px auto;
-    cursor: pointer;
   }
 
   .member-img {
