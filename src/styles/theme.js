@@ -30,22 +30,10 @@ const color = {
   gray3: '#C4C4C4',
   gray4: '#9E9E9E',
   gray5: '#F8F8F8',
-  orange: '#F84914',
   green: '#A1ED00',
   black: '#292929',
-  realblack: '#000000',
   white: '#fff',
   BackGround: '#363F4E',
-  mainBlue: '#5327ff',
-  mainMint: '#83ffca',
-  mainGray: '#dedfe0',
-  mint: '#bcffe2',
-  blue1: '#8689ff',
-  blue2: '#afb1ff',
-  blue3: '#d8d9ff',
-
-  darkLine: '#3F4448',
-  danger: '#ff8b6f',
 };
 
 const deviceSizes = {

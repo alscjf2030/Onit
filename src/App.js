@@ -19,8 +19,28 @@ import NotFound from "./pages/NotFound";
 import KakaoHandler from "./service/KakaoHandler";
 import theme from "./styles/theme";
 
+//FCM
+import {getToken} from 'firebase/messaging'
+import { messaging } from './firebase';
+
+
 
 function App() {
+
+    useEffect(() => {
+        if(localStorage.getItem('FCMtoken')) {
+            console.log("이미 토큰이 발급됨!")
+            return
+        }else{
+        console.log("토큰 발급!")
+        getToken(messaging, {
+            vapidKey: "BLg2NeG06gdfa1DbdDn1E6VFSD8a82zuaxgPXS5drdMaqUSf_lY421iglOkbev53HaDsl2jkw5vxgM" +
+                    "aA4b6wfug"
+        }).then(token => {
+            console.log(token);
+            localStorage.setItem('FCMtoken', token);
+        })}
+}, [])
 
     return (
         <>
