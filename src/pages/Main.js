@@ -9,7 +9,6 @@ import useResetStore from "../hooks/useResetStore";
 import {ReactComponent as BsBell} from '../img/icon/bell.svg'
 import {ReactComponent as Logo} from '../img/icon/logo-619.svg'
 import PlanList from '../components/PlanList';
-import GoodBye from '../img/GoodBye.png'
 
 //redux
 import {logout} from "../redux/modules/user";
