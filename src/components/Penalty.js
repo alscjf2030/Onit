@@ -31,7 +31,7 @@ const Penalty = ({setPenalty, clickHandler}) => {
     }
 
     return (
-        <>
+        <Container>
             <Grid padding="16px">
                 <p
                     style={{
@@ -64,11 +64,15 @@ const Penalty = ({setPenalty, clickHandler}) => {
                     onClick={handleNext}>다음으로
                 </button>
             </Grid>
-        </>
+        </Container>
     )
 }
 
 export default Penalty;
+
+const Container = styled.div`
+  display: block;
+`
 
 const PenaltyBox = styled.div`
   display: flex;

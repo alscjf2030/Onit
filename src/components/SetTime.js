@@ -74,7 +74,7 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
 
 
     return (
-        <React.Fragment>
+        <Container>
             <Grid padding="16px">
                 <Input
                     islabel
@@ -122,11 +122,15 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
                     onClick={handleNext}>다음으로
                 </button>
             </Grid>
-        </React.Fragment>
+        </Container>
     )
 }
 
 export default SetTime;
+
+const Container = styled.div`
+  display: block;
+`
 
 const ShowMenu = styled.div`
   background-color: rgba(255, 255, 255, 0);

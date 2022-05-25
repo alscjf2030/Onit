@@ -51,7 +51,6 @@ export const getHistoryPlan = createAsyncThunk(
             console.log(res)
             return res.data
         } catch (err) {
-            // window.alert(err.response.data.message)
             console.log(err)
             return rejectedWithValue(err.response)
         }

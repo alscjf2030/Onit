@@ -4,6 +4,7 @@ import 'react-widgets/styles.css'
 import {DropdownList} from "react-widgets/cjs";
 import {Grid} from "../elements";
 import {hourModel, minuteModel} from "../statics/time";
+import theme from "../styles/theme";
 
 const SetDropdown = ({onClose, hour, minute, setHour, setMinute, amPmType, setAmPmType}) => {
     const [_hour, _setHour] = useState(hour);
@@ -81,25 +82,16 @@ const SetDropdown = ({onClose, hour, minute, setHour, setMinute, amPmType, setAm
                         data={minuteModel}
                     />
                 </DropBox>
-            </Container>
-
-            <Grid bottom="0" padding="16px">
                 <button
+                    className='time-confirm'
                     style={{
                         backgroundColor: `${_amPmType === '' || _hour === '시' || _minute === '분' ? '#DDD' : '#A1ED00'}`,
-                        width: '100%',
-                        height: '100%',
-                        padding: '12px',
-                        color: 'black',
-                        border: '1px solid #A1ED00',
-                        borderRadius: '10px',
-                        // opacity: `${_amPmType === '' || _hour === '시' || _minute === '분' ? 0.3 : 1}`
                     }}
                     onClick={handleConfirm}
                 >
                     확인
                 </button>
-            </Grid>
+            </Container>
         </>
     )
 }
@@ -109,6 +101,17 @@ export default SetDropdown
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  
+  .time-confirm {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 10px;
+    width: 90%;
+    padding: 12px;
+    color: ${theme.color.black};
+    border: none;
+    border-radius: 10px;
+  }
 `
 
 const ButtonBox = styled.div`

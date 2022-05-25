@@ -7,11 +7,12 @@ const initialState = {
     loading: 'idle',
     is_login: false,
     user_info: null,
+    error: null
 }
 
 export const signUp = createAsyncThunk(
     'user/signup',
-    async ({data, navigate}, {rejectedWithValue}) => {
+    async ({data, navigate}, {rejectWithValue}) => {
         try {
             const res = await postApi('/user/signup', data)
             console.log(res.data)
@@ -29,11 +30,11 @@ export const signUp = createAsyncThunk(
             }
         } catch (err) {
             console.log(err.response.data)
-            Swal.fire({
-                text: err.response.data.msg,
-                icon: 'error'
-            })
-            return rejectedWithValue(err.response)
+            // Swal.fire({
+            //     text: err.response.data.msg,
+            //     icon: 'error'
+            // })
+            return rejectWithValue(err.response.data)
         }
     }
 )
@@ -187,6 +188,9 @@ export const userSlice = createSlice({
         },
         resetUser: (state) => {
             Object.assign(state, initialState)
+        },
+        setError: (state, action) => {
+            state.error = action.payload
         }
     },
     extraReducers: {
@@ -205,7 +209,8 @@ export const userSlice = createSlice({
         // user/signUp/rejected === signUp.rejected
         [signUp.rejected]: (state, action) => {
             if (state.loading === 'pending') {
-                state.loading = 'failed'
+                state.error = action.payload.msg
+                state.loading = 'idle'
             }
         },
         // user/login/fulfilled === login.fulfilled
@@ -227,7 +232,7 @@ export const userSlice = createSlice({
 
 
 // 2
-export const {setUserName, setLoading, resetUser} = userSlice.actions
+export const {setUserName, setLoading, resetUser, setError} = userSlice.actions
 
 const actionCreators = {kakaoLogin};
 export {actionCreators};

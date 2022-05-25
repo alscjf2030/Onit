@@ -42,9 +42,10 @@ const Tab = styled.div`
 `;
 
 const Container = styled.div`
+  width: 100%;
   background-color: #eee;
-  min-height: 100vh;
-  position:relative;
+  //min-height: 100vh;
+  position: relative;
 
   .logo {
     position: absolute;
@@ -66,9 +67,7 @@ const UserInfo = styled.div`
     margin: auto;
     justify-content: center;
     align-items: center;
-  }
-
-  .member-profile {
+  }.member-profile {
     width: 70px;
     height: 70px;
     border-radius: 50%;

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import PlanSelectMap from './PlanSelectMap';
 import {Grid, Input} from '../elements';
 import theme from '../styles/theme';
+import styled from "styled-components";
 
 const SetLocation = ({clickHandler, setPlace, place}) => {
     const [showMap, setShowMap] = useState(false);
@@ -20,7 +21,7 @@ const SetLocation = ({clickHandler, setPlace, place}) => {
     }
 
     return (
-        <React.Fragment>
+        <Container>
             <Grid padding="16px">
                 <Input
                     islabel
@@ -58,8 +59,12 @@ const SetLocation = ({clickHandler, setPlace, place}) => {
                     onClick={handleNext}>다음으로
                 </button>
             </Grid>
-        </React.Fragment>
+        </Container>
     )
 }
+
+const Container = styled.div`
+  display: block;
+`
 
 export default SetLocation;

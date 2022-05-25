@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Input, Grid } from '../elements';
 import theme from "../styles/theme";
 import Swal from "sweetalert2";
+import styled from "styled-components";
 
 const PlanName = ({clickHandler, name, setName}) => {
     const [_name, _setName] = useState(name)
@@ -23,7 +24,7 @@ const PlanName = ({clickHandler, name, setName}) => {
     }
 
     return(
-        <React.Fragment>
+        <Container>
             <Grid padding="16px">
                 <Input
                     islabel
@@ -49,8 +50,12 @@ const PlanName = ({clickHandler, name, setName}) => {
                     onClick={handleNext}>다음으로
                 </button>
             </Grid>
-        </React.Fragment>
+        </Container>
     )
 }
+
+const Container = styled.div`
+  display: block;
+`
 
 export default PlanName;

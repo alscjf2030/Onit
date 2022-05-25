@@ -6,6 +6,8 @@ import useResetStore from "../hooks/useResetStore";
 import {logout} from "../redux/modules/user";
 import {useNavigate} from "react-router-dom";
 import {ReactComponent as Logo} from '../img/icon/logo-619.svg'
+import MobilePortal from "./MobilePortal";
+
 const SideMenu = (props) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -26,32 +28,35 @@ const SideMenu = (props) => {
         <HeadBox>
             <Logo
                 className='logo'
-                onClick={() => {navigate('/main')}}
+                onClick={() => {
+                    navigate('/main')
+                }}
             />
-                <div className='hamburger-bell'>
-                    <BsBell style={{
-                        cursor: "pointer",
-                    }}/>
-                    <button className="hamburger-btn" onClick={toggleMenu}>
-                        <div className={`menu-trigger ${isOpen ? 'active' : ''}`}>
-                            <span/>
-                            <span/>
-                            <span/>
-                        </div>
-                    </button>
-                </div>
+            <div className='hamburger-bell'>
+                <BsBell style={{
+                    cursor: "pointer",
+                }}/>
+                <button className="hamburger-btn" onClick={toggleMenu}>
+                    <MenuTrigger active={isOpen}>
+                        <span/>
+                        <span/>
+                        <span/>
+                    </MenuTrigger>
+                </button>
+            </div>
+            <MobilePortal>
                 <ShowMenu isOpen={isOpen}>
                     <div className="side-bar-header">
                         <button className="hamburger-btn" onClick={toggleMenu}>
-                            <div className={`menu-trigger ${isOpen ? 'active' : ''}`}>
+                            <MenuTrigger active={isOpen}>
                                 <span/>
                                 <span/>
                                 <span/>
-                            </div>
+                            </MenuTrigger>
                         </button>
                     </div>
                     <div className='member'>
-                        <div className='member-img' style ={{
+                        <div className='member-img' style={{
                             backgroundImage: `url(${userData?.profileImg})`,
                             backgroundSize: 'cover',
                         }}>
@@ -70,7 +75,8 @@ const SideMenu = (props) => {
                         <p>로그아웃</p>
                     </div>
                 </ShowMenu>
-            </HeadBox>
+            </MobilePortal>
+        </HeadBox>
     )
 }
 
@@ -104,64 +110,62 @@ const HeadBox = styled.div`
     background-color: inherit;
     outline: none;
   }
+`
 
-  .menu-trigger {
-    position: relative;
-    width: 20px;
-    height: 17.6px;
-    cursor: pointer;
+const MenuTrigger = styled.div`
+  position: relative;
+  width: 20px;
+  height: 17.6px;
+  cursor: pointer;
 
-    &, span {
-      display: inline-block;
-      transition: all 0.4s;
-      box-sizing: border-box;
-    }
+  &, span {
+    display: inline-block;
+    transition: all 0.4s;
+    box-sizing: border-box;
+  }
 
-    span {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: #000;
-      border-radius: 4px;
-    }
+  span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    border-radius: 4px;
+  }
 
-    span:nth-of-type(1) {
-      top: 0;
-    }
+  span:nth-of-type(1) {
+    top: 0;
+  }
 
-    span:nth-of-type(2) {
-      top: 7.7px;
-    }
+  span:nth-of-type(2) {
+    top: 7.7px;
+  }
 
-    span:nth-of-type(3) {
-      bottom: 0;
-    }
+  span:nth-of-type(3) {
+    bottom: 0;
+  }
 
-    /* 2th bar 사라지고,  1st 3rd bar 회전하며 X  */
+  /* 2th bar 사라지고,  1st 3rd bar 회전하며 X  */
+  span:nth-of-type(1) {
+    transform: ${({active}) => active ? 'translateY(7.8px) rotate(-45deg)' : 'none'};
+  }
 
-    &.active {
-      span:nth-of-type(1) {
-        transform: translateY(7.8px) rotate(-45deg);
-      }
+  span:nth-of-type(2) {
+    opacity: ${({active}) => active ? 0 : 1};
+  }
 
-      span:nth-of-type(2) {
-        opacity: 0;
-      }
-
-      span:nth-of-type(3) {
-        transform: translateY(-7.7px) rotate(45deg);
-      }
-    }
+  span:nth-of-type(3) {
+    transform: ${({active}) => active ? 'translateY(-7.7px) rotate(45deg)' : 'none'};
   }
 `
+
 const ShowMenu = styled.div`
   background-color: #ddd;
   width: 70%;
   //height: calc(100% - 40px);
   visibility: ${({isOpen}) => isOpen ? 'visible' : 'hidden'};
   height: 100%;
-  position: fixed;
+  position: absolute;
   right: 0;
   top: 0;
   padding: 10px;
@@ -173,6 +177,17 @@ const ShowMenu = styled.div`
     display: flex;
     justify-content: flex-end;
     padding: 5px 0px 30px 0px;
+
+    .hamburger-btn {
+      border: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      background-color: inherit;
+      outline: none;
+    }
   }
 
   .member {

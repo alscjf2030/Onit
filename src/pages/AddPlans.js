@@ -69,7 +69,7 @@ const AddPlans = (props) => {
 
     if(comp <= 3) {
         return (
-            <React.Fragment>
+            <ContentWrap>
                 <Grid padding="16px">
                     <LeftArrow
                         size="24px"
@@ -81,7 +81,7 @@ const AddPlans = (props) => {
                     {obj[comp]}
                     {/*{getContent()}*/}
                 </Grid>
-            </React.Fragment>
+            </ContentWrap>
         )
     }
 
@@ -117,7 +117,6 @@ const AddPlans = (props) => {
                     }}>약속이 생성되었습니다!</p>
             </div>
             <Grid padding="16px">
-
                 <PlanDiv>
                     <Grid padding="10px">
                         <p>{name}</p>
@@ -146,15 +145,22 @@ const AddPlans = (props) => {
                     }}
                     onClick={create}>완성!</button>
             </Grid>
-            </Container>
-        )
+        </Container>
+    )
 }
 
 export default AddPlans;
 
 const Container = styled.div`
+  width: 100%;
   min-height: 100vh;
   background-color: ${theme.color.gray6};
+`
+
+const ContentWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `
 
 const PlanDiv = styled.div`

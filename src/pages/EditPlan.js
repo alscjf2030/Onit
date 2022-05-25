@@ -5,7 +5,7 @@ import styled from "styled-components";
 import {Grid} from "../elements";
 import {editPlan, getOnePlan} from "../redux/modules/plan";
 import {ReactComponent as LeftArrow} from '../img/icon/arrowl.svg';
-import {formatDate, formatTime} from "../shared/utils/common";
+import {formatDate, formatHalfTime, formatTime} from "../shared/utils/common";
 import Modal from "../components/Modal";
 import ModalPortal from "../components/ModalPortal";
 import dayjs from "dayjs";
@@ -16,6 +16,8 @@ import {penaltyModel} from "../statics/penalty";
 import { Input } from "../elements";
 import PlanSelectMap from "../components/PlanSelectMap";
 import theme from "../styles/theme";
+import SetDrawerCalendar from "../components/SetDrawerCalendar";
+import SetDrawerTime from "../components/SetDrawerTime";
 
 const EditPlan = (props) => {
     const {planUrl} = useParams()
@@ -106,6 +108,25 @@ const EditPlan = (props) => {
         setEditTimeModal(!editTimeModal)
     }
 
+    const [open, setOpen] = useState(false)
+    const [calendarOpen, setCalendarOpen] = useState(false)
+
+    const toggleMenu = () => {
+        setOpen(open => !open);
+    }
+
+    const closeMenu = () => {
+        setOpen(false)
+    }
+
+    const toggleCalendar = () => {
+        setCalendarOpen(calendarOpen => !calendarOpen);
+    }
+
+    const closeCalendar = () => {
+        setCalendarOpen(false)
+    }
+
     const validModify = () => {
         const modifiedDate = dayjs(`${date} ${time}`)
         return name !== plan.planName || modifiedDate !== plan.planDate || penalty !== plan.penalty
@@ -156,24 +177,30 @@ const EditPlan = (props) => {
                 </ModalPortal>
             </InputBox>
 
+            {/*<InputBox>*/}
+            {/*    <input*/}
+            {/*        readOnly*/}
+            {/*        value={formatDate(date)}*/}
+            {/*        placeholder={planDay}*/}
+            {/*        onClick={toggleCalendar}*/}
+            {/*    />*/}
+            {/*    <ShowCalendar calendarOpen={calendarOpen} onClick={closeCalendar}>*/}
+            {/*        <SetDrawerCalendar calendarOpen={calendarOpen} onClose={toggleCalendar} date={dayjs(date).toDate()} setDate={setDate}/>*/}
+            {/*    </ShowCalendar>*/}
+            {/*</InputBox>*/}
+
             <InputBox>
                 <input
                     readOnly
                     value={time}
                     placeholder={planTime}
-                    onClick={handleEditTimeModal}
+                    onClick={toggleMenu}
                 />
-                <ModalPortal>
-                    {editTimeModal && <Modal2 onClose={handleEditTimeModal}
-                                              hour={hour}
-                                              setHour={setHour}
-                                              minute={minute}
-                                              setMinute={setMinute}
-                                              amPmType={amPmType}
-                                              setAmPmType={setAmPmType}
-                    />}
-                </ModalPortal>
             </InputBox>
+            <ShowMenu open={open} onClick={closeMenu}>
+                <SetDrawerTime open={open} onClose={toggleMenu} hour={hour} setHour={setHour} minute={minute}
+                               setMinute={setMinute} amPmType={amPmType} setAmPmType={setAmPmType}/>
+            </ShowMenu>
 
             <InputBox>
                 <Input
@@ -222,7 +249,6 @@ const EditPlan = (props) => {
                         borderRadius: '10px',
                         cursor: "pointer",
                         fontWeight: 'bold',
-                        opacity: validModify ? 0.3 : 1,
                     }}>수정완료
                 </button>
             </Grid>
@@ -265,4 +291,32 @@ const DropBox = styled.div`
   width: 90%;
   margin: auto;
   box-sizing: border-box;
+`
+
+const ShowMenu = styled.div`
+  background-color: rgba(255, 255, 255, 0);
+  display: flex;
+  visibility: ${({open}) => open ? 'visible' : 'hidden'};
+  top: 0;
+  left: 0;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  transition: visibility 0.2s;
+`
+
+const ShowCalendar = styled.div`
+  background-color: rgba(255, 255, 255, 0);
+  display: flex;
+  visibility: ${({calendarOpen}) => calendarOpen ? 'visible' : 'hidden'};
+  top: 0;
+  left: 0;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  transition: visibility 0.2s;
 `

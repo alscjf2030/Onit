@@ -1,13 +1,14 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setLoading, signUp} from "../redux/modules/user";
+import {setError, setLoading, signUp} from "../redux/modules/user";
 import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
-import {ReactComponent as LeftArrow } from '../img/icon/arrowl.svg';
+import {ReactComponent as LeftArrow} from '../img/icon/arrowl.svg';
 import Swal from "sweetalert2";
 
 import eyeOn from '../img/icon/eyeOn.svg'
 import eyeOff from '../img/icon/eyeOff.svg'
+import theme from "../styles/theme";
 
 const SignUp = (props) => {
     const dispatch = useDispatch()
@@ -19,6 +20,7 @@ const SignUp = (props) => {
     const [hidePassword, setHidePassword] = useState(true)
     const [hidePasswordCheck, setHidePasswordCheck] = useState(true)
     const loading = useSelector((state) => state.user.loading)
+    const error = useSelector((state) => state.user.error)
 
     const toggleHidePassword = () => {
         setHidePassword(!hidePassword)
@@ -36,11 +38,8 @@ const SignUp = (props) => {
             })
         }
         if (pw !== pwCheck) {
-            return Swal.fire({
-                // title: 'Error!',
-                text: '비밀번호가 일치하지 않습니다!',
-                icon: 'error'
-            })
+            dispatch(setError('비밀번호가 일치하지 않습니다!'))
+            return
         } else {
             const data = {
                 username,
@@ -60,21 +59,15 @@ const SignUp = (props) => {
     if (loading === 'pending') {
         return 'loading...'
     }
-    // if (loading === 'failed') {
-    //     setTimeout(() => {
-    //         dispatch(setLoading('idle'))
-    //     }, 1000)
-    //     return 'failed...'
-    // }
 
     return (
-        <>
+        <Container>
             <HeadLine>
                 <LeftArrow
                     style={{
-                      position: "absolute",
-                      top: "12",
-                      left: "10"
+                        position: "absolute",
+                        top: "12",
+                        left: "10"
                     }}
                     cursor="pointer"
                     onClick={() => {
@@ -86,47 +79,100 @@ const SignUp = (props) => {
 
             <InputBox>
                 <p>아이디 입력</p>
-                <input
-                    value={username}
-                    placeholder='아이디를 입력하세요'
-                    onKeyPress={handleKeyPress}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
+                {error === '이미 사용중인 아이디 입니다!' ?
+                    <input
+                        style={{
+                            border: `2px solid ${theme.color.red1}`,
+                            backgroundColor: `${theme.color.red2}`
+                        }}
+                        value={username}
+                        placeholder='아이디를 입력하세요'
+                        onKeyPress={handleKeyPress}
+                        onChange={(e) => setUsername(e.target.value)}
+                    /> :
+                    <input
+                        value={username}
+                        placeholder='아이디를 입력하세요'
+                        onKeyPress={handleKeyPress}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                }
+                {error === '이미 사용중인 아이디 입니다!' && <ErrorBox>{error}</ErrorBox>}
             </InputBox>
 
             <InputBox>
                 <p>닉네임 입력</p>
-                <input
-                    value={nickname}
-                    placeholder='닉네임을 입력하세요'
-                    onKeyPress={handleKeyPress}
-                    onChange={(e) => setNickname(e.target.value)}
-                />
+                {error === '이미 사용중인 닉네임 입니다!' ?
+                    <input
+                        style={{
+                            border: `2px solid ${theme.color.red1}`,
+                            backgroundColor: `${theme.color.red2}`
+                        }}
+                        value={nickname}
+                        placeholder='닉네임을 입력하세요'
+                        onKeyPress={handleKeyPress}
+                        onChange={(e) => setNickname(e.target.value)}
+                    /> :
+                    <input
+                        value={nickname}
+                        placeholder='닉네임을 입력하세요'
+                        onKeyPress={handleKeyPress}
+                        onChange={(e) => setNickname(e.target.value)}
+                    />
+                }
+                {error === '이미 사용중인 닉네임 입니다!' && <ErrorBox>{error}</ErrorBox>}
             </InputBox>
 
             <PasswordBox>
                 <p>비밀번호 입력</p>
-                <input
-                    value={pw}
-                    placeholder='비밀번호를 입력하세요'
-                    type={hidePassword ? 'password' : 'text'}
-                    onKeyPress={handleKeyPress}
-                    onChange={(e) => setPw(e.target.value)}
-                />
-                    {hidePassword && <img src={eyeOff} onClick={toggleHidePassword}/>}
-                    {!hidePassword && <img src={eyeOn} onClick={toggleHidePassword}/>}
+                {error === '비밀번호가 일치하지 않습니다!' ?
+                    <input
+                        style={{
+                            border: `2px solid ${theme.color.red1}`,
+                            backgroundColor: `${theme.color.red2}`
+                        }}
+                        value={pw}
+                        placeholder='비밀번호를 입력하세요'
+                        type={hidePassword ? 'password' : 'text'}
+                        onKeyPress={handleKeyPress}
+                        onChange={(e) => setPw(e.target.value)}
+                    /> :
+                    <input
+                        value={pw}
+                        placeholder='비밀번호를 입력하세요'
+                        type={hidePassword ? 'password' : 'text'}
+                        onKeyPress={handleKeyPress}
+                        onChange={(e) => setPw(e.target.value)}
+                    />
+                }
+                {hidePassword && <img src={eyeOff} onClick={toggleHidePassword}/>}
+                {!hidePassword && <img src={eyeOn} onClick={toggleHidePassword}/>}
             </PasswordBox>
 
             <PwCheckBox>
-                <input
-                    value={pwCheck}
-                    placeholder='비밀번호를 다시 한번 입력하세요'
-                    type={hidePasswordCheck ? 'password' : 'text'}
-                    onKeyPress={handleKeyPress}
-                    onChange={(e) => setPwCheck(e.target.value)}
-                />
-                    {hidePasswordCheck && <img src={eyeOff} onClick={toggleHidePasswordCheck}/>}
-                    {!hidePasswordCheck && <img src={eyeOn} onClick={toggleHidePasswordCheck}/>}
+                {error === '비밀번호가 일치하지 않습니다!' ?
+                    <input
+                        style={{
+                            border: `2px solid ${theme.color.red1}`,
+                            backgroundColor: `${theme.color.red2}`
+                        }}
+                        value={pwCheck}
+                        placeholder='비밀번호를 다시 한번 입력하세요'
+                        type={hidePasswordCheck ? 'password' : 'text'}
+                        onKeyPress={handleKeyPress}
+                        onChange={(e) => setPwCheck(e.target.value)}
+                    /> :
+                    <input
+                        value={pwCheck}
+                        placeholder='비밀번호를 다시 한번 입력하세요'
+                        type={hidePasswordCheck ? 'password' : 'text'}
+                        onKeyPress={handleKeyPress}
+                        onChange={(e) => setPwCheck(e.target.value)}
+                    />
+                }
+                {hidePasswordCheck && <img src={eyeOff} onClick={toggleHidePasswordCheck}/>}
+                {!hidePasswordCheck && <img src={eyeOn} onClick={toggleHidePasswordCheck}/>}
+                {error === '비밀번호가 일치하지 않습니다!' && <ErrorBox>{error}</ErrorBox>}
             </PwCheckBox>
 
             <SignUpBox>
@@ -136,11 +182,16 @@ const SignUp = (props) => {
                 >회원가입
                 </button>
             </SignUpBox>
-        </>
+        </Container>
     )
 }
 
 export default SignUp
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`
 
 const HeadLine = styled.div`
   position: relative;
@@ -159,9 +210,9 @@ const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   width: 80%;
-  margin: 10px auto;
+  margin: 10px auto 30px;
   position: relative;
-  
+
   p {
     font-size: 18px;
     font-weight: bold;
@@ -169,13 +220,12 @@ const InputBox = styled.div`
   }
 
   input {
-    background-color: #eee;
+    background-color: ${theme.color.gray5};
     padding: 12px;
     width: 100%;
     height: 50px;
     border: none;
     border-radius: 10px;
-    margin-bottom: 30px;
 
     &:focus {
       outline: none;
@@ -197,7 +247,7 @@ const PasswordBox = styled.div`
   }
 
   input {
-    background-color: #eee;
+    background-color: ${theme.color.gray5};
     padding: 12px;
     width: 100%;
     height: 50px;
@@ -267,4 +317,11 @@ const SignUpBox = styled.div`
     font-weight: bold;
     font-size: 14px;
   }
+`
+
+const ErrorBox = styled.div`
+  font-size: 14px;
+  color: ${theme.color.orange};
+  margin-top: 8px;
+  margin-left: 2px;
 `

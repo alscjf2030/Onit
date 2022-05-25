@@ -27,9 +27,10 @@ const color = {
   // 가장 진한 색이 1이며, 숫자가 커질수록 점점 옅은 색으로 셋팅해두었습니다.
   gray1: '#5A5A5A',
   gray2: '#8C8C8C',
-  gray3: '#C4C4C4',
-  gray4: '#9E9E9E',
-  gray5: '#F8F8F8',
+  gray3: '#9E9E9E',
+  gray4: '#C4C4C4',
+  gray5: '#eee',
+  gray6: '#F8F8F8',
   orange: '#F84914',
   green: '#A1ED00',
   black: '#292929',
@@ -43,14 +44,21 @@ const color = {
   blue1: '#8689ff',
   blue2: '#afb1ff',
   blue3: '#d8d9ff',
+  red1: '#FF3030',
+  red2: '#FFF2F2',
 
   darkLine: '#3F4448',
   danger: '#ff8b6f',
 };
 
+export const DeviceSizes = {
+  mobile: 375,
+  laptop: 768
+}
+
 const deviceSizes = {
-  mobile: '375px',
-  laptop: '768px',
+  mobile: `${DeviceSizes.mobile}px`,
+  laptop: `${DeviceSizes.laptop}px`,
 };
 
 const device = {
