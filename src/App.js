@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import GlobalStyle from "./styles/GlobalStyle";
 import styled from "styled-components";
 import MainContents from "./components/MainContents";
 import useIsMobile from "./hooks/useIsMobile";
+import {messaging} from "./firebase";
+import {getToken} from 'firebase/messaging'
 
 
 function App() {
