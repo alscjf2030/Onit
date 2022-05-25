@@ -15,7 +15,6 @@ const Detail = (props) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.user_info)
     const plan = useSelector(state => state.plan.showplan)
-    console.log(plan)
     const token = localStorage.getItem("token")
     const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd')
     const planTime = dayjs(plan?.planDate).format('A hh시 mm분')

@@ -13,6 +13,9 @@ import Modal2 from "../components/Modal2";
 import {hourModel, minuteModel} from "../statics/time";
 import {DropdownList} from "react-widgets/cjs";
 import {penaltyModel} from "../statics/penalty";
+import { Input } from "../elements";
+import PlanSelectMap from "../components/PlanSelectMap";
+import theme from "../styles/theme";
 
 const EditPlan = (props) => {
     const {planUrl} = useParams()
@@ -26,11 +29,14 @@ const EditPlan = (props) => {
     const [date, setDate] = useState('')
     const [penalty, setPenalty] = useState('')
     const [place, setPlace] = useState(null)
-
+    const [showMap, setShowMap] = useState(false);
     const [hour, setHour] = useState(null)
     const [minute, setMinute] = useState(null)
     const [amPmType, setAmPmType] = useState('')
-
+    const [placename, setplaceName] = useState(place?.name || '');
+    const [address, setAddress] = useState(place?.address || '')
+    const [lat, setLat] = useState(place?.lat || '');
+    const [lng, setLng] = useState(place?.lng || '');
     const planDay = formatDate(plan?.planDate)
     const planTime = formatTime(plan?.planDate)
 
@@ -170,9 +176,22 @@ const EditPlan = (props) => {
             </InputBox>
 
             <InputBox>
-                <input
+                <Input
                     placeholder={plan.locationDetail.name}
+                    _onClick={() => {
+                        setShowMap(true);
+                    }}
+                    value={placename}
                 />
+                {showMap && (
+                <PlanSelectMap
+                    setShowMap={setShowMap}
+                    setName={setplaceName}
+                    setAddress={setAddress}
+                    setLat={setLat}
+                    setLng={setLng}
+                />
+            )}
             </InputBox>
 
             <DropBox>

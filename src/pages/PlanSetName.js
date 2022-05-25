@@ -13,7 +13,6 @@ const PlanSetName = props => {
   const planId = useSelector(state => state.map.planId)
   const path = useParams();
   const locationName = useSelector(state => state.map.locationName)
-  // console.log(locationName)
   //웹소켓 방 주소로 약속 일정 ID 가져오기
   useEffect(() => {
     dispatch(getPlanId(path.url));

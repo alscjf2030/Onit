@@ -1,13 +1,8 @@
 import axios from "axios";
 
 const client = axios.create({
-    baseURL: 'https://zsoon.shop',
-    withCredentials: true,
-})
-
-const instance = axios.create({
-    baseURL: 'https://imonit.co.kr',
-    withCredentials: true,
+    baseURL: 'https://imonint.shop',
+    withCredentials: true
 })
 
 client.interceptors.request.use(function (config) {
@@ -18,9 +13,6 @@ client.interceptors.request.use(function (config) {
 
 export const getApi = (path, config) => {
     return client.get(path, config)
-}
-export const getApi2 = (path, config) => {
-    return instance.get(path, config)
 }
 
 export const postApi = (path, data, config) => {

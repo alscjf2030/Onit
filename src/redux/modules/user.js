@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {getApi, getApi2, postApi} from "../../shared/api/client";
+import history from "../../index"
 import Swal from "sweetalert2";
 
 const initialState = {
@@ -12,9 +13,7 @@ export const signUp = createAsyncThunk(
     'user/signup',
     async ({data, navigate}, {rejectedWithValue}) => {
         try {
-            const res = await postApi('/user/signup', data, {
-                withCredentials: true,
-            })
+            const res = await postApi('/user/signup', data)
             console.log(res.data)
             Swal.fire({
                 position: 'center',
@@ -44,9 +43,7 @@ export const login = createAsyncThunk(
     'user/login',
     async ({data, navigate}, {rejectedWithValue}) => {
         try {
-            const res = await postApi('/user/login', data, {
-                withCredentials: true,
-            })
+            const res = await postApi('/user/login', data)
             console.log(res)
             Swal.fire({
                 position: 'center',
@@ -72,9 +69,7 @@ export const login2 = createAsyncThunk(
     'user/login',
     async ({data, join, navigate}, {rejectedWithValue}) => {
         try {
-            const res = await postApi('/user/login', data, {
-                withCredentials: true,
-            })
+            const res = await postApi('/user/login', data)
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -105,13 +100,6 @@ export const logout = createAsyncThunk(
         try {
             const res = await postApi('/user/logout', data);
             localStorage.removeItem('token');
-            Swal.fire({
-                position: 'center',
-                title: '다음에 또 만나요',
-                text: '온 세상의 약속을 잇다',
-                showConfirmButton: false,
-                timer: 1500
-            })
             setTimeout(() => navigate('/login'), 30)
             return {
                 data: res.data,
@@ -153,9 +141,7 @@ export const getUserToken = createAsyncThunk(
     'user/getUserToken',
     async (_, {rejectedWithValue}) => {
         try {
-            const res = await getApi('/users/kakao/callback', {
-                withCredentials: true,
-            })
+            const res = await getApi('/users/kakao/callback')
             console.log(res)
             return {
                 data: res.data.data,
@@ -169,19 +155,21 @@ export const getUserToken = createAsyncThunk(
 
 export const kakaoLogin = createAsyncThunk(
     'user/kakaoLogin',
-    async ({code, navigate}, {rejectedWithValue}) => {
+    async (code, {rejectedWithValue}) => {
         try {
-            const res = await getApi2(`users/kakao/callback?code=${code}`,{
-                withCredentials: true,
-            })
-            console.log(res)
-            const ACCESS_TOKEN = res.headers.authorization;
-            // const ACCESS_TOKEN2 = res.data.accessToken;
-            localStorage.setItem('token', ACCESS_TOKEN);
-            navigate('/main')
+            const res = await getApi(`/users/kakao/callback?code=${code}`)
+            if(res.headers.authorization){
+                const ACCESS_TOKEN = res.headers.authorization;
+                localStorage.setItem('token', ACCESS_TOKEN);
+                history.push("/main");
+                return res.data
+            } else {
+                history.push("/login")
+            }
+            return
         } catch (err) {
-            console.log(err)
-            navigate('/login')
+            console.log("카카오 로그인 실패")
+            history.push("/login")
             return rejectedWithValue(err)
         }
     }
@@ -231,6 +219,9 @@ export const userSlice = createSlice({
         [getUserToken.fulfilled]: (state, action) => {
             state.is_login = true
         },
+        [kakaoLogin.fulfilled]: (state, action) => {
+            state.user_info = action.payload
+        }
     },
 })
 
