@@ -67,11 +67,13 @@ export const addPlan = createAsyncThunk(
             return res.data
         } catch (err) {
             Swal.fire({
-                text: err.response.data.exception,
-                icon: 'error'
+                position: 'center',
+                icon: 'error',
+                text: `${err.response.data.msg}`,
+                showConfirmButton: false,
+                timer: 2000
             })
-            console.log(err)
-            return rejectedWithValue(err.response)
+            return rejectedWithValue(err.response.data)
         }
     }
 )
@@ -163,7 +165,7 @@ const initialState = {
     today: [],
     created: {
             plans: [],
-            totalPage: 1,
+            totalPage: 0,
             },
     _today: [],
     invited: {
