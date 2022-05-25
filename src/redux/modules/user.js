@@ -29,7 +29,11 @@ export const signUp = createAsyncThunk(
                 status: res.status
             }
         } catch (err) {
-            console.log(err)
+            console.log(err.response.data)
+            Swal.fire({
+                text: err.response.data.msg,
+                icon: 'error'
+            })
             return rejectedWithValue(err.response)
         }
     }
@@ -55,7 +59,10 @@ export const login = createAsyncThunk(
             navigate('/main')
             return res.data
         } catch (err) {
-            alert(err.response.data.exception)
+            Swal.fire({
+                text: err.response.data.exception,
+                icon: 'error'
+            })
             return rejectedWithValue(err.response)
         }
     }
@@ -79,7 +86,10 @@ export const login2 = createAsyncThunk(
             navigate(`/detail/${join}`)
             return res.data
         } catch (err) {
-            alert(err.response.data.exception)
+            Swal.fire({
+                text: err.response.data.exception,
+                icon: 'error'
+            })
             return rejectedWithValue(err.response)
         }
     }
@@ -95,6 +105,13 @@ export const logout = createAsyncThunk(
         try {
             const res = await postApi('/user/logout', data);
             localStorage.removeItem('token');
+            Swal.fire({
+                position: 'center',
+                title: '다음에 또 만나요',
+                text: '온 세상의 약속을 잇다',
+                showConfirmButton: false,
+                timer: 1500
+            })
             setTimeout(() => navigate('/login'), 30)
             return {
                 data: res.data,

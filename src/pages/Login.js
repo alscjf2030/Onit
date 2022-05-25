@@ -4,8 +4,6 @@ import {useNavigate, useParams} from 'react-router-dom'
 import styled from "styled-components";
 import Swal from "sweetalert2";
 
-import { KAKAO_AUTH_URL } from "../service/OAuth";
-import KakaoSymbol from "../img/icon/KakaoSymbol.svg"
 import {login, login2, setLoading} from "../redux/modules/user";
 import { LoginP } from "../img";
 import eyeOff from "../img/icon/eyeOff.svg";

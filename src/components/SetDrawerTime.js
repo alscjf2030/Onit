@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import {DropdownList} from "react-widgets/cjs";
 import {hourModel, minuteModel} from "../statics/time";
-import {Grid} from "../elements";
 import theme from "../styles/theme";
 import Swal from "sweetalert2";
 
@@ -118,7 +117,6 @@ const DrawerContainer = styled.div`
     position: absolute;
     bottom: 0;
     margin-bottom: 10px;
-    // background-color: ${({_amPmType, _hour, _minute}) => `${_amPmType === '' || _hour === '시' || _minute === '분' ? '#A1ED00' : '#DDD'}` };
     width: 90%;
     padding: 12px;
     color: ${theme.color.black};

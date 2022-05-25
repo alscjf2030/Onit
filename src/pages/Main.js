@@ -9,6 +9,7 @@ import useResetStore from "../hooks/useResetStore";
 import {ReactComponent as BsBell} from '../img/icon/bell.svg'
 import {ReactComponent as Logo} from '../img/icon/logo-619.svg'
 import PlanList from '../components/PlanList';
+import GoodBye from '../img/GoodBye.png'
 
 //redux
 import {logout} from "../redux/modules/user";
@@ -23,7 +24,6 @@ const Main = (props) => {
     const userData = useSelector(state => state.user.user_info)
     const resetStore = useResetStore()
     const [isOpen, setMenu] = useState(false);
-    // console.log(userData)
     const logoutBtn = () => {
         localStorage.removeItem('token')
         resetStore()
@@ -221,6 +221,7 @@ const ShowMenu = styled.div`
   background-color: #ddd;
   width: 70%;
   //height: calc(100% - 40px);
+  visibility: ${({isOpen}) => isOpen ? 'visible' : 'hidden'};
   height: 100%;
   position: fixed;
   right: 0;
@@ -228,7 +229,7 @@ const ShowMenu = styled.div`
   top: 0;
   padding: 10px;
   transform: ${({isOpen}) => `translateX(${isOpen ? 0 : '100%'})`};
-  transition: transform 0.2s ease-in-out;
+  transition: visibility 0.1s, transform 0.2s ease-in-out;
 
   .side-bar-header {
     display: flex;

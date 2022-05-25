@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Input, Grid } from '../elements';
 import theme from "../styles/theme";
+import Swal from "sweetalert2";
 
 const PlanName = ({clickHandler, name, setName}) => {
     const [_name, _setName] = useState(name)
@@ -11,7 +12,10 @@ const PlanName = ({clickHandler, name, setName}) => {
 
     const handleNext = () => {
         if ( !_name ) {
-            alert('약속 이름을 입력해 주세요')
+            Swal.fire({
+                text: '약속 이름을 입력해 주세요',
+                icon: 'error'
+            })
             return
         }
         setName(_name)

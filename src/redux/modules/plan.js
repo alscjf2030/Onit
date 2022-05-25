@@ -66,6 +66,10 @@ export const addPlan = createAsyncThunk(
             navigate('/main')
             return res.data
         } catch (err) {
+            Swal.fire({
+                text: err.response.data.exception,
+                icon: 'error'
+            })
             console.log(err)
             return rejectedWithValue(err.response)
         }

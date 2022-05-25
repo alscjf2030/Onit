@@ -50,21 +50,21 @@ const color = {
 };
 
 const deviceSizes = {
-  mobile: '360px',
-  laptop: '1024px',
+  mobile: '375px',
+  laptop: '768px',
 };
 
-// const device = {
-//   mobile: `screen and (min-width: ${deviceSizes.mobile})`,
-//   laptop: `screen and (min-width: ${deviceSizes.laptop})`,
-// };
+const device = {
+  mobile: `screen and (min-width: ${deviceSizes.mobile})`,
+  laptop: `screen and (min-width: ${deviceSizes.laptop})`,
+};
 
 const theme = {
   fontSize,
   fontWeight,
   color,
   calRem,
-  // device,
+  device,
 };
 
 export default theme;

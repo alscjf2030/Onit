@@ -2,15 +2,12 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {Grid, Input} from '../elements';
 import theme from "../styles/theme";
 
-import Modal from './Modal'
-import Modal2 from "./Modal2";
-import ModalPortal from "./ModalPortal";
-
 import {hourModel, minuteModel} from "../statics/time";
 import {formatDate} from "../shared/utils/common";
 import styled from "styled-components";
 import SetDrawerTime from "./SetDrawerTime";
-import SetDropdown from "./SetDropdown";
+import SetDrawerCalendar from "./SetDrawerCalendar";
+import Swal from "sweetalert2";
 
 const SetTime = ({setDate, setTime, clickHandler}) => {
     let today = new Date();
@@ -43,20 +40,12 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
     //     }
     // }, [amPmType, hour, minute])
 
-    const [openedDateModal, setOpenedDateModal] = useState(false);
-    const [openedTimeModal, setOpenedTimeModal] = useState(false);
-
-    const handleDateModal = () => {
-        setOpenedDateModal(!openedDateModal)
-    }
-
-    const handleTimeModal = () => {
-        setOpenedTimeModal(!openedTimeModal)
-    }
-
     const handleNext = () => {
         if (!_date || !_time) {
-            alert('날짜를 정해 주세요')
+            Swal.fire({
+                text: '날짜를 정해 주세요',
+                icon: 'error'
+            })
             return
         }
         setDate(formatDate(_date))
@@ -65,6 +54,7 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
     }
 
     const [open, setOpen] = useState(false)
+    const [calendarOpen, setCalendarOpen] = useState(false)
 
     const toggleMenu = () => {
         setOpen(open => !open);
@@ -72,6 +62,14 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
 
     const closeMenu = () => {
         setOpen(false)
+    }
+
+    const toggleCalendar = () => {
+        setCalendarOpen(calendarOpen => !calendarOpen);
+    }
+
+    const closeCalendar = () => {
+        setCalendarOpen(false)
     }
 
 
@@ -86,19 +84,8 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
                     labelText="먼저 날짜를 알려주세요"
                     placeholder={today = yyyy + '년 ' + mm + '월 ' + dd + '일 '}
                     value={formatDate(_date)}
-                    _onClick={handleDateModal}
+                    _onClick={toggleCalendar}
                 />
-                {/*<Input*/}
-                {/*    islabel*/}
-                {/*    labelBold*/}
-                {/*    readonly*/}
-                {/*    labelColor={theme.color.gray1}*/}
-                {/*    labelText="시간은 몇시가 좋을까요?"*/}
-                {/*    textAlign="center"*/}
-                {/*    value={_time}*/}
-                {/*    placeholder={timePlaceholder}*/}
-                {/*    _onClick={handleTimeModal}*/}
-                {/*/>*/}
                 <Input
                     islabel
                     labelBold
@@ -116,14 +103,9 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
                                    setMinute={setMinute} amPmType={amPmType} setAmPmType={setAmPmType}/>
             </ShowMenu>
 
-            <ModalPortal>
-                {openedDateModal && <Modal onClose={handleDateModal} date={_date} setDate={_setDate}/>}
-            </ModalPortal>
-
-            <ModalPortal>
-                {openedTimeModal && <Modal2 onClose={handleTimeModal} hour={hour} setHour={setHour} minute={minute}
-                                            setMinute={setMinute} amPmType={amPmType} setAmPmType={setAmPmType}/>}
-            </ModalPortal>
+            <ShowCalendar calendarOpen={calendarOpen} onClick={closeCalendar}>
+                <SetDrawerCalendar calendarOpen={calendarOpen} onClose={toggleCalendar} date={_date} setDate={_setDate}/>
+            </ShowCalendar>
 
             <Grid bottom="0" padding="16px">
                 <button
@@ -150,6 +132,20 @@ const ShowMenu = styled.div`
   background-color: rgba(255, 255, 255, 0);
   display: flex;
   visibility: ${({open}) => open ? 'visible' : 'hidden'};
+  top: 0;
+  left: 0;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  transition: visibility 0.2s;
+`
+
+const ShowCalendar = styled.div`
+  background-color: rgba(255, 255, 255, 0);
+  display: flex;
+  visibility: ${({calendarOpen}) => calendarOpen ? 'visible' : 'hidden'};
   top: 0;
   left: 0;
   align-items: flex-end;

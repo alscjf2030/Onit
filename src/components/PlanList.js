@@ -6,7 +6,6 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 import 'dayjs/locale/ko'
 
-import {Text} from "../elements";
 import theme from "../styles/theme";
 import {ReactComponent as Plus} from '../img/icon/Plus.svg'
 

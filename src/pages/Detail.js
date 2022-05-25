@@ -29,14 +29,16 @@ const Detail = (props) => {
                 .then(() => console.log('성공'))
                 .catch((err) => console.log(err))
         } else {
-            alert("공유하기가 지원되지 않는 환경 입니다.")
+            Swal.fire({
+                text: '공유하기가 지원되지 않는 환경 입니다.',
+                icon: 'error',
+            })
         }
     }
 
     useEffect(() => {
         if (!token) {
             Swal.fire({
-                // title: 'Error!',
                 text: '로그인을 해 주세요',
                 icon: 'error',
             })
@@ -48,7 +50,6 @@ const Detail = (props) => {
     const handleModify = () => {
         if (user.nickname !== plan.writer) {
             Swal.fire({
-                // title: 'Error!',
                 text: '작성자만 수정 가능합니다.',
                 icon: 'error',
             })
@@ -61,10 +62,8 @@ const Detail = (props) => {
     const deletePlanBtn = () => {
         if (user.nickname !== plan.writer) {
             Swal.fire({
-                // title: 'Error!',
                 text: '작성자만 삭제 가능합니다.',
                 icon: 'error',
-                // confirmButtonText: 'Cool'
             })
             return
         }

@@ -60,12 +60,12 @@ const SignUp = (props) => {
     if (loading === 'pending') {
         return 'loading...'
     }
-    if (loading === 'failed') {
-        setTimeout(() => {
-            dispatch(setLoading('idle'))
-        }, 1000)
-        return 'failed...'
-    }
+    // if (loading === 'failed') {
+    //     setTimeout(() => {
+    //         dispatch(setLoading('idle'))
+    //     }, 1000)
+    //     return 'failed...'
+    // }
 
     return (
         <>
