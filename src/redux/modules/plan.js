@@ -65,7 +65,7 @@ export const addPlan = createAsyncThunk(
             const res = await postApi('/member/plan', data)
             setTimeout(() => {
                 history.push("/main");
-            }, 400)
+              }, "600")
             return res.data
         } catch (err) {
             Swal.fire({

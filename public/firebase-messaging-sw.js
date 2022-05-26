@@ -27,17 +27,10 @@ self.addEventListener('push', function (event) {
   event.waitUntil(self.registration.showNotification(title, options)); // showNotification을 통해 푸시 알림을 생성, Promise가 반환되며 waitUntil을 통해 이벤트를 연장 시켜야함
 });
 
-self.addEventListener('notificationclick', function (event) {
-  // console.log('notificationclick', event);
-
-  event.notification.close();
-  // event.waitUntil(
-  //   self.clients.openWindow(
-  //     ``,
-  //     // /plan/${
-  //     //   event.notification.body.split('!\n')[1]
-  //     // }`,
-  //   ),
-  //   // self.clients.openWindow(event.notification.data.url),
-  // );
-});
+// self.addEventListener('notificationclick', function (event) {
+//   event.waitUntil(
+//     self.clients.openWindow(
+//       ``,
+//     ),
+//   );
+// });
