@@ -85,15 +85,18 @@ const PlanList = (props) => {
                         >
                             <Content>
                                 <h3>{todayPlan}</h3>
-                                <div
-                                    onClick={handleShared}
-                                    style={{
-                                        zIndex: 1,
-                                        marginLeft: "auto"
-                                    }}
-                                >
-                                    <Share/>
-                                </div>
+                                {/*<div*/}
+                                {/*    onClick={handleShared}*/}
+                                {/*    style={{*/}
+                                {/*        zIndex: 1,*/}
+                                {/*        marginLeft: "auto"*/}
+                                {/*    }}*/}
+                                {/*>*/}
+                                <Share onClick={handleShared}
+                                       style={{
+                                           marginLeft: "auto"
+                                       }}/>
+                                {/*</div>*/}
                             </Content>
                             <h3>{today.planName}</h3>
                             <br/>
@@ -187,22 +190,22 @@ const Content = styled.div`
 `;
 
 const Penalty = styled.div`
-display: flex;
-background: ${theme.color.gray5};
-border-radius: 9px;
-padding: 2px 8px;
-width: fit-content;
-align-items: center;
+  display: flex;
+  background: ${theme.color.gray5};
+  border-radius: 10px;
+  padding: 2px 8px;
+  width: fit-content;
+  align-items: center;
 
-span {
+  span {
     font-size: 12px;
-    margin: 0px 5px;
-}
+    margin: 0 5px;
+  }
 `;
 
 const List = styled.div`
   overflow: hidden;
-  height: 68vh;
+  height: 100%;
   padding: 24px;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
@@ -210,6 +213,16 @@ const List = styled.div`
 
   ::-webkit-scrollbar {
     display: none; /* Chrome , Safari , Opera */
+  }
+
+  .lists:first-of-type {
+    background-color: ${theme.color.green};
+    width: 100%;
+    //border: 1px none #ddd;
+    border-radius: 10px;
+    padding: 12px 10px;
+    margin-bottom: 16px;
+    box-shadow: 0 0 15px #d1d1d1;
   }
 
   .lists {
@@ -264,15 +277,15 @@ const List = styled.div`
 `
 
 const Today = styled.div`
-    position: relative;
-    background-color: ${theme.color.green};
-    height: 25vh;
-    width: 100%;
-    border: 1px none #ddd;
-    border-radius: 10px;
-    padding: 12px 12px;
-    margin-bottom: 16px;
-    box-shadow: 0 0 15px #d1d1d1;
+  position: relative;
+  background-color: ${theme.color.green};
+  height: 25vh;
+  width: 100%;
+  border: 1px none #ddd;
+  border-radius: 10px;
+  padding: 12px 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 0 15px #d1d1d1;
 
   h3 {
     font-size: 20px;

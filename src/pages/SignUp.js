@@ -86,13 +86,13 @@ const SignUp = (props) => {
                             backgroundColor: `${theme.color.red2}`
                         }}
                         value={username}
-                        placeholder='아이디를 입력하세요'
+                        placeholder='아이디는 영어와 숫자 3~9자리 입니다.'
                         onKeyPress={handleKeyPress}
                         onChange={(e) => setUsername(e.target.value)}
                     /> :
                     <input
                         value={username}
-                        placeholder='아이디를 입력하세요'
+                        placeholder='아이디는 영어와 숫자 3~9자리 입니다.'
                         onKeyPress={handleKeyPress}
                         onChange={(e) => setUsername(e.target.value)}
                     />

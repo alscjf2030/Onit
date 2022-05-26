@@ -47,7 +47,7 @@ const CompleteSignup = (props) => {
 export default CompleteSignup;
 
 const Container = styled.div`
-  min-height: 100vh;
+  height: 100%;
   
   .logo {
     width: 30%;
@@ -57,7 +57,7 @@ const Container = styled.div`
 
 const TitleBox = styled.div`
   width: 100%;
-  padding: 50px 0 30px 35px;
+  padding: 100px 0 30px 35px;
   
   h3 {
     font-size: 24px;
@@ -85,12 +85,11 @@ const TextBox = styled.div`
 
 const ImgBox = styled.div`
   width: 100%;
-  height: 50%;
   margin-top: 50px;
   
   img {
     width: 100%;
     height: 100%;
-    transform: rotate(44.45deg);
+    transform: rotate(45deg);
   }
 `

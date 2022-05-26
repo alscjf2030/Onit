@@ -25,6 +25,7 @@ const EditPlan = (props) => {
     const dispatch = useDispatch()
 
     const plan = useSelector(state => state.plan.showplan)
+    console.log('plan : ', plan);
 
     const [name, setName] = useState('')
     const [time, setTime] = useState('')
@@ -80,7 +81,7 @@ const EditPlan = (props) => {
         setName(e.target.value)
     }
     const changePenalty = (data) => {
-        setPenalty(data.value)
+        setPenalty(data)
     }
 
     const editPlanBtn = () => {
@@ -92,7 +93,7 @@ const EditPlan = (props) => {
             planName: name,
             planDate: `${formatDate(date)} ${time}`,
             location: place,
-            penalty,
+            penalty: penalty.value,
         }
         dispatch(editPlan({data, navigate}));
     }

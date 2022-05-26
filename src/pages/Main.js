@@ -9,6 +9,7 @@ import 'dayjs/locale/ko'
 import FCMtoken from "../components/FCMtoken";
 import PlanTab from "../components/PlanTab";
 import SideMenu from "../components/SideMenu";
+import theme from "../styles/theme";
 
 dayjs.locale('ko')
 
@@ -43,8 +44,8 @@ const Tab = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  background-color: #eee;
-  //min-height: 100vh;
+  height: 100%;
+  background-color: ${theme.color.gray5};
   position: relative;
 
   .logo {

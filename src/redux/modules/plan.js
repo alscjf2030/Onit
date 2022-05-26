@@ -7,7 +7,7 @@ export const getPlan = createAsyncThunk(
     async (page, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/member/plans/${page}`)
-            console.log(res)
+            // console.log(res)
             return res.data
         } catch (err) {
             console.log(err)
@@ -21,7 +21,7 @@ export const getMorePlan = createAsyncThunk(
     async ({page}, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/member/plans/${page}`)
-            return res.data.data.planList
+            return res.data.data?.planList
         } catch (err) {
             console.log(err)
             return rejectedWithValue(err.response)

@@ -15,6 +15,7 @@ import KakaoHandler from "../service/KakaoHandler";
 import NotFound from "../pages/NotFound";
 import styled from "styled-components";
 import theme from "../styles/theme";
+import MobilePortal from "./MobilePortal";
 
 function MainContents(props) {
     return (

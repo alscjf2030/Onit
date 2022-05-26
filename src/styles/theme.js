@@ -1,5 +1,3 @@
-import { css } from 'styled-components'
-
 const calRem = size => `${size / 16}rem`;
 
 const fontSize = {

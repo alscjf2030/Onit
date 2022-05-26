@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useNavigate} from 'react-router-dom';
-import { OnBoard } from '../img';
+import {OnBoard} from '../img';
 import Logo from '../img/Logo.svg'
 import KakaoButton from "../components/KakaoButton";
 
@@ -14,12 +14,12 @@ const Home = () => {
                 <h3>만들고, 공유하고, 확인하는</h3>
                 <h3>모임 약속 공유 플랫폼</h3>
             </TitleBox>
-              <img alt='logo' className='logo' src={Logo}/>
+            <img alt='logo' className='logo' src={Logo}/>
             <OnBoardingBox>
                 <img alt='cover' src={OnBoard}/>
             </OnBoardingBox>
             <LoginDiv>
-              <KakaoButton/>
+                <KakaoButton/>
                 <LoginBox>
                     <button
                         onClick={() => {
@@ -30,7 +30,9 @@ const Home = () => {
                 </LoginBox>
                 <SignupBox>
                     <span>아직 회원이 아니신가요?</span>
-                    <p onClick={() => {navigate('/signup')}}>회원가입하기</p>
+                    <p onClick={() => {
+                        navigate('/signup')
+                    }}>회원가입하기</p>
                 </SignupBox>
             </LoginDiv>
         </Container>
@@ -41,7 +43,7 @@ const Home = () => {
 export default Home;
 
 const Container = styled.div`
-  min-height: 100vh;
+  height: 100%;
 
   .logo {
     width: 30%;
@@ -63,12 +65,12 @@ const TitleBox = styled.div`
 
 const OnBoardingBox = styled.div`
   width: 100%;
-  height: 50%;
 
   img {
     width: 100%;
     height: 100%;
-    margin: 40px 0px 30px 0px;
+    margin: 40px 0px;
+    object-fit: cover;
   }
 `
 

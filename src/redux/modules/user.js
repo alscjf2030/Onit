@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import {getApi, getApi2, postApi} from "../../shared/api/client";
+import {getApi, postApi} from "../../shared/api/client";
 import history from "../../index"
 import Swal from "sweetalert2";
 

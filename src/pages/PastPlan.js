@@ -12,7 +12,7 @@ const PastPlan = (props) => {
     const dispatch = useDispatch()
 
     const pastPlan = useSelector(state => state.plan.plans)
-    console.log(pastPlan)
+    // console.log(pastPlan)
 
     useEffect(() => {
         if (pastPlan?.status === -1) {
