@@ -12,6 +12,7 @@ import {ReactComponent as Plus} from '../img/icon/Plus.svg'
 import {ReactComponent as Share} from '../img/icon/share-icon.svg'
 import {bomb} from '../img'
 import {getMorePlan, getPlan, setLoading} from "../redux/modules/plan";
+import Swal from "sweetalert2";
 
 dayjs.locale('ko')
 
@@ -70,7 +71,8 @@ const PlanList = (props) => {
                         {planList.map((plan, idx) => {
                             const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd,')
                             const planTime = dayjs(plan?.planDate).format(' A hh시 mm분')
-                            const handleShared = () => {
+                            const handleShared = (event) => {
+                                event.stopPropagation()
                                 if (navigator.share) {
                                     navigator.share({
                                         title: plan.planName,
@@ -80,7 +82,10 @@ const PlanList = (props) => {
                                         .then(() => console.log('성공'))
                                         .catch((err) => console.log(err))
                                 } else {
-                                    alert("공유하기가 지원되지 않는 환경 입니다.")
+                                    Swal.fire({
+                                        text: "공유하기가 지원되지 않는 환경 입니다.",
+                                        icon: 'error'
+                                    })
                                 }
                             }
                             return (
@@ -115,10 +120,10 @@ const PlanList = (props) => {
                     </>
                 ) : (
                     <div className='no-list'>
-                        <p size="14px" color={theme.color.gray1}>
+                        <p>
                             아직 약속이 없습니다!
                         </p>
-                        <p size="14px" color={theme.color.gray1}>
+                        <p>
                             즐거운 모임 온잇에서 어떠신가요?
                         </p>
                         <button
@@ -206,7 +211,7 @@ const List = styled.div`
 
   p {
     padding-bottom: 8px;
-    font-wight: bold;
+    font-weight: bold;
   }
 
   .no-list {

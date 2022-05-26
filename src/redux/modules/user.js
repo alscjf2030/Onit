@@ -15,7 +15,6 @@ export const signUp = createAsyncThunk(
     async ({data, navigate}, {rejectWithValue}) => {
         try {
             const res = await postApi('/user/signup', data)
-            console.log(res.data)
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -46,7 +45,7 @@ export const login = createAsyncThunk(
         try {
             const res = await postApi('/user/login', data)
             Swal.fire({
-                position: 'center',
+                position: 'center-start',
                 icon: 'success',
                 title: '로그인 성공',
                 showConfirmButton: false,

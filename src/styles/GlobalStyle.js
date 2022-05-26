@@ -69,6 +69,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    position: relative;
     line-height: 1;
   }
 

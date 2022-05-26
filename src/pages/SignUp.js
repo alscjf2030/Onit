@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setError, setLoading, signUp} from "../redux/modules/user";
+import {setError, signUp} from "../redux/modules/user";
 import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import {ReactComponent as LeftArrow} from '../img/icon/arrowl.svg';
@@ -145,8 +145,8 @@ const SignUp = (props) => {
                         onChange={(e) => setPw(e.target.value)}
                     />
                 }
-                {hidePassword && <img src={eyeOff} onClick={toggleHidePassword}/>}
-                {!hidePassword && <img src={eyeOn} onClick={toggleHidePassword}/>}
+                {hidePassword && <img alt='eyeOff' src={eyeOff} onClick={toggleHidePassword}/>}
+                {!hidePassword && <img alt='eyeOn' src={eyeOn} onClick={toggleHidePassword}/>}
             </PasswordBox>
 
             <PwCheckBox>
@@ -170,8 +170,8 @@ const SignUp = (props) => {
                         onChange={(e) => setPwCheck(e.target.value)}
                     />
                 }
-                {hidePasswordCheck && <img src={eyeOff} onClick={toggleHidePasswordCheck}/>}
-                {!hidePasswordCheck && <img src={eyeOn} onClick={toggleHidePasswordCheck}/>}
+                {hidePasswordCheck && <img alt='eyeOff' src={eyeOff} onClick={toggleHidePasswordCheck}/>}
+                {!hidePasswordCheck && <img alt='eyeOn' src={eyeOn} onClick={toggleHidePasswordCheck}/>}
                 {error === '비밀번호가 일치하지 않습니다!' && <ErrorBox>{error}</ErrorBox>}
             </PwCheckBox>
 

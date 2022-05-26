@@ -87,7 +87,7 @@ const InvitedList = (props) => {
                     </>
                 ) : (
                     <div className='no-list'>
-                        <p size="14px" color={theme.color.gray1}>
+                        <p>
                             아직 참여한 약속이 없습니다!
                         </p>
                     </div>
@@ -187,6 +187,7 @@ const List = styled.div`
 
   .no-list > p {
     font-size: 14px;
+    font-weight: bold;
     color: ${theme.color.gray1};
   }
 

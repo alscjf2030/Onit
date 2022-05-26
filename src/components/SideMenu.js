@@ -5,10 +5,10 @@ import {ReactComponent as BsBell} from '../img/icon/bell.svg'
 import useResetStore from "../hooks/useResetStore";
 import {logout} from "../redux/modules/user";
 import {useNavigate} from "react-router-dom";
-import { editPic } from "../img";
+import {editPic} from "../img";
 import {ReactComponent as Logo} from '../img/icon/logo-619.svg'
 import MobilePortal from "./MobilePortal";
-import { changePic } from "../redux/modules/user";
+import {changePic} from "../redux/modules/user";
 
 
 const SideMenu = (props) => {
@@ -70,12 +70,12 @@ const SideMenu = (props) => {
                             backgroundImage: `url(${userData?.profileImg})`,
                             backgroundSize: 'cover',
                         }}>
-                        <img
-                          alt='edit'
-                          src={editPic}
-                          style={{display: "flex", marginLeft: "auto"}}
-                          onClick={handleClick}
-                        />
+                            <img
+                                alt='edit'
+                                src={editPic}
+                                style={{display: "flex", marginLeft: "auto"}}
+                                onClick={handleClick}
+                            />
                         </div>
                         <p>{userData?.nickname || '손'} 님</p>
                     </div>
@@ -91,14 +91,14 @@ const SideMenu = (props) => {
                         <p>로그아웃</p>
                     </div>
                 </ShowMenu>
-              <input
-                type="file"
-                onChange={selectFile}
-                ref={hidden}
-                id="fileUpload"
-                accept="image/jpeg, image/png, image/jpg"
-                style={{ display: "none" }}
-              />
+                <input
+                    type="file"
+                    onChange={selectFile}
+                    ref={hidden}
+                    id="fileUpload"
+                    accept="image/jpeg, image/png, image/jpg"
+                    style={{display: "none"}}
+                />
             </MobilePortal>
         </HeadBox>
     )
@@ -170,6 +170,7 @@ const MenuTrigger = styled.div`
   }
 
   /* 2th bar 사라지고,  1st 3rd bar 회전하며 X  */
+
   span:nth-of-type(1) {
     transform: ${({active}) => active ? 'translateY(7.8px) rotate(-45deg)' : 'none'};
   }

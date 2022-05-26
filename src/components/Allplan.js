@@ -12,6 +12,7 @@ import {ReactComponent as Plus} from '../img/icon/Plus.svg'
 import {ReactComponent as Share} from '../img/icon/share-icon.svg'
 import {bomb} from '../img'
 import {getMorePlan, getPlan, setLoading} from "../redux/modules/plan";
+import Swal from "sweetalert2";
 
 dayjs.locale('ko')
 
@@ -26,7 +27,7 @@ const Allplan = (props) => {
     const loading = useSelector((state) => state.plan.loading)
     const planList = useSelector(state => state.plan.all.plans);
 
-    console.log(planList)
+    // console.log(planList)
 
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight
@@ -68,7 +69,8 @@ const Allplan = (props) => {
                         {planList.map((plan, idx) => {
                             const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd,')
                             const planTime = dayjs(plan?.planDate).format(' A hh시 mm분')
-                            const handleShared = () => {
+                            const handleShared = (event) => {
+                                event.stopPropagation()
                                 if (navigator.share) {
                                     navigator.share({
                                         title: plan.planName,
@@ -78,7 +80,10 @@ const Allplan = (props) => {
                                         .then(() => console.log('성공'))
                                         .catch((err) => console.log(err))
                                 } else {
-                                    alert("공유하기가 지원되지 않는 환경 입니다.")
+                                    Swal.fire({
+                                        text: "공유하기가 지원되지 않는 환경 입니다.",
+                                        icon: 'error'
+                                    })
                                 }
                             }
                             return (
@@ -113,10 +118,10 @@ const Allplan = (props) => {
                     </>
                 ) : (
                     <div className='no-list'>
-                        <p size="14px" color={theme.color.gray1}>
+                        <p>
                             아직 약속이 없습니다!
                         </p>
-                        <p size="14px" color={theme.color.gray1}>
+                        <p>
                             즐거운 모임 온잇에서 어떠신가요?
                         </p>
                         <button
@@ -150,13 +155,13 @@ align-items: center;
 
 span {
     font-size: 12px;
-    margin: 0px 5px;
+    margin: 0 5px;
 }
 `;
 
 const List = styled.div`
   overflow: hidden;
-  height: 68vh;
+  height: 100%;
   padding: 24px;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
@@ -166,6 +171,16 @@ const List = styled.div`
     display: none; /* Chrome , Safari , Opera */
   }
 
+  .lists:first-of-type {
+    background-color: ${theme.color.green};
+    width: 100%;
+    //border: 1px none #ddd;
+    border-radius: 10px;
+    padding: 12px 10px;
+    margin-bottom: 16px;
+    box-shadow: 0 0 15px #d1d1d1;
+  }
+  
   .lists {
     background-color: ${theme.color.white};
     width: 100%;
@@ -194,7 +209,7 @@ const List = styled.div`
 
   p {
     padding-bottom: 8px;
-    font-wight: bold;
+    font-weight: bold;
   }
 
   .no-list {
