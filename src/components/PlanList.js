@@ -233,20 +233,3 @@ const List = styled.div`
     z-index: 1;
   }
 `
-
-const Today = styled.div`
-  position: relative;
-  background-color: ${theme.color.green};
-  height: 25vh;
-  width: 100%;
-  border: 1px none #ddd;
-  border-radius: 10px;
-  padding: 12px 12px;
-  margin-bottom: 16px;
-  box-shadow: 0 0 15px #d1d1d1;
-
-  h3 {
-    font-size: 20px;
-    padding: 5px 0px;
-  }
-`;

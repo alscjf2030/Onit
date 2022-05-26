@@ -59,19 +59,21 @@ const Detail = (props) => {
     }
 
     const deletePlanBtn = () => {
-        if (user.nickname !== plan.writer) {
-            Swal.fire({
-                text: '작성자만 삭제 가능합니다.',
-                icon: 'error',
-            })
-            return
-        }
+        // if (user.nickname !== plan.writer) {
+        //     Swal.fire({
+        //         text: '작성자만 삭제 가능합니다.',
+        //         icon: 'error',
+        //     })
+        //     return
+        // }
         dispatch(deletePlan({planUrl, navigate}))
     }
 
     if (!plan) {
         return <div>loading...</div>
     }
+
+    console.log(plan)
 
     return (
         <Container>
@@ -124,6 +126,13 @@ const Detail = (props) => {
                         공유하기
                     </button>
                     :
+                    ( plan.member ?
+                    <>
+                        <button onClick={deletePlanBtn}>
+                            일정 나가기
+                        </button>
+                    </>
+                    :
                     <>
                         <button onClick={() => dispatch(joinPlan(planUrl))}>
                             참석하기
@@ -135,7 +144,7 @@ const Detail = (props) => {
                             거절하기
                         </button>
                     </>
-                }
+                    )}
             </ButtonBox>
         </Container>
     )

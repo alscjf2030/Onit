@@ -1,6 +1,10 @@
 import dest_marker from './map/dest_marker.png';
 import my_marker from './map/my_marker.png';
 import OnBoard from './OnBoard.png';
+import OnBoard2 from './OnBoard2.png';
+import OnBoard3 from './OnBoard3.png';
+import OnBoard4 from './OnBoard4.png';
+import OnBoard5 from './OnBoard5.png';
 import Complete from './Complete.png';
 import LoginP from './Login.png';
 import NotFoundLogo from './NotFoundLogo.png';
@@ -15,6 +19,10 @@ export {
     dest_marker,
     my_marker,
     OnBoard,
+    OnBoard2,
+    OnBoard3,
+    OnBoard4,
+    OnBoard5,
     Complete,
     LoginP,
     NotFoundLogo,
