@@ -6,6 +6,8 @@ import useIsMobile from "./hooks/useIsMobile";
 
 import {messaging} from "./firebase";
 import {getToken} from 'firebase/messaging'
+import BackGround from "./components/BackGround";
+import theme from "./styles/theme";
 
 
 function App() {
@@ -34,7 +36,7 @@ function App() {
             ) : (
                 <LaptopContainer>
                     <LeftWrap>
-                        <div>배경 자리</div>
+                        <BackGround/>
                     </LeftWrap>
                     <RightWrap>
                         <PhoneFrame>
@@ -54,6 +56,7 @@ const Container = styled.div`
   display: flex;
   width: 100vw;
   height: 100vh;
+  background-color: ${theme.color.gray5};
 `
 
 const LaptopContainer = styled.div`
@@ -70,8 +73,9 @@ const LeftWrap = styled.div`
 `
 
 const RightWrap = styled.div`
-  padding: 30px 70px;
+  padding: 40px;
   max-width: 590px;
+  background-color: ${theme.color.gray4};
 `
 
 const PhoneFrame = styled.div`
