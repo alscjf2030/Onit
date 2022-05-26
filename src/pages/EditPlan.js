@@ -162,52 +162,46 @@ const EditPlan = (props) => {
             </HeadLine>
 
             <InputBox>
-                <input
-                    value={name}
-                    onChange={changeName}
-                    placeholder={plan.planName}
-                />
+                <Grid padding="0 16px">
+                    <input
+                        value={name}
+                        onChange={changeName}
+                        placeholder={plan.planName}
+                    />
+                </Grid>
             </InputBox>
 
             <InputBox>
-                <input
-                    readOnly
-                    value={formatDate(date)}
-                    placeholder={planDay}
-                    onClick={handleEditDateModal}
-                />
-                <ModalPortal>
-                    {editDateModal &&
-                        <Modal onClose={handleEditDateModal} date={dayjs(date).toDate()} setDate={setDate}/>}
-                </ModalPortal>
+                <Grid padding="0 16px">
+                    <input
+                        readOnly
+                        value={formatDate(date)}
+                        placeholder={planDay}
+                        onClick={handleEditDateModal}
+                    />
+                    <ModalPortal>
+                        {editDateModal &&
+                            <Modal onClose={handleEditDateModal} date={dayjs(date).toDate()} setDate={setDate}/>}
+                    </ModalPortal>
+                </Grid>
             </InputBox>
 
-            {/*<InputBox>*/}
-            {/*    <input*/}
-            {/*        readOnly*/}
-            {/*        value={formatDate(date)}*/}
-            {/*        placeholder={planDay}*/}
-            {/*        onClick={toggleCalendar}*/}
-            {/*    />*/}
-            {/*    <ShowCalendar calendarOpen={calendarOpen} onClick={closeCalendar}>*/}
-            {/*        <SetDrawerCalendar calendarOpen={calendarOpen} onClose={toggleCalendar} date={dayjs(date).toDate()} setDate={setDate}/>*/}
-            {/*    </ShowCalendar>*/}
-            {/*</InputBox>*/}
-
             <InputBox>
-                <input
-                    readOnly
-                    value={time}
-                    placeholder={planTime}
-                    onClick={toggleMenu}
-                />
+                <Grid padding="0 16px">
+                    <input
+                        readOnly
+                        value={time}
+                        placeholder={planTime}
+                        onClick={toggleMenu}
+                    />
+                </Grid>
             </InputBox>
             <ShowMenu open={open} onClick={closeMenu}>
                 <SetDrawerTime open={open} onClose={toggleMenu} hour={hour} setHour={setHour} minute={minute}
                                setMinute={setMinute} amPmType={amPmType} setAmPmType={setAmPmType}/>
             </ShowMenu>
-
             <InputBox>
+                <Grid padding="0 16px">
                 <Input
                     placeholder={placename? placename : plan.locationDetail.name}
                     _onClick={() => {
@@ -215,6 +209,7 @@ const EditPlan = (props) => {
                     }}
                     value={placename}
                 />
+                </Grid>
                 {showMap && (
                     <PlanSelectMap
                         setShowMap={setShowMap}
@@ -277,7 +272,7 @@ const HeadLine = styled.div`
 `
 
 const InputBox = styled.div`
-  width: 90%;
+  width: 100%;
   margin: auto;
   box-sizing: border-box;
 

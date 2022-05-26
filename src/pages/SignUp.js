@@ -8,11 +8,14 @@ import Swal from "sweetalert2";
 
 import eyeOn from '../img/icon/eyeOn.svg'
 import eyeOff from '../img/icon/eyeOff.svg'
-import theme from "../styles/theme";
+import theme from '../styles/theme';
+import Agreement from '../components/Agreement'
+import { Grid } from "../elements";
 
 const SignUp = (props) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [checked, setChecked] = useState(false);
     const [username, setUsername] = useState('')
     const [nickname, setNickname] = useState('')
     const [pw, setPw] = useState('')
@@ -174,7 +177,9 @@ const SignUp = (props) => {
                 {!hidePasswordCheck && <img alt='eyeOn' src={eyeOn} onClick={toggleHidePasswordCheck}/>}
                 {error === '비밀번호가 일치하지 않습니다!' && <ErrorBox>{error}</ErrorBox>}
             </PwCheckBox>
-
+            <Grid padding="0px 1rem 1rem 1rem">
+                <Agreement checked={checked} setChecked={setChecked}/>
+            </Grid>
             <SignUpBox>
                 <button
                     style={{opacity: !username || !nickname || !pw || !pwCheck ? 0.3 : 1}}
@@ -220,7 +225,7 @@ const InputBox = styled.div`
   }
 
   input {
-    background-color: ${theme.color.gray5};
+    background-color: ${theme.color.white};
     padding: 12px;
     width: 100%;
     height: 50px;
@@ -247,7 +252,7 @@ const PasswordBox = styled.div`
   }
 
   input {
-    background-color: ${theme.color.gray5};
+    background-color: ${theme.color.white};
     padding: 12px;
     width: 100%;
     height: 50px;
@@ -275,7 +280,7 @@ const PwCheckBox = styled.div`
   position: relative;
 
   input {
-    background-color: #eee;
+    background-color: ${theme.color.white};
     padding: 12px;
     width: 100%;
     height: 50px;

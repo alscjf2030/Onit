@@ -14,6 +14,10 @@ import leftArrow from './icon/arrowl.svg';
 import bomb from './icon/bomb.svg';
 import Share from './icon/share-icon.svg';
 import editPic from './icon/edit.svg'
+import sunny from './icon/sun.svg';
+import cloudy from './icon/cloud.svg';
+import rainy from './icon/cloud-drizzle.svg';
+import snowy from './icon/cloud-snow.svg';
 
 export {
     dest_marker,
@@ -32,4 +36,8 @@ export {
     bomb,
     Share,
     editPic,
+    sunny,
+    snowy,
+    rainy,
+    cloudy,
 };

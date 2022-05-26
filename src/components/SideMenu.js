@@ -186,6 +186,7 @@ const MenuTrigger = styled.div`
 `
 
 const ShowMenu = styled.div`
+  z-index: 2;
   background-color: #ddd;
   width: 70%;
   //height: calc(100% - 40px);
@@ -197,7 +198,6 @@ const ShowMenu = styled.div`
   padding: 10px;
   transform: ${({isOpen}) => `translateX(${isOpen ? 0 : '100%'})`};
   transition: visibility 0.1s, transform 0.2s ease-in-out;
-  z-index: 1;
 
   .side-bar-header {
     display: flex;

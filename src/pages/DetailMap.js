@@ -63,14 +63,14 @@ background-color: black;
 color: white;
 padding: 9px;
 border-radius: 5px;
-margin-bottom: 110px;
+margin-bottom: 6.5rem;
 `;
 
 const Share = styled.button`
 position: absolute;
 left: 33%;
 right: 33%;
-bottom: 120px;
+bottom: 23%;
 z-index: 2;
 background: black;
 color: white;

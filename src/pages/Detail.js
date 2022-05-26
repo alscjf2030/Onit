@@ -73,7 +73,7 @@ const Detail = (props) => {
         return <div>loading...</div>
     }
 
-    console.log(plan)
+    // console.log(plan)
 
     return (
         <Container>
@@ -175,7 +175,7 @@ const ScheduleBox = styled.div`
   border: none;
   border-radius: 5px;
   width: 90%;
-  height: 35vh;
+  height: 30vh;
   margin: auto;
 
   h3: first-of-type {
@@ -204,7 +204,7 @@ const MapBox = styled.div`
   border: none;
   border-radius: 5px;
   width: 90%;
-  height: 45vh;
+  height: 40vh;
   margin: auto;
 `
 
