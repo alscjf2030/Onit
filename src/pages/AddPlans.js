@@ -52,7 +52,7 @@ const AddPlans = (props) => {
             },
             penalty,
         }
-        dispatch(addPlan({data, navigate}));
+        dispatch(addPlan(data));
     }
 
     // const getContent = () => {

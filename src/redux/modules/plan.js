@@ -1,6 +1,7 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {postApi, getApi, putApi, deleteApi} from "../../shared/api/client";
 import Swal from "sweetalert2";
+import history from '../../index'
 
 export const getPlan = createAsyncThunk(
     'plan/getPlan',
@@ -10,7 +11,7 @@ export const getPlan = createAsyncThunk(
             // console.log(res)
             return res.data
         } catch (err) {
-            console.log(err)
+            console.log(err.response)
             return rejectedWithValue(err.response)
         }
     }
@@ -59,11 +60,12 @@ export const getHistoryPlan = createAsyncThunk(
 
 export const addPlan = createAsyncThunk(
     'plan/addPlan',
-    async ({data, navigate}, {rejectedWithValue}) => {
-        console.log(data)
+    async (data, {rejectedWithValue}) => {
         try {
             const res = await postApi('/member/plan', data)
-            navigate('/main')
+            setTimeout(() => {
+                history.push("/main");
+            }, 400)
             return res.data
         } catch (err) {
             Swal.fire({
@@ -144,34 +146,19 @@ export const deletePlan = createAsyncThunk(
     }
 )
 
-export const setFCMTokenplan = createAsyncThunk(
-    'plan/setFCMTokenplan',
-    async (data, { rejectWithValue }) => {
-        const newdata = {
-            ...data,
-            planId: 1,
-        };
-        try {
-            return await postApi(`/api/fcm`, newdata)
-                .then(response => response.data.data);
-        } catch (error) {
-            console.log(error);
-            return rejectWithValue(error.response.data);
-        }
-    },
-);
-
 const initialState = {
-    today: [],
     created: {
-            plans: [],
-            totalPage: 0,
-            },
-    _today: [],
+        plans: [],
+        totalPage: 0,
+    },
     invited: {
-            plans: [],
-            totalPage: 0,
-            },
+        plans: [],
+        totalPage: 0,
+    },
+    all: {
+        plans:[],
+        totalPage: 0
+    },
     showplan: null,
     loading: 'idle',
 }
@@ -193,30 +180,32 @@ export const planSlice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(getPlan.fulfilled, (state, action) => {
-                const {totalPage, planLists} = action.payload.myPlanList
-                state.today = action.payload.myFirstPlanDto
-                state.created.plans = planLists;
-                state.created.totalPage = totalPage
-                state.invited.plans = action.payload.invitedPlanList.planLists
-                state.invited.totalPage = action.payload.invitedPlanList.totalPage
-                state._today = action.payload.myFirstInvitedPlanDto
+                state.all.plans = action.payload.totalPlanList.planLists;
+                state.all.totalPage = action.payload.totalPlanList.totalPage
+
+                state.created.plans = action.payload.myPlanList.planLists;
+                state.created.totalPage = action.payload.myPlanList.totalPage;
+
+                state.invited.plans = action.payload.invitedPlanList.planLists;
+                state.invited.totalPage = action.payload.invitedPlanList.totalPage;
             })
-            .addCase(getMorePlan.pending, state => {
-                if (state?.loading === 'idle'){
-                    state.loading = 'pending'
-                }
-            })
-            .addCase(getMorePlan.fulfilled, (state, action) => {
-                if (state.loading === 'pending') {
-                    state.loading = 'succeeded'
-                    state.plans = [...state.plans, ...action.payload];
-                }
-            })
-            .addCase(getMorePlan.rejected, state => {
-                if (state.loading === 'pending') {
-                    state.loading = 'failed'
-                }
-            })
+            // .addCase(getMorePlan.pending, state => {
+            //     if (state?.loading === 'idle'){
+            //         state.loading = 'pending'
+            //     }
+            // })
+            // .addCase(getMorePlan.fulfilled, (state, action) => {
+            //     if (state.loading === 'pending') {
+            //         state.loading = 'succeeded'
+            //         // state.created.plans = [...state.created.plans, ...action.payload.myPlanList];
+            //         // state.invited.plans = [...state.invited.plans, ...action.payload.invitedPlanlist];
+            //     }
+            // })
+            // .addCase(getMorePlan.rejected, state => {
+            //     if (state.loading === 'pending') {
+            //         state.loading = 'failed'
+            //     }
+            // })
             .addCase(getOnePlan.fulfilled, (state, action) => {
                 state.showplan = action.payload;
             })
@@ -228,13 +217,14 @@ export const planSlice = createSlice({
             .addCase(editPlan.fulfilled, (state, action) => {
                 const data = {...state.showplan, ...action.payload}
                 state.showplan = data
-                state.plans = state.plans.map((plan) => plan.planId === action.payload.planId ? action.payload : plan)
+                state.created.plans = state.created.plans.map((plan) => plan.planId === action.payload.planId ? action.payload : plan)
+                // state.plans = state.plans.map((plan) => plan.planId === action.payload.planId ? action.payload : plan)
+                // window.location.reload()
             })
             .addCase(deletePlan.fulfilled, (state, action) => {
                 state.showplan = null
                 state.plans = state.plans.filter((plan) => plan.planId !== action.payload)
             })
-            .addCase(setFCMTokenplan.fulfilled, (state, action) => {});
     }
 })
 

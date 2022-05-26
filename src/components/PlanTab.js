@@ -1,16 +1,17 @@
 import * as React from 'react';
-import {styled} from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import PlanList from './PlanList';
 import InvitedList from './InvitedList';
+import Allplan from './Allplan';
 
 const StyledTabs = styled((props) => (
     <Tabs
         {...props}
-        TabIndicatorProps={{children: <span className="MuiTabs-indicatorSpan"/>}}
+        TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
     />
 ))({
     '& .MuiTabs-indicator': {
@@ -20,25 +21,23 @@ const StyledTabs = styled((props) => (
         marginBottom: "15px"
     },
     '& .MuiTabs-indicatorSpan': {
-        maxWidth: 70,
+        maxWidth: 30,
         width: '100%',
         backgroundColor: '#181818',
     },
     '& .MuiTabs-flexContainer': {
-        marginLeft: "15px",
         marginBottom: "15px"
     },
     '& .MuiButtonBase-root': {
         justifyContent: 'flex-end',
         minWidth: '70px',
         marginBottom: '3px',
-        marginRight: '8px',
     },
 
 });
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
-    ({theme}) => ({
+    ({ theme }) => ({
         zIndex: "0",
         textTransform: 'none',
         fontFamily: 'Pretendard',
@@ -54,7 +53,7 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 );
 
 function TabPanel(props) {
-    const {children, value, index, ...other} = props;
+    const { children, value, index, ...other } = props;
 
     return (
         <div
@@ -95,21 +94,25 @@ const PlanTab = () => {
     };
 
     return (
-        <Box style={{width: '100%'}}>
-            <Box sx={{}}>
+        <Box style={{ width: '100%'}}>
+            <Box sx={{ }}>
                 <StyledTabs
                     value={value}
                     onChange={handleChange}
                     aria-label="styled tabs example"
                 >
-                    <StyledTab label="만든 약속" {...a11yProps(0)}/>
-                    <StyledTab label="받은 약속" {...a11yProps(1)}/>
+                    <StyledTab label="전체" {...a11yProps(0)}/>
+                    <StyledTab label="만든 약속" style={{marginRight: "15px"}} {...a11yProps(1)}/>
+                    <StyledTab label="받은 약속" {...a11yProps(2)}/>
                 </StyledTabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <PlanList/>
+                <Allplan/>
             </TabPanel>
             <TabPanel value={value} index={1}>
+                <PlanList/>
+            </TabPanel>
+            <TabPanel value={value} index={2}>
                 <InvitedList/>
             </TabPanel>
         </Box>

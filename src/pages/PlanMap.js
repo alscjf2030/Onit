@@ -84,6 +84,7 @@ import { dest_marker, my_marker } from '../img'
     //위치보내기
     const sendMyLocation = () => {
       if (stompClient) {
+        stompClient.debug = null;
         let chatMessage = {
           sender: props.usernick,
           lat: myLocation.center.lat,

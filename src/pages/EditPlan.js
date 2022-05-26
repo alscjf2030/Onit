@@ -25,7 +25,6 @@ const EditPlan = (props) => {
     const dispatch = useDispatch()
 
     const plan = useSelector(state => state.plan.showplan)
-    console.log('plan : ', plan);
 
     const [name, setName] = useState('')
     const [time, setTime] = useState('')
@@ -92,7 +91,12 @@ const EditPlan = (props) => {
             planUrl,
             planName: name,
             planDate: `${formatDate(date)} ${time}`,
-            location: place,
+            location: {
+                name: placename,
+                lat: lat,
+                lng: lng,
+                address: address
+            },
             penalty: penalty.value,
         }
         dispatch(editPlan({data, navigate}));
@@ -205,21 +209,21 @@ const EditPlan = (props) => {
 
             <InputBox>
                 <Input
-                    placeholder={plan.locationDetail.name}
+                    placeholder={placename? placename : plan.locationDetail.name}
                     _onClick={() => {
                         setShowMap(true);
                     }}
                     value={placename}
                 />
                 {showMap && (
-                <PlanSelectMap
-                    setShowMap={setShowMap}
-                    setName={setplaceName}
-                    setAddress={setAddress}
-                    setLat={setLat}
-                    setLng={setLng}
-                />
-            )}
+                    <PlanSelectMap
+                        setShowMap={setShowMap}
+                        setName={setplaceName}
+                        setAddress={setAddress}
+                        setLat={setLat}
+                        setLng={setLng}
+                    />
+                )}
             </InputBox>
 
             <DropBox>

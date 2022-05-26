@@ -1,23 +1,33 @@
-import {getMorePlan, getPlan, setLoading} from "../redux/modules/plan";
-import {useSelector, useDispatch} from "react-redux";
 import React, {useState, useEffect} from "react";
+import {useSelector, useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
-import theme from "../styles/theme";
-import {bomb} from '../img'
+
 import dayjs from "dayjs";
 import 'dayjs/locale/ko'
+
+
+import theme from "../styles/theme";
+import {ReactComponent as Plus} from '../img/icon/Plus.svg'
+import {ReactComponent as Share} from '../img/icon/share-icon.svg'
+import {bomb} from '../img'
+import {getMorePlan, getPlan, setLoading} from "../redux/modules/plan";
+
 dayjs.locale('ko')
 
-const InvitedList = (props) => {
+const Allplan = (props) => {
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [page, setPage] = useState(1);
     const userData = useSelector(state => state.user.user_info);
-    const totalPage = useSelector(state => state.plan.invited.totalPage);
+    const totalPage = useSelector(state => state.plan.all.totalPage);
     const loading = useSelector((state) => state.plan.loading)
-    const planList = useSelector(state => state.plan.invited?.plans);
+    const planList = useSelector(state => state.plan.all.plans);
+
+    console.log(planList)
+
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight
         const scrollTop = document.documentElement.scrollTop
@@ -26,15 +36,13 @@ const InvitedList = (props) => {
             setPage(page + 1)
         }
     }
-
     useEffect(() => {
-        if (userData) {
-            dispatch(getPlan(1))
-        }
+        if(userData)
+            dispatch(getPlan(page))
     }, [userData])
 
     useEffect(() => {
-        if (userData && page > 1) {
+        if (userData && page) {
             dispatch(getMorePlan({page: page}))
         }
     }, [userData, page])
@@ -52,18 +60,27 @@ const InvitedList = (props) => {
         }
     }, [])
 
-    if (!planList.length && loading === 'pending') {
-        return 'loading...'
-    }
-
     return (
         <>
             <List>
                 {planList.length > 0 ? (
                     <>
                         {planList.map((plan, idx) => {
-                            const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd')
-                            const planTime = dayjs(plan?.planDate).format('A hh시 mm분')
+                            const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd,')
+                            const planTime = dayjs(plan?.planDate).format(' A hh시 mm분')
+                            const handleShared = () => {
+                                if (navigator.share) {
+                                    navigator.share({
+                                        title: plan.planName,
+                                        text: plan.planName,
+                                        url: `https://imonit.co.kr/detail/${plan.url}`
+                                    })
+                                        .then(() => console.log('성공'))
+                                        .catch((err) => console.log(err))
+                                } else {
+                                    alert("공유하기가 지원되지 않는 환경 입니다.")
+                                }
+                            }
                             return (
                                 <div className='lists'
                                      key={idx}
@@ -72,10 +89,15 @@ const InvitedList = (props) => {
                                      }}
                                 >
                                     <Content>
-                                        <h3>{planDay}</h3>
+                                        <h3>{planDay}{planTime}</h3>
+                                        <Share
+                                            style={{
+                                                zIndex: 1,
+                                                marginLeft: "auto"
+                                            }}
+                                            onClick={handleShared}
+                                        />
                                     </Content>
-                                    <h3>{planTime}</h3>
-                                    <p>{plan.planName}</p>
                                     <p>{plan.locationName}</p>
                                     <Penalty>
                                         <img alt='penalty icon' src={bomb}/>
@@ -84,12 +106,26 @@ const InvitedList = (props) => {
                                 </div>
                             )
                         })}
+                        <Plus className='plus-icon' src='Plus.svg'
+                              onClick={() => {
+                                  navigate('/add')
+                              }}/>
                     </>
                 ) : (
                     <div className='no-list'>
                         <p size="14px" color={theme.color.gray1}>
-                            아직 참여한 약속이 없습니다!
+                            아직 약속이 없습니다!
                         </p>
+                        <p size="14px" color={theme.color.gray1}>
+                            즐거운 모임 온잇에서 어떠신가요?
+                        </p>
+                        <button
+                            className='create-on-it'
+                            onClick={() => {
+                                navigate('/add')
+                            }}
+                        >온잇으로 모임 만들기
+                        </button>
                     </div>
                 )}
             </List>
@@ -97,24 +133,7 @@ const InvitedList = (props) => {
     )
 }
 
-export default InvitedList;
-
-const Today = styled.div`
-  position: relative;
-  background-color: ${theme.color.green};
-  height: 25vh;
-  width: 100%;
-  border: 1px none #ddd;
-  border-radius: 10px;
-  padding: 12px 12px;
-  margin-bottom: 16px;
-  box-shadow: 0 0 15px #d1d1d1;
-
-  h3 {
-    font-size: 20px;
-    padding: 5px 0px;
-  }
-`;
+export default Allplan;
 
 const Content = styled.div`
   display: flex;
@@ -122,22 +141,22 @@ const Content = styled.div`
 `;
 
 const Penalty = styled.div`
-  display: flex;
-  background: ${theme.color.gray5};
-  border-radius: 9px;
-  padding: 2px 8px;
-  width: fit-content;
-  align-items: center;
+display: flex;
+background: ${theme.color.gray5};
+border-radius: 9px;
+padding: 2px 8px;
+width: fit-content;
+align-items: center;
 
-  span {
+span {
     font-size: 12px;
     margin: 0px 5px;
-  }
+}
 `;
 
 const List = styled.div`
   overflow: hidden;
-  height: 100%;
+  height: 68vh;
   padding: 24px;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
@@ -146,36 +165,36 @@ const List = styled.div`
   ::-webkit-scrollbar {
     display: none; /* Chrome , Safari , Opera */
   }
-  
-  .lists:first-of-type {
-    background-color: ${theme.color.green};
+
+  .lists {
+    background-color: ${theme.color.white};
     width: 100%;
-    //border: 1px none #ddd;
+    border: 1px none #ddd;
     border-radius: 10px;
     padding: 12px 10px;
     margin-bottom: 16px;
     box-shadow: 0 0 15px #d1d1d1;
   }
 
-  .lists {
-    background-color: ${theme.color.white};
-    width: 100%;
-    height: 20vh;
-    border: 1px none #ddd;
+  .create-on-it {
+    width: 70%;
+    height: 35px;
+    background-color: ${theme.color.green};
     border-radius: 10px;
-    padding: 16px 10px;
-    margin-bottom: 16px;
-    box-shadow: 0 0 15px #d1d1d1;
+    border: none;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #181818;
   }
 
   h3 {
     font-weight: bold;
-    font-size: 20px;
-    padding-bottom: 5px;
+    font-size: 16px;
   }
 
   p {
     padding-bottom: 8px;
+    font-wight: bold;
   }
 
   .no-list {
@@ -190,4 +209,10 @@ const List = styled.div`
     color: ${theme.color.gray1};
   }
 
+  .plus-icon {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 1;
+  }
 `

@@ -5,11 +5,11 @@ import { Button, Grid, Text } from '../elements';
 import styled from 'styled-components';
 import Headerbar from '../shared/Headerbar';
 import theme from '../styles/theme';
-import {dest_marker} from '../img'
+import {dest_marker, my_marker} from '../img'
 
 const PlanSelectMap = props => {
   const inputref = useRef(); //인풋데이터
-  const [keyword, setKeyword] = useState('이태원 맛집'); //defult값 빼면 에러남..
+  const [keyword, setKeyword] = useState('맛집'); //defult값 빼면 에러남..
   const [info, setInfo] = useState(); //클릭시 나올 정보==>하단 바로 빼기
   // const [markers, setMarkers] = useState([]); //마커들
   const [map, setMap] = useState(); //지도 데이터
@@ -19,8 +19,8 @@ const PlanSelectMap = props => {
   const [selectlist, setSelectlist] = useState({
     //리스트 클릭시 들어갈 데이터
     position: {
-      lat: 37.5211,
-      lng: 126.9889,
+      lat: null,
+      lng: null,
     },
     content: '',
     address_name: '',
@@ -38,8 +38,7 @@ const PlanSelectMap = props => {
         // LatLngBounds 객체에 좌표를 추가합니다
         const bounds = new kakao.maps.LatLngBounds();
         let markers = [];
-
-        for (var i = 0; i < data.length; i++) {
+        for (var i = 0; i < 10; i++) {
           // @ts-ignore
           markers.push({
             position: {
@@ -87,10 +86,8 @@ const PlanSelectMap = props => {
               }}
             ></InputDest>
             <Search onClick={inputdatabutton}>
-              {/* <BiSearch size={'15px'} /> */}
             </Search>
           </Grid>
-
           {isInput && (
             <Grid padding="12px">
               {datas &&
@@ -116,13 +113,14 @@ const PlanSelectMap = props => {
                         props.setLat(point.y);
                         props.setLng(point.x);
                         props.setShowMap(true);
-                        // const bounds = new window.kakao.maps.LatLngBounds();
-                        // bounds.extend(
-                        //   new window.kakao.maps.LatLng(point.y, point.x),
-                        // );
-                        // map.setBounds(bounds);
+                        const bounds = new window.kakao.maps.LatLngBounds();
+                        bounds.extend(
+                          new window.kakao.maps.LatLng(point.y, point.x),
+                        );
+                        map.setBounds(bounds);
                       }}
                     >
+
                       <Text size={'16px'}>{point.place_name}</Text>
                       <Text size={'11px'} color={theme.color.gray4}>
                         {point.address_name}
@@ -132,41 +130,6 @@ const PlanSelectMap = props => {
                   </div>
                 ))}
             </Grid>
-          )}
-          {!isInput && (
-            <Map
-              center={{
-                lat: 37.566826,
-                lng: 126.9786567,
-              }}
-              style={{
-                width: '90%',
-                height: '80%',
-                margin: 'auto'
-              }}
-              level={3}
-              onCreate={setMap}
-            >
-              <MapMarker
-                position={selectlist.position}
-                onClick={() => setInfo(selectlist)}
-                image={{
-                  src: dest_marker,
-                  size: { width: 33, height: 33 },
-                }}
-              />
-                {/* {info && info.content === selectlist.content && (
-                  <div style={{ color: 'black' }}>{selectlist.content}</div>
-                )} */}
-              {/* {info &&info.content === selectlist.content && (
-                <CustomOverlayMap position={selectlist.position}>
-                  <MarkerDetail>
-                  {selectlist.content}
-                  <Here onClick={()=> window.open(selectlist.place_url)}>정보</Here>
-                </MarkerDetail>
-                </CustomOverlayMap>
-              )} */}
-            </Map>
           )}
           {isdata && (
             <InfoMap>
@@ -182,7 +145,6 @@ const PlanSelectMap = props => {
                 style={{
                   marginLeft: 'auto',
                   display: "flex",
-                  fontFamily: "pretendard"
                 }}
               >
                 <DestInfo
@@ -202,6 +164,30 @@ const PlanSelectMap = props => {
               </div>
             </InfoMap>
           )}
+                      <Map
+                        center={
+                          selectlist.position
+                        }
+                        style={{
+                          width: '90%',
+                          height: '80%',
+                          margin: 'auto'
+                        }}
+                        level={3}
+                        onCreate={setMap}
+                      >
+                        {selectlist ? <MapMarker
+                          position={selectlist.position}
+                          onClick={() => setInfo(selectlist)}
+                          image={{
+                            src: dest_marker,
+                            size: { width: 33, height: 33 },
+                          }}
+                        />
+                        :
+                        null
+                      }
+                      </Map>
         </MainModal>
       </Section>
     </>

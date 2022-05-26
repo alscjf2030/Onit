@@ -50,7 +50,7 @@ const Plansocket = props => {
 
   //웹소켓 연결 함수
   const connect = () => {
-    // client.debug = null;
+    client.debug = null;
     client.connect({}, onConnected, onError);
     // sock.addEventListener('open', () => {
     //   console.log('Connected to Browser!!!😀');
@@ -67,11 +67,10 @@ const Plansocket = props => {
   const onConnected = () => {
     setUserData({ ...userData, connected: true });
     //구독
-    // client.debug = null;
+    client.debug = null;
     // client.subscribe(`/topic/chat/${planId}`, onMessageReceived, onError);
     client.subscribe(`/topic/map/${pId}`, onMessageReceived2, onError);
     userJoin();
-    console.log('연결 / 구독 / 유저 입장');
   };
 
 
@@ -92,13 +91,13 @@ const Plansocket = props => {
 
     if (payloadData.type === 'MAP' || payloadData.type === 'DEST') {
       dispatch(setPublicMaps(payloadData));
-      if (payloadData.type === 'MAP') {
-        // eslint-disable-next-line no-unused-vars
-        const data = {
-          lat: payloadData.lat,
-          lng: payloadData.lng,
-        };
-      }
+      // if (payloadData.type === 'MAP') {
+      //   // eslint-disable-next-line no-unused-vars
+      //   const data = {
+      //     lat: payloadData.lat,
+      //     lng: payloadData.lng,
+      //   };
+      // }
       if (payloadData.type === 'DEST') {
         if (MapRef.current) MapRef.current.sendMyLocationfun();
         const data = {
