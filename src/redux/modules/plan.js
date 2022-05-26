@@ -8,6 +8,7 @@ export const getPlan = createAsyncThunk(
     async (page, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/member/plans/${page}`)
+            console.log(res)
             return res.data
         } catch (err) {
             console.log(err.response)
@@ -20,8 +21,8 @@ export const getMorePlan = createAsyncThunk(
     'plan/getMorePlan',
     async ({page}, {rejectedWithValue}) => {
         try {
-            const res = await getApi(`/member/plans/${page}`)
-            return res.data.myPlanList.planLists
+            // const res = await getApi(`/member/plans/${page}`)
+            // return res.data.myPlanList.planLists
         } catch (err) {
             console.log(err)
             return rejectedWithValue(err.response)
@@ -62,7 +63,9 @@ export const addPlan = createAsyncThunk(
     async (data, {rejectedWithValue}) => {
         try {
             const res = await postApi('/member/plan', data)
-            history.push('/main')
+            setTimeout(() => {
+                history.push("/main");
+              }, "400")
             return res.data
         } catch (err) {
             Swal.fire({
@@ -144,16 +147,18 @@ export const deletePlan = createAsyncThunk(
 )
 
 const initialState = {
-    today: [],
     created: {
             plans: [],
             totalPage: 0,
             },
-    _today: [],
     invited: {
             plans: [],
             totalPage: 0,
             },
+    all: {
+        plans:[],
+        totalPage: 0
+    },
     showplan: null,
     loading: 'idle',
 }
@@ -175,31 +180,32 @@ export const planSlice = createSlice({
     extraReducers: builder => {
         builder
             .addCase(getPlan.fulfilled, (state, action) => {
-                const {totalPage, planLists} = action.payload.myPlanList;
-                state.today = action.payload.myFirstPlanDto;
-                state.created.plans = planLists;
-                state.created.totalPage = totalPage;
+                state.all.plans = action.payload.totalPlanList.planLists;
+                state.all.totalPage = action.payload.totalPlanList.totalPage
+
+                state.created.plans = action.payload.myPlanList.planLists;
+                state.created.totalPage = action.payload.myPlanList.totalPage;
+
                 state.invited.plans = action.payload.invitedPlanList.planLists;
                 state.invited.totalPage = action.payload.invitedPlanList.totalPage;
-                state._today = action.payload.myFirstInvitedPlanDto;
             })
-            .addCase(getMorePlan.pending, state => {
-                if (state?.loading === 'idle'){
-                    state.loading = 'pending'
-                }
-            })
-            .addCase(getMorePlan.fulfilled, (state, action) => {
-                if (state.loading === 'pending') {
-                    state.loading = 'succeeded'
-                    // state.created.plans = [...state.created.plans, ...action.payload.myPlanList];
-                    // state.invited.plans = [...state.invited.plans, ...action.payload.invitedPlanlist];
-                }
-            })
-            .addCase(getMorePlan.rejected, state => {
-                if (state.loading === 'pending') {
-                    state.loading = 'failed'
-                }
-            })
+            // .addCase(getMorePlan.pending, state => {
+            //     if (state?.loading === 'idle'){
+            //         state.loading = 'pending'
+            //     }
+            // })
+            // .addCase(getMorePlan.fulfilled, (state, action) => {
+            //     if (state.loading === 'pending') {
+            //         state.loading = 'succeeded'
+            //         // state.created.plans = [...state.created.plans, ...action.payload.myPlanList];
+            //         // state.invited.plans = [...state.invited.plans, ...action.payload.invitedPlanlist];
+            //     }
+            // })
+            // .addCase(getMorePlan.rejected, state => {
+            //     if (state.loading === 'pending') {
+            //         state.loading = 'failed'
+            //     }
+            // })
             .addCase(getOnePlan.fulfilled, (state, action) => {
                 state.showplan = action.payload;
             })
@@ -211,7 +217,6 @@ export const planSlice = createSlice({
             .addCase(editPlan.fulfilled, (state, action) => {
                 const data = {...state.showplan, ...action.payload}
                 state.showplan = data
-                state.today = state.today.map((plan) => plan.planId === action.payload.planId ? action.payload : plan)
                 state.created.plans = state.created.plans.map((plan) => plan.planId === action.payload.planId ? action.payload : plan)
                 window.location.reload()
             })

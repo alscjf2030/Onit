@@ -46,7 +46,6 @@ export const login = createAsyncThunk(
     async ({data, navigate}, {rejectedWithValue}) => {
         try {
             const res = await postApi('/user/login', data)
-            console.log(res)
             Swal.fire({
                 position: 'center',
                 icon: 'success',

@@ -24,21 +24,6 @@ const PlanList = (props) => {
     const totalPage = useSelector(state => state.plan.created.totalPage);
     const loading = useSelector((state) => state.plan.loading)
     const planList = useSelector(state => state.plan.created.plans);
-    const today = useSelector((state) => state.plan.today)
-    const todayPlan = dayjs(today?.planDate).format(' A hh시 mm분까지')
-    const handleShared = () => {
-        if (navigator.share) {
-            navigator.share({
-                title: today.planName,
-                text: today.planName,
-                url: `https://imonit.co.kr/detail/${today.url}`
-            })
-                .then(() => console.log('성공'))
-                .catch((err) => console.log(err))
-        } else {
-            alert("공유하기가 지원되지 않는 환경 입니다.")
-        }
-    }
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight
         const scrollTop = document.documentElement.scrollTop
@@ -79,41 +64,7 @@ const PlanList = (props) => {
     return (
         <>
             <List>
-                {today ?
-                    <>
-                        <Today
-                            key={today.planId}
-                            onClick={() => {
-                                navigate(`/detail/${today.url}`)
-                            }}
-                        >
-                            <Content>
-                                <h3>{todayPlan}</h3>
-                                <div
-                                    onClick={handleShared}
-                                    style={{
-                                        zIndex: 1,
-                                        marginLeft: "auto"
-                                    }}
-                                >
-                                    <Share/>
-                                </div>
-                            </Content>
-                            <h3>{today.planName}</h3>
-                            <br/>
-                            <h2>{today.locationName}</h2>
-                            <Penalty
-                                style={{position: "absolute", bottom: "16px"}}
-                            >
-                                <img alt='penalty icon' src={bomb}/>
-                                <span>{today.penalty}</span>
-                            </Penalty>
-                        </Today>
-                    </>
-                    :
-                    null
-                }
-                {planList.length > 0 || today ? (
+                {planList.length > 0 ? (
                     <>
                         {planList.map((plan, idx) => {
                             const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd,')

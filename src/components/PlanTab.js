@@ -6,6 +6,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import PlanList from './PlanList';
 import InvitedList from './InvitedList';
+import Allplan from './Allplan';
 
 const StyledTabs = styled((props) => (
   <Tabs
@@ -20,19 +21,17 @@ const StyledTabs = styled((props) => (
     marginBottom: "15px"
   },
   '& .MuiTabs-indicatorSpan': {
-    maxWidth: 70,
+    maxWidth: 30,
     width: '100%',
     backgroundColor: '#181818',
   },
   '& .MuiTabs-flexContainer': {
-      marginLeft: "15px",
       marginBottom: "15px"
   },
   '& .MuiButtonBase-root': {
       justifyContent: 'flex-end',
       minWidth: '70px',
       marginBottom: '3px',
-      marginRight: '8px',
   },
 
 });
@@ -102,14 +101,18 @@ const PlanTab = () => {
           onChange={handleChange}
           aria-label="styled tabs example"
         >
-          <StyledTab label="만든 약속" {...a11yProps(0)}/>
-          <StyledTab label="받은 약속" {...a11yProps(1)}/>
+          <StyledTab label="전체" {...a11yProps(0)}/>
+          <StyledTab label="만든 약속" style={{marginRight: "15px"}} {...a11yProps(1)}/>
+          <StyledTab label="받은 약속" {...a11yProps(2)}/>
         </StyledTabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <PlanList/>
+        <Allplan/>
       </TabPanel>
       <TabPanel value={value} index={1}>
+        <PlanList/>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
         <InvitedList/>
       </TabPanel>
     </Box>

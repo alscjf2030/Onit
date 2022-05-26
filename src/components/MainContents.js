@@ -38,7 +38,6 @@ function MainContents(props) {
                     <Route path="*" element={<NotFound/>}/>
                 </Routes>
             </MobileScrollBar>
-            <div id="mobile-portal"/>
         </MobileContainer>
     );
 }
