@@ -20,6 +20,7 @@ const SideMenu = (props) => {
     const hidden = React.useRef(null);
     const logoutBtn = () => {
         localStorage.removeItem('token')
+        localStorage.removeItem('FCMtoken')
         resetStore()
         dispatch(logout(navigate))
     };
