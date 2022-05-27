@@ -2,12 +2,14 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {getApi, postApi, putApi} from "../../shared/api/client";
 import history from "../../index"
 import Swal from "sweetalert2";
+import { async } from '@firebase/util';
 
 const initialState = {
     loading: 'idle',
     is_login: false,
     user_info: null,
-    error: null
+    error: null,
+    url: null
 }
 
 export const signUp = createAsyncThunk(
@@ -34,6 +36,29 @@ export const signUp = createAsyncThunk(
     }
 )
 
+export const signUp2 = createAsyncThunk(
+    'user/signup',
+    async ({data, join, navigate}, {rejectWithValue}) => {
+        try {
+            const res = await postApi('/user/signup', data)
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '회원가입 성공',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            navigate(`/complete/${join}`)
+            return {
+                data: res.data,
+                status: res.status
+            }
+        } catch (err) {
+            console.log(err.response.data)
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
 
 export const login = createAsyncThunk(
     'user/login',
@@ -117,6 +142,19 @@ export const changePic = createAsyncThunk(
                 headers: {
                     "Content-Type": "multipart/form-data",
                 }
+            })
+        } catch (err) {
+            return rejectWithValue(err.response.data.msg)
+        }
+    }
+)
+
+export const updateUser = createAsyncThunk(
+    'member/info',
+    async (_, {rejectWithValue}) => {
+        try {
+            await getApi('/member/info').then((res) => {
+                return res.data
             })
         } catch (err) {
             return rejectWithValue(err.response.data.msg)
@@ -238,7 +276,10 @@ export const userSlice = createSlice({
         },
         [kakaoLogin.fulfilled]: (state, action) => {
             state.user_info = action.payload
-        }
+        },
+        [updateUser.fulfilled]: (state, action) => {
+            state.user_info = action.payload
+        },
     },
 })
 

@@ -103,15 +103,20 @@ const Login = (props) => {
                     onClick={Login}
                 >로그인
                 </button>
-
                 <KakaoButton/>
             </LoginBox>
 
             <SignupBox>
                 <span>아직 회원이 아니신가요?</span>
+                {join ?
+                <p onClick={() => {
+                    navigate(`/signup/${join}`)
+                }}>회원가입하기</p>
+                :
                 <p onClick={() => {
                     navigate('/signup')
                 }}>회원가입하기</p>
+            }
             </SignupBox>
 
             <LoginLogoBox>

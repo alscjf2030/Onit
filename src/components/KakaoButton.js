@@ -3,13 +3,14 @@ import styled from "styled-components";
 import {KAKAO_AUTH_URL} from "../service/OAuth";
 import KakaoSymbol from "../img/icon/KakaoSymbol.png";
 
-const KakaoButton = (props) => {
 
+
+const KakaoButton = (props) => {
     return (
         <Container>
             <KakaoBox>
                 <a href={KAKAO_AUTH_URL}>
-                    <img alt='kakao login' src={KakaoSymbol}/>
+                    <img alt='kakao login' src={KakaoSymbol} />
                     카카오톡으로 간편 로그인
                 </a>
             </KakaoBox>
