@@ -93,18 +93,18 @@ const TitleContainer = styled.div`
 
   @keyframes letter-in {
     0% {
-      top: 1.2em;
+      bottom: 1.2em;
     }
     100% {
-      top: 0;
+      bottom: 0;
     }
   }
   @keyframes letter-out {
     0% {
-      top: 0;
+      bottom: 0;
     }
     100% {
-      top: -1.2em;
+      bottom: -1.2em;
     }
   }
 
@@ -128,7 +128,7 @@ const TitleContainer = styled.div`
 
       .letter {
         position: relative;
-        top: 1.2em;
+        bottom: 1.2em;
 
         &.in {
           animation-name: letter-in;
@@ -138,7 +138,7 @@ const TitleContainer = styled.div`
         }
 
         &.out {
-          top: 0em;
+          bottom: 0;
           animation-name: letter-out;
           animation-duration: 0.3s;
           animation-timing-function: ease-in;

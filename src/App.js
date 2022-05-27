@@ -9,6 +9,7 @@ import {getToken} from 'firebase/messaging'
 import theme from "./styles/theme";
 import EventBackGround from "./components/EventBackGround";
 import LaptopBackground from "./components/LaptopBackground";
+import Phone from './img/Phone.png'
 
 
 function App() {
@@ -38,10 +39,11 @@ function App() {
             ) : (
                 <LaptopContainer>
                     <LeftWrap>
-                        <LaptopBackground/>
-                        {/*<EventBackGround/>*/}
+                        {/*<LaptopBackground/>*/}
+                        <EventBackGround/>
                     </LeftWrap>
                     <RightWrap>
+                        <img className='phone-img' alt='phone' src={Phone}/>
                         <PhoneFrame>
                             <MainContents/>
                         </PhoneFrame>
@@ -74,7 +76,7 @@ const LeftWrap = styled.div`
   align-items: center;
   justify-content: flex-end;
   min-width: 980px;
-  
+
   @media (max-width: 768px) {
     display: none;
   }
@@ -84,12 +86,23 @@ const RightWrap = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   margin-left: 150px;
   background-color: ${theme.color.gray5};
+
+  .phone-img {
+    position: absolute;
+    width: 430px;
+    height: 930px;
+    
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
 `
 
 const PhoneFrame = styled.div`
+  position: relative;
   width: 375px;
   height: 812px;
 `

@@ -23,7 +23,8 @@ const EventBackGround = (props) => {
             </Text>
 
             <EventContainer>
-                <img alt='event' src={Event}/>
+                {/*<img alt='event' src={Event}/>*/}
+                <div className='event'>Event</div>
                 <p>온잇에서 약속 계획 만들고, 친구들에게 공유하고 선물 받자!</p>
                 <img alt='gift' src={Gift}/>
             </EventContainer>
@@ -111,18 +112,35 @@ const EventContainer = styled.div`
   display: flex;
   margin-left: 100px;
   margin-bottom: 25px;
+  min-width: 640px;
+  
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 50px;
+    background-color: ${theme.color.green};
+    font-weight: bold;
+    font-size: 30px;
+    border: none;
+    border-radius: 10px;
+  }
 
   p {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 26px;
     display: flex;
     align-items: end;
-    margin-left: 30px;
+    margin-left: 40px;
     padding-bottom: 6px;
+    min-width: 600px;
   }
 
   img:last-of-type {
-    margin-left: 30px;
+    margin-left: 40px;
+    width: 50px;
+    height: 50px;
   }
 `
 
@@ -135,6 +153,7 @@ const EventDateContainer = styled.div`
     width: 15%;
     font-weight: bold;
     font-size: 30px;
+    min-width: 155px;
   }
 
   p {
@@ -142,7 +161,7 @@ const EventDateContainer = styled.div`
     align-items: end;
     font-weight: bold;
     font-size: 20px;
-    margin-left: 25px;
+    margin-left: 30px;
   }
 `
 
@@ -155,6 +174,7 @@ const EventJoinContainer = styled.div`
     width: 15%;
     font-weight: bold;
     font-size: 30px;
+    min-width: 155px;
   }
 
   .step {
@@ -167,7 +187,8 @@ const EventJoinContainer = styled.div`
     align-items: center;
     background-color: ${theme.color.white};
     width: 80%;
-    min-width: 620px;
+    min-width: 640px;
+    max-width: 650px;
     height: 50px;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -181,6 +202,7 @@ const EventJoinContainer = styled.div`
     border: none;
     border-radius: 10%;
     font-weight: bold;
+    font-size: 18px;
   }
 
   p:first-of-type {
@@ -199,9 +221,9 @@ const EventJoinContainer = styled.div`
 const GiftContainer = styled.div`
   display: flex;
   margin-left: 100px;
-  
+
   .img-container {
-    min-width: 640px;
+    min-width: 660px;
     margin-left: 20px;
   }
 
@@ -209,11 +231,12 @@ const GiftContainer = styled.div`
     width: 15%;
     font-weight: bold;
     font-size: 30px;
+    min-width: 155px;
   }
 
   img {
     width: 100%;
-    max-width: 210px;
+    max-width: 220px;
   }
 `
 
