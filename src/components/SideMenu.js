@@ -190,7 +190,14 @@ const MenuTrigger = styled.div`
 `
 
 const ShowSide = styled.div`
-  
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(1.5px);
+  background-color: rgba(255, 255, 255, 0.1);
+  z-index: 3;
+  visibility: ${({isOpen}) => isOpen ? 'visible' : 'hidden'};
+  transition: visibility 0.2s
 `
 
 const ShowMenu = styled.div`
@@ -204,7 +211,7 @@ const ShowMenu = styled.div`
   top: 0;
   padding: 10px;
   transform: ${({isOpen}) => `translateX(${isOpen ? 0 : '100%'})`};
-  transition: visibility 0.1s, transform 0.2s ease-in-out;
+  transition: visibility 0.2s, transform 0.2s ease-in-out;
 
   .side-bar-header {
     display: flex;
