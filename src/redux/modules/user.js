@@ -142,7 +142,9 @@ export const changePic = createAsyncThunk(
                 headers: {
                     "Content-Type": "multipart/form-data",
                 }
-            })
+            }).then(
+                window.location.reload()
+            )
         } catch (err) {
             return rejectWithValue(err.response.data.msg)
         }
@@ -153,9 +155,8 @@ export const updateUser = createAsyncThunk(
     'member/info',
     async (_, {rejectWithValue}) => {
         try {
-            await getApi('/member/info').then((res) => {
-                return res.data
-            })
+            const res = await getApi('/member/info')
+            return res.data
         } catch (err) {
             return rejectWithValue(err.response.data.msg)
         }

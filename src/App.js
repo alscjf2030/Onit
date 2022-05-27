@@ -1,11 +1,11 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import GlobalStyle from "./styles/GlobalStyle";
 import styled from "styled-components";
 import MainContents from "./components/MainContents";
 import useIsMobile from "./hooks/useIsMobile";
 
-import {messaging} from "./firebase";
-import {getToken} from 'firebase/messaging'
+import { messaging } from "./firebase";
+import { getToken } from 'firebase/messaging'
 import theme from "./styles/theme";
 import EventBackGround from "./components/EventBackGround";
 import LaptopBackground from "./components/LaptopBackground";
@@ -35,22 +35,22 @@ function App() {
     return (
         <Container>
             {isMobile ? (
-                <MainContents/>
+                <MainContents />
             ) : (
                 <LaptopContainer>
                     <LeftWrap>
-                        {/*<LaptopBackground/>*/}
+                        {/* <LaptopBackground /> */}
                         <EventBackGround/>
                     </LeftWrap>
                     <RightWrap>
-                        <img className='phone-img' alt='phone' src={Phone}/>
+                        <img className='phone-img' alt='phone' src={Phone} />
                         <PhoneFrame>
-                            <MainContents/>
+                            <MainContents />
                         </PhoneFrame>
                     </RightWrap>
                 </LaptopContainer>
             )}
-            <GlobalStyle/>
+            <GlobalStyle />
         </Container>
     );
 }
@@ -94,7 +94,7 @@ const RightWrap = styled.div`
     position: absolute;
     width: 430px;
     height: 930px;
-    
+
     @media (max-width: 768px) {
       display: none;
     }
