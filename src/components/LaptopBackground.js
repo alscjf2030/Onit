@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import Logo from '../img/Logo.svg'
 import styled from "styled-components";
 import ChangeWording from "../shared/utils/ChangeWording";
+import theme from "../styles/theme";
 
 const LaptopBackground = () => {
     const intervalRef = useRef(null)
@@ -95,12 +96,12 @@ const TitleContainer = styled.div`
       top: 1.2em;
     }
     100% {
-      top: 0em;
+      top: 0;
     }
   }
   @keyframes letter-out {
     0% {
-      top: 0em;
+      top: 0;
     }
     100% {
       top: -1.2em;

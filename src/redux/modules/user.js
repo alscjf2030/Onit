@@ -29,10 +29,6 @@ export const signUp = createAsyncThunk(
             }
         } catch (err) {
             console.log(err.response.data)
-            // Swal.fire({
-            //     text: err.response.data.msg,
-            //     icon: 'error'
-            // })
             return rejectWithValue(err.response.data)
         }
     }

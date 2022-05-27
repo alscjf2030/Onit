@@ -1,7 +1,7 @@
 // GlobalStyle.js
-import { createGlobalStyle } from 'styled-components';
-// import PretendardBold from './font/Pretendard-Bold.woff';
-// import PretendardMedium from './font/Pretendard-Medium.woff';
+import {createGlobalStyle} from 'styled-components';
+import PretendardBold from './font/Pretendard-Bold.woff';
+import PretendardMedium from './font/Pretendard-Medium.woff';
 import PretendardRegular from './font/Pretendard-Regular.woff';
 
 
@@ -15,32 +15,32 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  button,img{
-    cursor:pointer;
+  button, img {
+    cursor: pointer;
   }
 
-  // @font-face {
-  //   font-family:'Pretendard' ;
-  //   font-weight: 700;
-  //   src: url($PretendardBold});
-  // }
-
-  // @font-face {
-  //   font-family:'Pretendard' ;
-  //   font-weight: 500;
-  //   src: url($PretendardMedium});
-  // }
+  @font-face {
+    font-family: 'Pretendard' ;
+    font-weight: 700;
+    src: url(${PretendardBold});
+  }
 
   @font-face {
-    font-family:'Pretendard' ;
-    // font-weight: 400;
+    font-family: 'Pretendard' ;
+    font-weight: 500;
+    src: url(${PretendardMedium});
+  }
+
+  @font-face {
+    font-family: 'Pretendard' ;
+    font-weight: 400;
     src: url(${PretendardRegular});
   }
 
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+  /* http://meyerweb.com/eric/tools/css/reset/
+     v2.0 | 20110126
+     License: none (public domain)
+  */
 
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,

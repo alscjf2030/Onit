@@ -3,8 +3,8 @@ import styled from "styled-components";
 import {useNavigate, useParams} from "react-router-dom";
 import {editPlan, deletePlan, getOnePlan, joinPlan} from "../redux/modules/plan";
 import {useDispatch, useSelector} from "react-redux";
-import {ReactComponent as LeftArrow } from '../img/icon/arrowl.svg';
-import { deleteIcon, editIcon } from "../img";
+import {ReactComponent as LeftArrow} from '../img/icon/arrowl.svg';
+import {deleteIcon, editIcon} from "../img";
 import DetailMap from "./DetailMap";
 import dayjs from "dayjs";
 import Swal from "sweetalert2";
@@ -127,7 +127,7 @@ const Detail = (props) => {
                         공유하기
                     </button>
                     :
-                    ( plan.member ?
+                    (plan.member ?
                             <>
                                 <button onClick={deletePlanBtn}>
                                     일정 나가기

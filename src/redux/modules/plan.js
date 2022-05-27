@@ -227,7 +227,7 @@ export const planSlice = createSlice({
                 state.showplan = data
                 state.created.plans = state.created.plans.map((plan) => plan.planId === action.payload.planId ? action.payload : plan)
                 // state.plans = state.plans.map((plan) => plan.planId === action.payload.planId ? action.payload : plan)
-                // window.location.reload()
+                window.location.reload()
             })
             .addCase(deletePlan.fulfilled, (state, action) => {
                 state.showplan = null

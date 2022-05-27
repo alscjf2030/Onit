@@ -1,8 +1,9 @@
 class ChangeWording {
-    constructor(x=null) {
+    constructor(x = null) {
         this.node = x;
         this.letterfy(this.node.querySelector('h1'));
     }
+
     letterfy(node) {
         let text = node.innerText;
         node.innerText = '';
@@ -15,6 +16,7 @@ class ChangeWording {
             node.appendChild(span);
         }
     }
+
     changeText(newText) {
         let oldTitle = this.node.querySelector('.current');
         let i = 0;
@@ -36,6 +38,7 @@ class ChangeWording {
         this.node.appendChild(newTitle);
         setTimeout(this.removeNode(oldTitle), 2000);
     }
+
     removeNode(x) {
         return () => {
             x.remove();
