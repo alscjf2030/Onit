@@ -8,6 +8,7 @@ import { deleteIcon, editIcon } from "../img";
 import DetailMap from "./DetailMap";
 import dayjs from "dayjs";
 import Swal from "sweetalert2";
+import theme from "../styles/theme";
 
 const Detail = (props) => {
     const {planUrl} = useParams();
@@ -144,8 +145,8 @@ const Detail = (props) => {
 export default Detail
 
 const Container = styled.div`
-  min-height: 100vh;
-  background-color: #eee;
+  height: 100%;
+  background-color: ${theme.color.gray6};
 `
 
 const HeadLine = styled.div`
@@ -166,7 +167,7 @@ const ScheduleBox = styled.div`
   border: none;
   border-radius: 5px;
   width: 90%;
-  height: 35vh;
+  height: 30%;
   margin: auto;
 
   h3: first-of-type {
@@ -195,7 +196,7 @@ const MapBox = styled.div`
   border: none;
   border-radius: 5px;
   width: 90%;
-  height: 45vh;
+  height: 50%;
   margin: auto;
 `
 

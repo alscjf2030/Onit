@@ -5,19 +5,19 @@ import styled from "styled-components";
 import {Grid} from "../elements";
 import {editPlan, getOnePlan} from "../redux/modules/plan";
 import {ReactComponent as LeftArrow} from '../img/icon/arrowl.svg';
-import {formatDate, formatHalfTime, formatTime} from "../shared/utils/common";
+import {formatDate, formatTime} from "../shared/utils/common";
 import Modal from "../components/Modal";
 import ModalPortal from "../components/ModalPortal";
 import dayjs from "dayjs";
-import Modal2 from "../components/Modal2";
 import {hourModel, minuteModel} from "../statics/time";
 import {DropdownList} from "react-widgets/cjs";
 import {penaltyModel} from "../statics/penalty";
-import { Input } from "../elements";
+import {Input} from "../elements";
 import PlanSelectMap from "../components/PlanSelectMap";
 import theme from "../styles/theme";
-import SetDrawerCalendar from "../components/SetDrawerCalendar";
 import SetDrawerTime from "../components/SetDrawerTime";
+import SetDrawerCalendar from "../components/SetDrawerCalendar";
+import MobilePortal from "../components/MobilePortal";
 
 const EditPlan = (props) => {
     const {planUrl} = useParams()
@@ -140,9 +140,8 @@ const EditPlan = (props) => {
     if (!plan) {
         return <div>loading...</div>
     }
-
     return (
-        <>
+        <Container>
             <HeadLine>
                 <LeftArrow
                     style={{
@@ -174,25 +173,16 @@ const EditPlan = (props) => {
                     readOnly
                     value={formatDate(date)}
                     placeholder={planDay}
-                    onClick={handleEditDateModal}
+                    onClick={toggleCalendar}
                 />
-                <ModalPortal>
-                    {editDateModal &&
-                        <Modal onClose={handleEditDateModal} date={dayjs(date).toDate()} setDate={setDate}/>}
-                </ModalPortal>
-            </InputBox>
 
-            {/*<InputBox>*/}
-            {/*    <input*/}
-            {/*        readOnly*/}
-            {/*        value={formatDate(date)}*/}
-            {/*        placeholder={planDay}*/}
-            {/*        onClick={toggleCalendar}*/}
-            {/*    />*/}
-            {/*    <ShowCalendar calendarOpen={calendarOpen} onClick={closeCalendar}>*/}
-            {/*        <SetDrawerCalendar calendarOpen={calendarOpen} onClose={toggleCalendar} date={dayjs(date).toDate()} setDate={setDate}/>*/}
-            {/*    </ShowCalendar>*/}
-            {/*</InputBox>*/}
+                <MobilePortal>
+                    <ShowCalendar calendarOpen={calendarOpen} onClick={closeCalendar}>
+                        <SetDrawerCalendar calendarOpen={calendarOpen} onClose={toggleCalendar}
+                                           date={date ? dayjs(date).toDate() : null} setDate={setDate}/>
+                    </ShowCalendar>
+                </MobilePortal>
+            </InputBox>
 
             <InputBox>
                 <input
@@ -202,14 +192,16 @@ const EditPlan = (props) => {
                     onClick={toggleMenu}
                 />
             </InputBox>
-            <ShowMenu open={open} onClick={closeMenu}>
-                <SetDrawerTime open={open} onClose={toggleMenu} hour={hour} setHour={setHour} minute={minute}
-                               setMinute={setMinute} amPmType={amPmType} setAmPmType={setAmPmType}/>
-            </ShowMenu>
+            <MobilePortal>
+                <ShowMenu open={open} onClick={closeMenu}>
+                    <SetDrawerTime open={open} onClose={toggleMenu} hour={hour} setHour={setHour} minute={minute}
+                                   setMinute={setMinute} amPmType={amPmType} setAmPmType={setAmPmType}/>
+                </ShowMenu>
+            </MobilePortal>
 
             <InputBox>
                 <Input
-                    placeholder={placename? placename : plan.locationDetail.name}
+                    placeholder={placename ? placename : plan.locationDetail.name}
                     _onClick={() => {
                         setShowMap(true);
                     }}
@@ -231,7 +223,7 @@ const EditPlan = (props) => {
                     style={{
                         width: '100%',
                         margin: '14px auto 0 auto',
-                        background: '#ffffff'
+                        background: `${theme.color.white}`
                     }}
                     dataKey="id"
                     textField="value"
@@ -257,11 +249,16 @@ const EditPlan = (props) => {
                     }}>수정완료
                 </button>
             </Grid>
-        </>
+        </Container>
     )
 }
 
 export default EditPlan
+
+const Container = styled.div`
+  height: 100%;
+  background-color: ${theme.color.gray6};
+`
 
 const HeadLine = styled.div`
   position: relative;
@@ -307,7 +304,7 @@ const ShowMenu = styled.div`
   align-items: flex-end;
   width: 100%;
   height: 100%;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   transition: visibility 0.2s;
 `
@@ -321,7 +318,7 @@ const ShowCalendar = styled.div`
   align-items: flex-end;
   width: 100%;
   height: 100%;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   transition: visibility 0.2s;
 `

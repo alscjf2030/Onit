@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import styled from "styled-components";
 import {useSelector, useDispatch} from "react-redux";
 import {ReactComponent as BsBell} from '../img/icon/bell.svg'
@@ -17,7 +17,8 @@ const SideMenu = (props) => {
     const resetStore = useResetStore()
     const userData = useSelector(state => state.user.user_info)
     const [isOpen, setMenu] = useState(false);
-    const hidden = React.useRef(null);
+    const hidden = useRef(null);
+
     const logoutBtn = () => {
         localStorage.removeItem('token')
         localStorage.removeItem('FCMtoken')
@@ -67,7 +68,8 @@ const SideMenu = (props) => {
                         </button>
                     </div>
                     <div className='member'>
-                        <div className='member-img' style={{
+                        <div className='member-img'
+                             style={{
                             backgroundImage: `url(${userData?.profileImg})`,
                             backgroundSize: 'cover',
                         }}>

@@ -14,7 +14,6 @@ import EditPlan from "../pages/EditPlan";
 import KakaoHandler from "../service/KakaoHandler";
 import NotFound from "../pages/NotFound";
 import styled from "styled-components";
-import theme from "../styles/theme";
 
 function MainContents(props) {
     return (

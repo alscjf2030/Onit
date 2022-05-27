@@ -45,7 +45,7 @@ export const login = createAsyncThunk(
         try {
             const res = await postApi('/user/login', data)
             Swal.fire({
-                position: 'center-start',
+                position: 'center',
                 icon: 'success',
                 title: '로그인 성공',
                 showConfirmButton: false,

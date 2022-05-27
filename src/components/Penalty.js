@@ -3,13 +3,14 @@ import {Grid} from '../elements';
 import styled from "styled-components";
 import {penaltyModel} from "../statics/penalty";
 
-const PenaltyItem = ({onClick, value, active}) => {
+const PenaltyItem = ({onClick, value, active, image}) => {
     return (
         <PenaltyItemCard
             active={active}
             onClick={onClick}
         >
-            <p>{value}</p>
+            <p>{image}</p>
+            <p style={{fontWeight: 'bold'}}>{value}</p>
         </PenaltyItemCard>
     )
 }
@@ -42,8 +43,9 @@ const Penalty = ({setPenalty, clickHandler}) => {
             </Grid>
 
             <PenaltyBox>
-                {penaltyModel.map(({id, value}) => (
+                {penaltyModel.map(({id, value, image}) => (
                     <PenaltyItem key={id}
+                                 image={image}
                                  value={value}
                                  onClick={() => onClick(id)}
                                  active={selectedPenalty === id}/>
@@ -83,6 +85,7 @@ const PenaltyBox = styled.div`
 
 const PenaltyItemCard = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   text-align: center;
   align-items: center;
@@ -93,4 +96,8 @@ const PenaltyItemCard = styled.div`
   margin: 8px 8px 16px 8px;
   cursor: pointer;
   background-color: ${({active}) => active ? '#A1ED00' : '#DDD'};
+  
+  p {
+    margin: 0;
+  }
 `

@@ -60,6 +60,7 @@ const SignUp = (props) => {
         return 'loading...'
     }
 
+
     return (
         <Container>
             <HeadLine>
@@ -82,7 +83,7 @@ const SignUp = (props) => {
                 {error === '이미 사용중인 아이디 입니다!' ?
                     <input
                         style={{
-                            border: `2px solid ${theme.color.red1}`,
+                            border: `1px solid ${theme.color.red1}`,
                             backgroundColor: `${theme.color.red2}`
                         }}
                         value={username}
@@ -105,17 +106,17 @@ const SignUp = (props) => {
                 {error === '이미 사용중인 닉네임 입니다!' ?
                     <input
                         style={{
-                            border: `2px solid ${theme.color.red1}`,
+                            border: `1px solid ${theme.color.red1}`,
                             backgroundColor: `${theme.color.red2}`
                         }}
                         value={nickname}
-                        placeholder='닉네임을 입력하세요'
+                        placeholder='닉네임은 2~8자리 입니다.'
                         onKeyPress={handleKeyPress}
                         onChange={(e) => setNickname(e.target.value)}
                     /> :
                     <input
                         value={nickname}
-                        placeholder='닉네임을 입력하세요'
+                        placeholder='닉네임은 2~8자리 입니다.'
                         onKeyPress={handleKeyPress}
                         onChange={(e) => setNickname(e.target.value)}
                     />
@@ -128,18 +129,18 @@ const SignUp = (props) => {
                 {error === '비밀번호가 일치하지 않습니다!' ?
                     <input
                         style={{
-                            border: `2px solid ${theme.color.red1}`,
+                            border: `1px solid ${theme.color.red1}`,
                             backgroundColor: `${theme.color.red2}`
                         }}
                         value={pw}
-                        placeholder='비밀번호를 입력하세요'
+                        placeholder='비밀번호는 영어와 숫자로 4~12자리 입니다.'
                         type={hidePassword ? 'password' : 'text'}
                         onKeyPress={handleKeyPress}
                         onChange={(e) => setPw(e.target.value)}
                     /> :
                     <input
                         value={pw}
-                        placeholder='비밀번호를 입력하세요'
+                        placeholder='비밀번호는 영어와 숫자로 4~12자리 입니다.'
                         type={hidePassword ? 'password' : 'text'}
                         onKeyPress={handleKeyPress}
                         onChange={(e) => setPw(e.target.value)}
@@ -153,18 +154,18 @@ const SignUp = (props) => {
                 {error === '비밀번호가 일치하지 않습니다!' ?
                     <input
                         style={{
-                            border: `2px solid ${theme.color.red1}`,
+                            border: `1px solid ${theme.color.red1}`,
                             backgroundColor: `${theme.color.red2}`
                         }}
                         value={pwCheck}
-                        placeholder='비밀번호를 다시 한번 입력하세요'
+                        placeholder='비밀번호는 영어와 숫자로 4~12자리 입니다.'
                         type={hidePasswordCheck ? 'password' : 'text'}
                         onKeyPress={handleKeyPress}
                         onChange={(e) => setPwCheck(e.target.value)}
                     /> :
                     <input
                         value={pwCheck}
-                        placeholder='비밀번호를 다시 한번 입력하세요'
+                        placeholder='비밀번호는 영어와 숫자로 4~12자리 입니다.'
                         type={hidePasswordCheck ? 'password' : 'text'}
                         onKeyPress={handleKeyPress}
                         onChange={(e) => setPwCheck(e.target.value)}
@@ -191,6 +192,7 @@ export default SignUp
 const Container = styled.div`
   width: 100%;
   height: 100%;
+  background-color: ${theme.color.gray6};
 `
 
 const HeadLine = styled.div`

@@ -5,10 +5,11 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 
 import {login, login2, setLoading} from "../redux/modules/user";
-import { LoginP } from "../img";
+import {LoginP} from "../img";
 import eyeOff from "../img/icon/eyeOff.svg";
 import eyeOn from "../img/icon/eyeOn.svg";
 import KakaoButton from "../components/KakaoButton";
+import theme from "../styles/theme";
 
 const Login = (props) => {
     const {join} = useParams();
@@ -41,7 +42,7 @@ const Login = (props) => {
                 dispatch(login2({data: loginData, join, navigate}));
             }
         }
-        if(!join){
+        if (!join) {
             if (username === '' || pw === '') {
                 Swal.fire({
                     // title: 'Error!',
@@ -76,49 +77,47 @@ const Login = (props) => {
     }
 
     return (
-        <>
-            <Container>
-                <h3 className='login-text'>로그인</h3>
-                <InputBox>
-                    <input
-                        placeholder='아이디를 입력하세요'
-                        onKeyPress={handleKeyPress}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </InputBox>
+        <Container>
+            <h3 className='login-text'>로그인</h3>
+            <InputBox>
+                <input
+                    placeholder='아이디를 입력하세요'
+                    onKeyPress={handleKeyPress}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+            </InputBox>
 
-                <InputBox>
-                    <input
-                        placeholder='비밀번호 입력하세요'
-                        type={hidePassword ? 'password' : 'text'}
-                        onKeyPress={handleKeyPress}
-                        onChange={(e) => setPw(e.target.value)}
-                    />
-                    {hidePassword && <img src={eyeOff} onClick={toggleHidePassword}/>}
-                    {!hidePassword && <img src={eyeOn} onClick={toggleHidePassword}/>}
-                </InputBox>
+            <InputBox>
+                <input
+                    placeholder='비밀번호 입력하세요'
+                    type={hidePassword ? 'password' : 'text'}
+                    onKeyPress={handleKeyPress}
+                    onChange={(e) => setPw(e.target.value)}
+                />
+                {hidePassword && <img src={eyeOff} onClick={toggleHidePassword}/>}
+                {!hidePassword && <img src={eyeOn} onClick={toggleHidePassword}/>}
+            </InputBox>
 
-                <LoginBox>
-                    <button
-                        onClick={Login}
-                    >로그인
-                    </button>
+            <LoginBox>
+                <button
+                    onClick={Login}
+                >로그인
+                </button>
 
-                    <KakaoButton/>
-                </LoginBox>
+                <KakaoButton/>
+            </LoginBox>
 
-                <SignupBox>
-                    <span>아직 회원이 아니신가요?</span>
-                    <p onClick={() => {
-                        navigate('/signup')
-                    }}>회원가입하기</p>
-                </SignupBox>
+            <SignupBox>
+                <span>아직 회원이 아니신가요?</span>
+                <p onClick={() => {
+                    navigate('/signup')
+                }}>회원가입하기</p>
+            </SignupBox>
 
-                <LoginLogoBox>
-                    <img alt='login-page' src={LoginP}/>
-                </LoginLogoBox>
-            </Container>
-        </>
+            <LoginLogoBox>
+                <img alt='login-page' src={LoginP}/>
+            </LoginLogoBox>
+        </Container>
     )
 }
 
@@ -126,7 +125,8 @@ export default Login
 
 const Container = styled.div`
   position: relative;
-  height: 100vh;
+  height: 100%;
+  background-color: ${theme.color.gray6};
 
   .login-text {
     color: black;
@@ -134,12 +134,6 @@ const Container = styled.div`
     font-weight: bold;
     padding: 130px 0 30px 40px;
   }
-`
-
-const HeadLine = styled.div`
-  position: relative;
-  width: 80%;
-  text-align: center;
 `
 
 const InputBox = styled.div`
@@ -185,43 +179,13 @@ const LoginBox = styled.div`
   }
 `
 
-const KakaoBox = styled.div`
-  position: relative;
-  background-color: #FEE500;
-  display: flex;
-  width: 100%;
-  margin-bottom: 15px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-
-  a {
-    width: 100%;
-    height: 40px;
-    color: black;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration-line: none;
-    font-weight: bold;
-  }
-
-  img {
-    position: absolute;
-    left: 10px;
-    width: 40px;
-    height: 40px;
-  }
-`
-
 const SignupBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 90%;
-  margin: 0 auto 15px auto;
+  margin: 0 auto;
 
   span {
     display: flex;
@@ -242,7 +206,6 @@ const SignupBox = styled.div`
 
 const LoginLogoBox = styled.div`
   width: 100%;
-  height: 40%;
 
   img {
     width: 100%;

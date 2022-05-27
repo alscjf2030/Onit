@@ -118,6 +118,14 @@ export const editPlan = createAsyncThunk(
             return res.data
         } catch (err) {
             console.log(err)
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: '수정실패',
+                text: '수정하실 내용을 확인해 주세요',
+                showConfirmButton: false,
+                timer: 1500
+            })
             return rejectedWithValue(err.response)
         }
     }

@@ -44,7 +44,7 @@ const Tab = styled.div`
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background-color: ${theme.color.gray5};
+  background-color: ${theme.color.gray6};
   position: relative;
 
   .logo {

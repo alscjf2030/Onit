@@ -6,8 +6,9 @@ import useIsMobile from "./hooks/useIsMobile";
 
 import {messaging} from "./firebase";
 import {getToken} from 'firebase/messaging'
-import BackGround from "./components/BackGround";
 import theme from "./styles/theme";
+import EventBackGround from "./components/EventBackGround";
+import LaptopBackground from "./components/LaptopBackground";
 
 
 function App() {
@@ -36,7 +37,8 @@ function App() {
             ) : (
                 <LaptopContainer>
                     <LeftWrap>
-                        <BackGround/>
+                        <LaptopBackground/>
+                        {/*<EventBackGround/>*/}
                     </LeftWrap>
                     <RightWrap>
                         <PhoneFrame>
@@ -63,19 +65,21 @@ const LaptopContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  //  여기에 전체 배경
 `
 
 const LeftWrap = styled.div`
   flex: 1;
-  max-width: 950px;
-  //  여기가 배경 자리
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 `
 
 const RightWrap = styled.div`
-  padding: 40px;
-  max-width: 590px;
-  background-color: ${theme.color.gray4};
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: ${theme.color.gray5};
 `
 
 const PhoneFrame = styled.div`

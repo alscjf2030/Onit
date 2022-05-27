@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {OnBoard} from '../img';
 import Logo from '../img/Logo.svg'
 import KakaoButton from "../components/KakaoButton";
+import theme from "../styles/theme";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -44,6 +45,7 @@ export default Home;
 
 const Container = styled.div`
   height: 100%;
+  background-color: ${theme.color.gray6};
 
   .logo {
     width: 30%;

@@ -38,29 +38,12 @@ const SetDropdown = ({onClose, hour, minute, setHour, setMinute, amPmType, setAm
             <Container>
                 <ButtonBox>
                     <button
-                        style={{
-                            backgroundColor: `${_amPmType === 'am' ? "#A1ED00" : "#ddd"}`,
-                            width: '25%',
-                            height: '100%',
-                            padding: '12px',
-                            marginRight: '12px',
-                            color: 'black',
-                            border: 'none',
-                            borderRadius: '10px',
-                        }}
+                        style={{backgroundColor: `${_amPmType === 'am' ? "#A1ED00" : "#ddd"}`,}}
                         onClick={() => selected('am')}
                     >오전
                     </button>
                     <button
-                        style={{
-                            backgroundColor: `${_amPmType === 'pm' ? "#A1ED00" : "#ddd"}`,
-                            width: '25%',
-                            height: '100%',
-                            padding: '12px',
-                            color: 'black',
-                            border: 'none',
-                            borderRadius: '10px',
-                        }}
+                        style={{backgroundColor: `${_amPmType === 'pm' ? "#A1ED00" : "#ddd"}`,}}
                         onClick={() => selected('pm')}
                     >오후
                     </button>
@@ -118,6 +101,16 @@ const ButtonBox = styled.div`
   display: flex;
   width: 100%;
   padding: 12px;
+  
+  button {
+    width: 25%;
+    height: 100%;
+    padding: 12px;
+    margin-right: 12px;
+    color: ${theme.color.black};
+    border: none;
+    border-radius: 10px;
+  }
 `
 
 const DropBox = styled.div`

@@ -8,6 +8,7 @@ import styled from "styled-components";
 import SetDrawerTime from "./SetDrawerTime";
 import SetDrawerCalendar from "./SetDrawerCalendar";
 import Swal from "sweetalert2";
+import MobilePortal from "./MobilePortal";
 
 const SetTime = ({setDate, setTime, clickHandler}) => {
     let today = new Date();
@@ -97,15 +98,18 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
                     _onClick={toggleMenu}
                 />
             </Grid>
-
-            <ShowMenu open={open} onClick={closeMenu}>
+            <MobilePortal>
+                <ShowMenu open={open} onClick={closeMenu}>
                     <SetDrawerTime open={open} onClose={toggleMenu} hour={hour} setHour={setHour} minute={minute}
                                    setMinute={setMinute} amPmType={amPmType} setAmPmType={setAmPmType}/>
-            </ShowMenu>
-
-            <ShowCalendar calendarOpen={calendarOpen} onClick={closeCalendar}>
-                <SetDrawerCalendar calendarOpen={calendarOpen} onClose={toggleCalendar} date={_date} setDate={_setDate}/>
-            </ShowCalendar>
+                </ShowMenu>
+            </MobilePortal>
+            <MobilePortal>
+                <ShowCalendar calendarOpen={calendarOpen} onClick={closeCalendar}>
+                    <SetDrawerCalendar calendarOpen={calendarOpen} onClose={toggleCalendar} date={_date}
+                                       setDate={_setDate}/>
+                </ShowCalendar>
+            </MobilePortal>
 
             <Grid bottom="0" padding="16px">
                 <button
@@ -141,7 +145,7 @@ const ShowMenu = styled.div`
   align-items: flex-end;
   width: 100%;
   height: 100%;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   transition: visibility 0.2s;
 `
@@ -155,7 +159,7 @@ const ShowCalendar = styled.div`
   align-items: flex-end;
   width: 100%;
   height: 100%;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   transition: visibility 0.2s;
 `

@@ -5,7 +5,6 @@ import styled from "styled-components";
 import theme from "../styles/theme";
 
 const SetDrawerCalendar = ({calendarOpen ,onClose, date = new Date(), setDate}) => {
-
     const handleDay = (value) => {
         setDate(value)
         onClose()

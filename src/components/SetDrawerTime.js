@@ -1,11 +1,18 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import {DropdownList} from "react-widgets/cjs";
+import DropdownList from "react-widgets/DropdownList";
 import {hourModel, minuteModel} from "../statics/time";
 import theme from "../styles/theme";
 import Swal from "sweetalert2";
+import "react-widgets/styles.css";
+// import {Dropdown} from "semantic-ui-react";
 
 const SetDrawerTime = ({open, onClose, hour, minute, setHour, setMinute, amPmType, setAmPmType}) => {
+
+    // const styleLink = document.createElement("link");
+    // styleLink.rel = "stylesheet";
+    // styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+    // document.head.appendChild(styleLink);
 
     const [_hour, _setHour] = useState(hour);
     const [_minute, _setMinute] = useState(minute);
@@ -36,7 +43,6 @@ const SetDrawerTime = ({open, onClose, hour, minute, setHour, setMinute, amPmTyp
         setAmPmType(_amPmType)
         onClose()
     }
-
 
     return (
         <DrawerContainer open={open} onClick={(event) => event.stopPropagation()}>
@@ -71,8 +77,30 @@ const SetDrawerTime = ({open, onClose, hour, minute, setHour, setMinute, amPmTyp
                     </button>
                 </ButtonBox>
                 <DropBox>
+                    {/*<Dropdown*/}
+                    {/*    style={{marginRight: '12px'}}*/}
+                    {/*    defaultValue={_hour}*/}
+                    {/*    // dataKey="id"*/}
+                    {/*    // text="value"*/}
+                    {/*    placeholder="시"*/}
+                    {/*    onChange={handleHour}*/}
+                    {/*    selection*/}
+                    {/*    options={hourModel}*/}
+                    {/*/>*/}
+                    {/*<Dropdown*/}
+                    {/*    defaultValue={_minute}*/}
+                    {/*    // dataKey="id"*/}
+                    {/*    // textField="value"*/}
+                    {/*    placeholder="분"*/}
+                    {/*    onChange={handleMinute}*/}
+                    {/*    selection*/}
+                    {/*    options={minuteModel}*/}
+                    {/*/>*/}
                     <DropdownList
-                        style={{marginRight: '12px'}}
+                        style={{
+                            flex: 1,
+                            marginRight: '12px'
+                        }}
                         dataKey="id"
                         textField="value"
                         value={_hour}
@@ -80,6 +108,7 @@ const SetDrawerTime = ({open, onClose, hour, minute, setHour, setMinute, amPmTyp
                         data={hourModel}
                     />
                     <DropdownList
+                        style={{flex: 1}}
                         dataKey="id"
                         textField="value"
                         value={_minute}
@@ -92,7 +121,8 @@ const SetDrawerTime = ({open, onClose, hour, minute, setHour, setMinute, amPmTyp
                 style={{
                     backgroundColor: `${_amPmType === '' || _hour === '시' || _minute === '분' ? '#DDD' : '#A1ED00'}`
                 }}
-                className='confirm' onClick={handleConfirm}>확인</button>
+                className='confirm' onClick={handleConfirm}>확인
+            </button>
         </DrawerContainer>
     );
 }
@@ -112,7 +142,7 @@ const DrawerContainer = styled.div`
   transform: ${({open}) => `translateY(${open ? 0 : '100%'})`};
   transition: transform 0.2s ease-in-out;
   height: 55%;
-  
+
   .confirm {
     position: absolute;
     bottom: 0;
