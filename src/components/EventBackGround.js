@@ -71,6 +71,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   margin-bottom: 50px;
+  margin-left: 100px;
 `
 
 const HeadContainer = styled.div`

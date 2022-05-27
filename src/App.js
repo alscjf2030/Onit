@@ -37,8 +37,8 @@ function App() {
             ) : (
                 <LaptopContainer>
                     <LeftWrap>
-                        <LaptopBackground/>
-                        {/*<EventBackGround/>*/}
+                        {/*<LaptopBackground/>*/}
+                        <EventBackGround/>
                     </LeftWrap>
                     <RightWrap>
                         <PhoneFrame>
@@ -68,7 +68,7 @@ const LaptopContainer = styled.div`
 `
 
 const LeftWrap = styled.div`
-  flex: 1;
+  flex: 1.5;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -79,6 +79,7 @@ const RightWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  margin-left: 150px;
   background-color: ${theme.color.gray5};
 `
 
