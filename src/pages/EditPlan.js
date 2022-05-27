@@ -42,7 +42,6 @@ const EditPlan = (props) => {
     const [lng, setLng] = useState(place?.lng || '');
     const planDay = formatDate(plan?.planDate)
     const planTime = formatTime(plan?.planDate)
-
     useEffect(() => {
         dispatch(getOnePlan(planUrl))
     }, [])
@@ -66,6 +65,10 @@ const EditPlan = (props) => {
             const minuteData = minuteModel.find((model) => model.value === _minute.toString())
             setHour(hourData)
             setMinute(minuteData?.id)
+            setAddress(plan.locationDetail.address)
+            setLat(plan.locationDetail.lat)
+            setLng(plan.locationDetail.lng)
+            setplaceName(plan.locationDetail.name)
         }
     }, [plan])
 
