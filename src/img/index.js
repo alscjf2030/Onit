@@ -1,6 +1,10 @@
 import dest_marker from './map/dest_marker.png';
 import my_marker from './map/my_marker.png';
 import OnBoard from './OnBoard.png';
+import OnBoard2 from './OnBoard2.png';
+import OnBoard3 from './OnBoard3.png';
+import OnBoard4 from './OnBoard4.png';
+import OnBoard5 from './OnBoard5.png';
 import Complete from './Complete.png';
 import LoginP from './Login.png';
 import NotFoundLogo from './NotFoundLogo.png';
@@ -10,11 +14,19 @@ import leftArrow from './icon/arrowl.svg';
 import bomb from './icon/bomb.svg';
 import Share from './icon/share-icon.svg';
 import editPic from './icon/edit.svg'
+import sunny from './icon/sun.svg';
+import cloudy from './icon/cloud.svg';
+import rainy from './icon/cloud-drizzle.svg';
+import snowy from './icon/cloud-snow.svg';
 
 export {
     dest_marker,
     my_marker,
     OnBoard,
+    OnBoard2,
+    OnBoard3,
+    OnBoard4,
+    OnBoard5,
     Complete,
     LoginP,
     NotFoundLogo,
@@ -24,4 +36,8 @@ export {
     bomb,
     Share,
     editPic,
+    sunny,
+    snowy,
+    rainy,
+    cloudy,
 };

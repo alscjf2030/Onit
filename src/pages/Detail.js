@@ -74,6 +74,8 @@ const Detail = (props) => {
         return <div>loading...</div>
     }
 
+    // console.log(plan)
+
     return (
         <Container>
             <HeadLine>
@@ -125,18 +127,25 @@ const Detail = (props) => {
                         공유하기
                     </button>
                     :
-                    <>
-                        <button onClick={() => dispatch(joinPlan(planUrl))}>
-                            참석하기
-                        </button>
-                        <button
-                            onClick={() => {
-                                navigate('/main')
-                            }}>
-                            거절하기
-                        </button>
-                    </>
-                }
+                    ( plan.member ?
+                            <>
+                                <button onClick={deletePlanBtn}>
+                                    일정 나가기
+                                </button>
+                            </>
+                            :
+                            <>
+                                <button onClick={() => dispatch(joinPlan(planUrl))}>
+                                    참석하기
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        navigate('/main')
+                                    }}>
+                                    거절하기
+                                </button>
+                            </>
+                    )}
             </ButtonBox>
         </Container>
     )

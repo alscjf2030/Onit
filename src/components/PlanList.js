@@ -7,12 +7,16 @@ import dayjs from "dayjs";
 import 'dayjs/locale/ko'
 
 
+import { sunny, cloudy, rainy, snowy } from "../img";
+
 import theme from "../styles/theme";
 import {ReactComponent as Plus} from '../img/icon/Plus.svg'
 import {ReactComponent as Share} from '../img/icon/share-icon.svg'
 import {bomb} from '../img'
-import {getMorePlan, getPlan, setLoading} from "../redux/modules/plan";
+import plan, {getMorePlan, getPlan, setLoading} from "../redux/modules/plan";
 import Swal from "sweetalert2";
+import CompleteSignup from "../pages/CompleteSignup";
+import Weather from "./Weather";
 
 dayjs.locale('ko')
 
@@ -61,14 +65,58 @@ const PlanList = (props) => {
     // if (!today && loading === 'pending') {
     //     return 'loading...'
     // }
-
-    console.log()
+    const first = [...planList].splice(0,1)[0]
+    const rest = [...planList].splice(1)
+    const planDay = dayjs(first?.planDate).format('MM월 DD일 dddd,')
+    const planTime = dayjs(first?.planDate).format(' A hh시 mm분')
+    const handleShared = (event) => {
+            event.stopPropagation()
+            if (navigator.share) {
+                navigator.share({
+                    title: first.planName,
+                    text: first.planName,
+                    url: `https://imonit.co.kr/detail/${first.url}`
+                })
+                    .then(() => console.log('성공'))
+                    .catch((err) => console.log(err))
+            } else {
+                Swal.fire({
+                    text: "공유하기가 지원되지 않는 환경 입니다.",
+                    icon: 'error'
+                })
+            }
+        }
     return (
         <>
             <List>
                 {planList.length > 0 ? (
                     <>
-                        {planList.map((plan, idx) => {
+                    <div className='first'
+                        key={first.planId}
+                        onClick={() => {
+                            navigate(`/detail/${plan.url}`)
+                        }}
+                    >
+                        <Content>
+                            <h3>{planDay}</h3>
+                            <Share
+                                style={{
+                                    zIndex: 1,
+                                    marginLeft: "auto"
+                                }}
+                                onClick={handleShared}
+                            />
+                        </Content>
+                        <h3>{planTime}</h3>
+                        <h2>{first.planName}</h2>
+                        <p>{first.locationName}</p>
+                        <Weather props={first.description} />
+                        <Penalty style={{position: "absolute", bottom: "1rem"}}>
+                            <img alt='penalty icon' src={bomb}/>
+                            <span>{first.penalty}</span>
+                        </Penalty>
+                    </div>
+                        {rest.map((plan, idx) => {
                             const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd,')
                             const planTime = dayjs(plan?.planDate).format(' A hh시 mm분')
                             const handleShared = (event) => {
@@ -96,7 +144,7 @@ const PlanList = (props) => {
                                      }}
                                 >
                                     <Content>
-                                        <h3>{planDay}{planTime}</h3>
+                                        <h1>{planDay}{planTime}</h1>
                                         <Share
                                             style={{
                                                 zIndex: 1,
@@ -148,23 +196,23 @@ const Content = styled.div`
 `;
 
 const Penalty = styled.div`
-  display: flex;
-  background: ${theme.color.gray5};
-  border-radius: 10px;
-  padding: 2px 8px;
-  width: fit-content;
-  align-items: center;
+display: flex;
+background: ${theme.color.gray5};
+border-radius: 9px;
+padding: 2px 8px;
+width: fit-content;
+align-items: center;
 
-  span {
+span {
     font-size: 12px;
     margin: 0 5px;
-  }
+}
 `;
 
 const List = styled.div`
   overflow: hidden;
-  height: 100%;
-  padding: 24px;
+  height: 36rem;
+  padding: 24px 24px 0px 24px;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -173,14 +221,16 @@ const List = styled.div`
     display: none; /* Chrome , Safari , Opera */
   }
 
-  .lists:first-of-type {
+  .first {
     background-color: ${theme.color.green};
     width: 100%;
-    //border: 1px none #ddd;
     border-radius: 10px;
-    padding: 12px 10px;
+    padding: 12px 16px;
     margin-bottom: 16px;
+    height: 10.875rem;
     box-shadow: 0 0 15px #d1d1d1;
+    position: relative;
+    overflow: hidden;
   }
 
   .lists {
@@ -188,7 +238,7 @@ const List = styled.div`
     width: 100%;
     border: 1px none #ddd;
     border-radius: 10px;
-    padding: 12px 10px;
+    padding: 12px 16px;
     margin-bottom: 16px;
     box-shadow: 0 0 15px #d1d1d1;
   }
@@ -206,12 +256,26 @@ const List = styled.div`
 
   h3 {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  h2 {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 30px;
+  }
+
+  h1 {
+    font-size: 1rem;
+    font-weight: bold;
   }
 
   p {
-    padding-bottom: 8px;
     font-weight: bold;
+    font-size: 14px;
+    line-height: 21px;
+    padding: 0px 0px 8px 0px;
   }
 
   .no-list {
@@ -233,20 +297,3 @@ const List = styled.div`
     z-index: 1;
   }
 `
-
-const Today = styled.div`
-  position: relative;
-  background-color: ${theme.color.green};
-  height: 25vh;
-  width: 100%;
-  border: 1px none #ddd;
-  border-radius: 10px;
-  padding: 12px 12px;
-  margin-bottom: 16px;
-  box-shadow: 0 0 15px #d1d1d1;
-
-  h3 {
-    font-size: 20px;
-    padding: 5px 0px;
-  }
-`;

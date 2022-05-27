@@ -1,24 +1,91 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useNavigate} from 'react-router-dom';
-import {OnBoard} from '../img';
-import Logo from '../img/Logo.svg'
+import {Grid} from '../elements'
+
+//카카오
 import KakaoButton from "../components/KakaoButton";
 import theme from "../styles/theme";
 
+//캐러셀
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+//이미지
+import {
+    OnBoard, OnBoard2, OnBoard3, OnBoard4, OnBoard5
+}
+from  '../img'
+import Logo from '../img/Logo.svg'
+
 const Home = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+    //캐러셀 설정
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+  };
 
     return (
         <Container>
-            <TitleBox>
-                <h3>만들고, 공유하고, 확인하는</h3>
-                <h3>모임 약속 공유 플랫폼</h3>
-            </TitleBox>
-            <img alt='logo' className='logo' src={Logo}/>
+          <StyledSlider {...settings}>
+            <div>
+              <TitleBox>
+                <img alt='logo' className='logo' src={Logo}/>
+              </TitleBox>
             <OnBoardingBox>
-                <img alt='cover' src={OnBoard}/>
+                <img alt='cover' src={OnBoard} style={{marginTop: "20%"}}/>
             </OnBoardingBox>
+            </div>
+            <div>
+              <OnBoardingBox>
+                <Grid padding="20% 0px 40px 40px">
+                  <h2>Make</h2><br/>
+                  <h3>온잇에서, 만나고 싶은 사람들과</h3>
+                  <h3>일정과 만남 장소를 간단히</h3>
+                  <h3>만들어 볼 수 있어요. 👋🏻</h3>
+                 </Grid>
+                 <img alt='Onboard' src={OnBoard2} style={{width: "70%", marginLeft: "4%"}}/>
+              </OnBoardingBox>
+            </div>
+            <div>
+              <OnBoardingBox>
+                <Grid padding="20% 0px 40px 40px">
+                <h2>Choose</h2><br/>
+                <h3>어디서 만날지,</h3>
+                <h3>늦으면 어떤 무서운 벌칙을 당할지 🤑</h3>
+                <h3>정해보는 건 어때요?</h3>
+                </Grid>
+                <img alt='Onboard' src={OnBoard3} style={{width: "90%", margin:"0 auto"}}/>
+              </OnBoardingBox>
+            </div>
+            <div>
+              <OnBoardingBox>
+                <Grid padding="20% 0px 40px 40px">
+                <h2>Share</h2><br/>
+                <h3>친구들과 모임을 공유해봐요,</h3>
+                <h3>더 근사하고 재미있는 모임이 될거에요.! 🙌🏻</h3>
+                </Grid>
+                <img alt='Onboard' src={OnBoard4} style={{marginTop:"20%"}}/>
+              </OnBoardingBox>
+            </div>
+            <div>
+              <OnBoardingBox>
+                <Grid padding="20% 0px 40px 40px">
+                <h2>Location</h2><br/>
+                <h3>모임시간 임박,</h3>
+                <h3>과연 친구들은 오고있는게 맞을까..?🤔</h3>
+                <h3>친구들의 위치를 실시간으로 확인해보세요!</h3>
+                </Grid>
+                <img alt='Onboard' src={OnBoard5} style={{width: "80%", margin: "0 auto"}}/>
+              </OnBoardingBox>
+            </div>
+          </StyledSlider>
             <LoginDiv>
                 <KakaoButton/>
                 <LoginBox>
@@ -53,16 +120,31 @@ const Container = styled.div`
     padding-bottom: 20px;
   }
 `
+const StyledSlider = styled(Slider)`
+  .slick-track {
+    height: 560px;
+  }
+  .slick-slide div {
+    width: 100%;
+    margin: 0 auto;
+    z-index: 999;
+    cursor: pointer;
+  }
+  .slick-dots {
+    bottom: 1em;
+  }
+  .slick-dots li button:before {
+    color: gray;
+  }
+  .slick-dots li.slick-active button:before {
+    color: black;
+  }
+`;
 
 const TitleBox = styled.div`
   width: 100%;
   padding: 100px 0 20px 35px;
 
-  h3 {
-    font-size: 20px;
-    font-weight: bold;
-    padding-bottom: 10px;
-  }
 `
 
 const OnBoardingBox = styled.div`
@@ -71,8 +153,19 @@ const OnBoardingBox = styled.div`
   img {
     width: 100%;
     height: 100%;
-    margin: 40px 0px;
     object-fit: cover;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    // padding-bottom: 10px;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 24px;
   }
 `
 

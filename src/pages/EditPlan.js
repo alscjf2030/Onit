@@ -9,10 +9,11 @@ import {formatDate, formatTime} from "../shared/utils/common";
 import Modal from "../components/Modal";
 import ModalPortal from "../components/ModalPortal";
 import dayjs from "dayjs";
+import Modal2 from "../components/Modal2";
 import {hourModel, minuteModel} from "../statics/time";
 import {DropdownList} from "react-widgets/cjs";
 import {penaltyModel} from "../statics/penalty";
-import {Input} from "../elements";
+import { Input } from "../elements";
 import PlanSelectMap from "../components/PlanSelectMap";
 import theme from "../styles/theme";
 import SetDrawerTime from "../components/SetDrawerTime";
@@ -140,6 +141,7 @@ const EditPlan = (props) => {
     if (!plan) {
         return <div>loading...</div>
     }
+
     return (
         <Container>
             <HeadLine>
@@ -200,13 +202,15 @@ const EditPlan = (props) => {
             </MobilePortal>
 
             <InputBox>
-                <Input
-                    placeholder={placename ? placename : plan.locationDetail.name}
-                    _onClick={() => {
-                        setShowMap(true);
-                    }}
-                    value={placename}
-                />
+                <Grid padding="0 16px">
+                    <Input
+                        placeholder={placename? placename : plan.locationDetail.name}
+                        _onClick={() => {
+                            setShowMap(true);
+                        }}
+                        value={placename}
+                    />
+                </Grid>
                 {showMap && (
                     <PlanSelectMap
                         setShowMap={setShowMap}

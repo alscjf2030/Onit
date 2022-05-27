@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from 'react-router-dom'
 import styled from "styled-components";
 import Swal from "sweetalert2";
+import theme from "../styles/theme";
 
 import {login, login2, setLoading} from "../redux/modules/user";
 import {LoginP} from "../img";
@@ -143,7 +144,7 @@ const InputBox = styled.div`
   margin: 0 auto 20px auto;
 
   input {
-    background-color: #eee;
+    background-color: ${theme.color.white};
     padding: 12px;
     width: 100%;
     height: 40px;
