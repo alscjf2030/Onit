@@ -73,6 +73,7 @@ const LeftWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  min-width: 980px;
 `
 
 const RightWrap = styled.div`

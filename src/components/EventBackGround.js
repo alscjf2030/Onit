@@ -38,11 +38,11 @@ const EventBackGround = (props) => {
                 <div className='step'>
                     <div className='step-by-step'>
                         <p>Step 1.</p>
-                        <p>온잇으로 친구들과 약속을 잡아보세요~</p>
+                        <p>약속을 만들고 친구들과 실시간 위치를 공유해 보세요~</p>
                     </div>
                     <div className='step-by-step'>
                         <p>Step 2.</p>
-                        <p>뭐라고 해야 할까요~</p>
+                        <p>온잇을 이용하면서 찾은 오류들을 구글폼에 통해 제출해 주세요~</p>
                     </div>
                     <div className='step-by-step'>
                         <p>Step 3.</p>
@@ -56,9 +56,11 @@ const EventBackGround = (props) => {
 
             <GiftContainer>
                 <h5>상품</h5>
-                <img alt='first' src={First}/>
-                <img alt='second' src={Second}/>
-                <img alt='third' src={Third}/>
+                <div className='img-container'>
+                    <img alt='first' src={First}/>
+                    <img alt='second' src={Second}/>
+                    <img alt='third' src={Third}/>
+                </div>
             </GiftContainer>
         </Container>
     );
@@ -86,7 +88,7 @@ const HeadContainer = styled.div`
 
   p {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 20px;
     display: flex;
     align-items: end;
     justify-content: center;
@@ -101,7 +103,7 @@ const Text = styled.div`
 
   p {
     padding: 5px;
-    font-size: 16px;
+    font-size: 18px;
   }
 `
 
@@ -140,7 +142,7 @@ const EventDateContainer = styled.div`
     align-items: end;
     font-weight: bold;
     font-size: 20px;
-    margin-left: 10px;
+    margin-left: 25px;
   }
 `
 
@@ -157,7 +159,7 @@ const EventJoinContainer = styled.div`
 
   .step {
     width: 80%;
-    margin-left: 10px;
+    margin-left: 25px;
   }
 
   .step-by-step {
@@ -165,6 +167,7 @@ const EventJoinContainer = styled.div`
     align-items: center;
     background-color: ${theme.color.white};
     width: 80%;
+    min-width: 620px;
     height: 50px;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -196,6 +199,11 @@ const EventJoinContainer = styled.div`
 const GiftContainer = styled.div`
   display: flex;
   margin-left: 100px;
+  
+  .img-container {
+    min-width: 640px;
+    margin-left: 20px;
+  }
 
   h5 {
     width: 15%;
@@ -206,11 +214,6 @@ const GiftContainer = styled.div`
   img {
     width: 100%;
     max-width: 210px;
-    margin-left: 5px;
-  }
-
-  img:first-of-type {
-    margin-left: 0.1px;
   }
 `
 
