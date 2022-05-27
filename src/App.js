@@ -24,7 +24,7 @@ function App() {
                 vapidKey: "BLg2NeG06gdfa1DbdDn1E6VFSD8a82zuaxgPXS5drdMaqUSf_lY421iglOkbev53HaDsl2jkw5vxgM" +
                     "aA4b6wfug"
             }).then(token => {
-                console.log(token);
+                // console.log(token);
                 localStorage.setItem('FCMtoken', token);
             })
         }
@@ -39,8 +39,8 @@ function App() {
             ) : (
                 <LaptopContainer>
                     <LeftWrap>
-                        <LaptopBackground/>
-                        {/*<EventBackGround/>*/}
+                        {/*<LaptopBackground/>*/}
+                        <EventBackGround/>
                     </LeftWrap>
                     <RightWrap>
                         <img className='phone-img' alt='phone' src={Phone}/>

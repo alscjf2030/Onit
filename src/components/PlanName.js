@@ -33,7 +33,7 @@ const PlanName = ({clickHandler, name, setName}) => {
                     labelText="먼저 약속 이름을 정해 주세요"
                     _onChange={handleName}
                     value={_name}
-                    placeholder='약속 이름을 입력해 주세요'/>
+                    placeholder='약속 이름은 2~10자로 정해 주세요'/>
             </Grid>
             <Grid bottom="0" padding="16px">
                 <button

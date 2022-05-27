@@ -111,7 +111,6 @@ const Detail = (props) => {
                     <img className='bomb' alt='penalty icon' src={bomb}/>
                     <span>{plan?.penalty}</span>
                 </Penalty>
-                {/*<p>{plan?.penalty}</p>*/}
             </ScheduleBox>
             <MapBox>
                 {plan.locationDetail ? (
