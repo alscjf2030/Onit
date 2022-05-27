@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from 'react-router-dom'
 import styled from "styled-components";
 import Swal from "sweetalert2";
-import theme from "../styles/theme";
 
 import {login, login2, setLoading} from "../redux/modules/user";
 import {LoginP} from "../img";

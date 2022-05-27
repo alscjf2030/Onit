@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk'
+import React, {useState, useEffect} from 'react'
+import {Map, MapMarker, CustomOverlayMap} from 'react-kakao-maps-sdk'
 import styled from 'styled-components';
-import { dest_marker } from '../img';
-import { useNavigate } from 'react-router-dom';
+import {dest_marker} from '../img';
+import {useNavigate} from 'react-router-dom';
 
 const DetailMap = (props) => {
     const nav = useNavigate();
@@ -40,41 +40,41 @@ const DetailMap = (props) => {
                     }
                     image={{
                         src: dest_marker,
-                        size: { width: 33, height: 33 },
+                        size: {width: 33, height: 33},
                     }}
                 />
-                    <CustomOverlayMap position={dest.center}>
+                <CustomOverlayMap position={dest.center}>
                     <Dest>
                         {props.name}
                     </Dest>
-                    </CustomOverlayMap>
-                    {props.ws ?
-                    <Share onClick={()=> nav(`/details/${props.ws}`)}>실시간 위치 공유</Share>
+                </CustomOverlayMap>
+                {props.ws ?
+                    <Share onClick={() => nav(`/details/${props.ws}`)}>실시간 위치 공유</Share>
                     :
                     null
-                    }
+                }
             </Map>
         </>
     )
 }
 
 const Dest = styled.div`
-background-color: black;
-color: white;
-padding: 9px;
-border-radius: 5px;
-margin-bottom: 6.5rem;
+  background-color: black;
+  color: white;
+  padding: 9px;
+  border-radius: 5px;
+  margin-bottom: 6.5rem;
 `;
 
 const Share = styled.button`
-position: absolute;
-left: 33%;
-right: 33%;
-bottom: 23%;
-z-index: 2;
-background: black;
-color: white;
-border: 0px;
-border-radius: 7px;
+  position: absolute;
+  left: 33%;
+  right: 33%;
+  bottom: 13%;
+  z-index: 2;
+  background: black;
+  color: white;
+  border: 0px;
+  border-radius: 7px;
 `;
 export default DetailMap;

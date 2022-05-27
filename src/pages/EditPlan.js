@@ -13,7 +13,7 @@ import Modal2 from "../components/Modal2";
 import {hourModel, minuteModel} from "../statics/time";
 import {DropdownList} from "react-widgets/cjs";
 import {penaltyModel} from "../statics/penalty";
-import { Input } from "../elements";
+import {Input} from "../elements";
 import PlanSelectMap from "../components/PlanSelectMap";
 import theme from "../styles/theme";
 import SetDrawerTime from "../components/SetDrawerTime";
@@ -101,17 +101,6 @@ const EditPlan = (props) => {
             penalty: penalty.value,
         }
         dispatch(editPlan({data, navigate}));
-    }
-
-    const [editDateModal, setEditDateModal] = useState(false)
-    const [editTimeModal, setEditTimeModal] = useState(false)
-
-    const handleEditDateModal = () => {
-        setEditDateModal(!editDateModal)
-    }
-
-    const handleEditTimeModal = () => {
-        setEditTimeModal(!editTimeModal)
     }
 
     const [open, setOpen] = useState(false)
@@ -202,15 +191,13 @@ const EditPlan = (props) => {
             </MobilePortal>
 
             <InputBox>
-                <Grid padding="0 16px">
-                    <Input
-                        placeholder={placename? placename : plan.locationDetail.name}
-                        _onClick={() => {
-                            setShowMap(true);
-                        }}
-                        value={placename}
-                    />
-                </Grid>
+                <Input
+                    placeholder={placename ? placename : plan.locationDetail.name}
+                    _onClick={() => {
+                        setShowMap(true);
+                    }}
+                    value={placename}
+                />
                 {showMap && (
                     <PlanSelectMap
                         setShowMap={setShowMap}
@@ -278,18 +265,21 @@ const HeadLine = styled.div`
 `
 
 const InputBox = styled.div`
-  width: 90%;
+  width: 100%;
   margin: auto;
   box-sizing: border-box;
 
   input {
+    display: flex;
     border: 1px solid #c4c4c4;
-    width: 100%;
+    width: 90%;
     padding: 12px 12px;
     margin: 14px auto 0 auto;
     box-sizing: border-box;
     border-radius: 10px;
     background: #ffffff;
+    align-items: center;
+    justify-content: center;
   }
 `
 
