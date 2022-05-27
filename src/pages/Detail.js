@@ -60,13 +60,6 @@ const Detail = (props) => {
     }
 
     const deletePlanBtn = () => {
-        if (user.nickname !== plan.writer) {
-            Swal.fire({
-                text: '작성자만 삭제 가능합니다.',
-                icon: 'error',
-            })
-            return
-        }
         dispatch(deletePlan({planUrl, navigate}))
     }
 

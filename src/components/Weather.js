@@ -1,5 +1,5 @@
 import React from 'react';
-import { sunny, cloudy, rainy, snowy } from "../img";
+import { sunny, cloudy, rainy, snowy, unknown } from "../img";
 import styled from "styled-components";
 
 const Weather = (props) => {
@@ -26,6 +26,11 @@ const Weather = (props) => {
                 :
                 null
             }
+            {condition === "없음" ?
+                <Unknown  alt="weather" src={unknown}/>
+                :
+                null
+            }
         </>
     )
 }
@@ -49,5 +54,10 @@ const Snowy = styled.img`
     position: absolute;
     left: 12.5rem;
     top: 3.125rem;
+`;
+const Unknown = styled.img`
+    position: absolute;
+    left: 12.5rem;
+    top: 1.813rem;
 `;
 export default Weather;

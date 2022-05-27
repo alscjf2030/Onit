@@ -18,7 +18,7 @@ import sunny from './icon/sun.svg';
 import cloudy from './icon/cloud.svg';
 import rainy from './icon/cloud-drizzle.svg';
 import snowy from './icon/cloud-snow.svg';
-
+import unknown from './icon/unknown.svg'
 export {
     dest_marker,
     my_marker,
@@ -40,4 +40,5 @@ export {
     snowy,
     rainy,
     cloudy,
+    unknown,
 };
