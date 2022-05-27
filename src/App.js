@@ -1,11 +1,11 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import GlobalStyle from "./styles/GlobalStyle";
 import styled from "styled-components";
 import MainContents from "./components/MainContents";
 import useIsMobile from "./hooks/useIsMobile";
 
-import {messaging} from "./firebase";
-import {getToken} from 'firebase/messaging'
+import { messaging } from "./firebase";
+import { getToken } from 'firebase/messaging'
 import theme from "./styles/theme";
 import EventBackGround from "./components/EventBackGround";
 import LaptopBackground from "./components/LaptopBackground";
@@ -14,45 +14,45 @@ import Phone from './img/Phone.png'
 
 function App() {
 
-    useEffect(() => {
-        if (localStorage.getItem('FCMtoken')) {
-            console.log("이미 토큰이 발급됨!")
-            return
-        } else {
-            console.log("토큰 발급!")
-            getToken(messaging, {
-                vapidKey: "BLg2NeG06gdfa1DbdDn1E6VFSD8a82zuaxgPXS5drdMaqUSf_lY421iglOkbev53HaDsl2jkw5vxgM" +
-                    "aA4b6wfug"
-            }).then(token => {
-                console.log(token);
-                localStorage.setItem('FCMtoken', token);
-            })
-        }
-    }, [])
+  useEffect(() => {
+    if (localStorage.getItem('FCMtoken')) {
+      console.log("이미 토큰이 발급됨!")
+      return
+    } else {
+      console.log("토큰 발급!")
+      getToken(messaging, {
+        vapidKey: "BLg2NeG06gdfa1DbdDn1E6VFSD8a82zuaxgPXS5drdMaqUSf_lY421iglOkbev53HaDsl2jkw5vxgM" +
+          "aA4b6wfug"
+      }).then(token => {
+        console.log(token);
+        localStorage.setItem('FCMtoken', token);
+      })
+    }
+  }, [])
 
-    const isMobile = useIsMobile()
+  const isMobile = useIsMobile()
 
-    return (
-        <Container>
-            {isMobile ? (
-                <MainContents/>
-            ) : (
-                <LaptopContainer>
-                    <LeftWrap>
-                        <LaptopBackground/>
-                        {/*<EventBackGround/>*/}
-                    </LeftWrap>
-                    <RightWrap>
-                        <img className='phone-img' alt='phone' src={Phone}/>
-                        <PhoneFrame>
-                            <MainContents/>
-                        </PhoneFrame>
-                    </RightWrap>
-                </LaptopContainer>
-            )}
-            <GlobalStyle/>
-        </Container>
-    );
+  return (
+    <Container>
+      {isMobile ? (
+        <MainContents />
+      ) : (
+        <LaptopContainer>
+          <LeftWrap>
+            {/* <LaptopBackground /> */}
+            <EventBackGround/>
+          </LeftWrap>
+          <RightWrap>
+            <img className='phone-img' alt='phone' src={Phone} />
+            <PhoneFrame>
+              <MainContents />
+            </PhoneFrame>
+          </RightWrap>
+        </LaptopContainer>
+      )}
+      <GlobalStyle />
+    </Container>
+  );
 }
 
 export default App;
@@ -94,7 +94,7 @@ const RightWrap = styled.div`
     position: absolute;
     width: 430px;
     height: 930px;
-    
+
     @media (max-width: 768px) {
       display: none;
     }

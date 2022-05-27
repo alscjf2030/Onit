@@ -243,13 +243,14 @@ const List = styled.div`
 
   .create-on-it {
     width: 70%;
-    height: 35px;
+    height: 45px;
     background-color: ${theme.color.green};
     border-radius: 10px;
     border: none;
     font-weight: bold;
     margin-top: 20px;
     color: #181818;
+    font-size: 16px;
   }
 
   h3 {

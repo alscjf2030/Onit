@@ -20,8 +20,10 @@ const Main = (props) => {
         .format('YYYY년MM월DD일 dddd')
 
     useEffect(() => {
-      dispatch(updateUser())
+        dispatch(updateUser())
     }, [])
+
+    console.log(userData)
 
     return (
         <Container>
