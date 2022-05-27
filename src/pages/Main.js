@@ -1,6 +1,7 @@
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import { updateUser } from "../redux/modules/user";
 import styled from "styled-components";
-import React from "react";
+import React, {useEffect} from "react";
 import dayjs from "dayjs";
 import 'dayjs/locale/ko'
 
@@ -13,9 +14,14 @@ import theme from "../styles/theme";
 dayjs.locale('ko')
 
 const Main = (props) => {
+    const dispatch = useDispatch();
     const userData = useSelector(state => state.user.user_info)
     const nowDate = dayjs()
         .format('YYYY년MM월DD일 dddd')
+
+    useEffect(() => {
+      dispatch(updateUser())
+    }, [])
 
     return (
         <Container>

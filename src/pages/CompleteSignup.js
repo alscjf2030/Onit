@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from "styled-components";
 import {Grid} from "../elements";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Complete} from '../img';
 
 
 const CompleteSignup = (props) => {
-
+    const {join} = useParams();
     const navigate = useNavigate()
 
     return (
@@ -26,6 +26,22 @@ const CompleteSignup = (props) => {
             </ImgBox>
 
             <Grid bottom="0" padding="16px">
+              {join ?
+              <button
+                    style={{
+                        backgroundColor: '#A1ED00',
+                        width: '100%',
+                        height: '100%',
+                        padding: '12px',
+                        color: 'black',
+                        border: 'none',
+                        borderRadius: '10px',
+                        fontWeight: 'bold',
+                    }}
+                    onClick={() => {navigate(`/login/${join}`)}}
+                >로그인하러 가기
+                </button>
+              :
                 <button
                     style={{
                         backgroundColor: '#A1ED00',
@@ -37,8 +53,10 @@ const CompleteSignup = (props) => {
                         borderRadius: '10px',
                         fontWeight: 'bold',
                     }}
-                    onClick={() => {navigate('/login')}}>로그인하러 가기
+                    onClick={() => {navigate('/login')}}
+                >로그인하러 가기
                 </button>
+              }
             </Grid>
         </Container>
     );

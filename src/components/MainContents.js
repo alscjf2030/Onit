@@ -25,8 +25,12 @@ function MainContents(props) {
                     <Route path="/login" element={<Login/>}>
                         <Route path=":join" element={<Login/>}/>
                     </Route>
-                    <Route path="/signup" element={<SignUp/>}/>
-                    <Route path="/complete" element={<CompleteSignup/>}/>
+                    <Route path="/signup" element={<SignUp/>}>
+                        <Route path=":join" element={<SignUp/>}/>
+                    </Route>
+                    <Route path="/complete" element={<CompleteSignup/>}>
+                        <Route path=':join' element={<CompleteSignup/>}/>
+                    </Route>
                     <Route path="/main" element={<Main/>}/>
                     <Route path="/add" element={<AddPlans/>}/>
                     <Route path="/test" element={<KakaoMap/>}/>

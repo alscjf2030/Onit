@@ -6,16 +6,12 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 import 'dayjs/locale/ko'
 
-
-import {sunny, cloudy, rainy, snowy} from "../img";
-
 import theme from "../styles/theme";
 import {ReactComponent as Plus} from '../img/icon/Plus.svg'
 import {ReactComponent as Share} from '../img/icon/share-icon.svg'
 import {bomb} from '../img'
 import plan, {getMorePlan, getPlan, setLoading} from "../redux/modules/plan";
 import Swal from "sweetalert2";
-import CompleteSignup from "../pages/CompleteSignup";
 import Weather from "./Weather";
 
 dayjs.locale('ko')
@@ -67,7 +63,7 @@ const PlanList = (props) => {
     // }
     const first = [...planList].splice(0, 1)[0]
     const rest = [...planList].splice(1)
-    const planDay = dayjs(first?.planDate).format('MM월 DD일 dddd,')
+    const planDay = dayjs(first?.planDate).format('MM월 DD일 dddd')
     const planTime = dayjs(first?.planDate).format(' A hh시 mm분')
     const handleShared = (event) => {
         event.stopPropagation()

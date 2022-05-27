@@ -94,8 +94,8 @@ const Login = (props) => {
                     onKeyPress={handleKeyPress}
                     onChange={(e) => setPw(e.target.value)}
                 />
-                {hidePassword && <img src={eyeOff} onClick={toggleHidePassword}/>}
-                {!hidePassword && <img src={eyeOn} onClick={toggleHidePassword}/>}
+                {hidePassword && <img alt="hide" src={eyeOff} onClick={toggleHidePassword}/>}
+                {!hidePassword && <img alt="show" src={eyeOn} onClick={toggleHidePassword}/>}
             </InputBox>
 
             <LoginBox>
@@ -103,15 +103,20 @@ const Login = (props) => {
                     onClick={Login}
                 >로그인
                 </button>
-
                 <KakaoButton/>
             </LoginBox>
 
             <SignupBox>
                 <span>아직 회원이 아니신가요?</span>
+                {join ?
+                <p onClick={() => {
+                    navigate(`/signup/${join}`)
+                }}>회원가입하기</p>
+                :
                 <p onClick={() => {
                     navigate('/signup')
                 }}>회원가입하기</p>
+            }
             </SignupBox>
 
             <LoginLogoBox>

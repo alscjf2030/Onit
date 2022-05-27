@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setError, signUp} from "../redux/modules/user";
-import {useNavigate} from "react-router-dom";
+import {setError, signUp, signUp2} from "../redux/modules/user";
+import {useNavigate, useParams} from "react-router-dom";
 import styled from "styled-components";
 import {ReactComponent as LeftArrow} from '../img/icon/arrowl.svg';
 import Swal from "sweetalert2";
@@ -13,6 +13,7 @@ import Agreement from '../components/Agreement'
 import { Grid } from "../elements";
 
 const SignUp = (props) => {
+    const {join} = useParams();
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [checked, setChecked] = useState(false);
@@ -49,7 +50,11 @@ const SignUp = (props) => {
                 nickname,
                 password: pw,
             }
-            dispatch(signUp({data, navigate}));
+            if(join){
+                dispatch(signUp2({data, join, navigate}))
+            } else {
+                dispatch(signUp({data, navigate}));
+            }
         }
     };
 
@@ -183,7 +188,7 @@ const SignUp = (props) => {
             </Grid>
             <SignUpBox>
                 <button
-                    style={{opacity: !username || !nickname || !pw || !pwCheck ? 0.3 : 1}}
+                    style={{opacity: !username || !nickname || !pw || !pwCheck || !checked ? 0.3 : 1 }}
                     onClick={handleSignUp}
                 >회원가입
                 </button>

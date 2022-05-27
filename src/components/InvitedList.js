@@ -59,7 +59,7 @@ const InvitedList = (props) => {
 
  const first = [...planList].splice(0,1)[0]
     const rest = [...planList].splice(1)
-    const planDay = dayjs(first?.planDate).format('MM월 DD일 dddd,')
+    const planDay = dayjs(first?.planDate).format('MM월 DD일 dddd')
     const planTime = dayjs(first?.planDate).format(' A hh시 mm분')
     return (
         <>
@@ -74,6 +74,7 @@ const InvitedList = (props) => {
                     >
                         <Content>
                             <h3>{planDay}</h3>
+                            <div style={{width: "40px", height: "40px"}}/>
                         </Content>
                         <h3>{planTime}</h3>
                         <h2>{first.planName}</h2>
