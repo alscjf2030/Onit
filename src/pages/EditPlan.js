@@ -251,7 +251,7 @@ export default EditPlan
 
 const Container = styled.div`
   height: 100%;
-  background-color: ${theme.color.gray6};
+  background-color: ${theme.color.gray7};
 `
 
 const HeadLine = styled.div`

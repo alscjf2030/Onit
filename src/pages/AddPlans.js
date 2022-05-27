@@ -153,7 +153,7 @@ export default AddPlans;
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background-color: ${theme.color.gray6}
+  background-color: ${theme.color.gray7}
 `
 
 const ContentWrap = styled.div`
@@ -161,7 +161,7 @@ const ContentWrap = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: ${theme.color.gray6};
+  background-color: ${theme.color.gray7};
 `
 
 const PlanDiv = styled.div`

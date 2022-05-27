@@ -41,7 +41,7 @@ const LaptopBackground = () => {
             <TitleContainer>
                 <span>온 세상 [</span>
                 <div ref={changeWordingRef} className="changing-wording">
-                    <h1>약속</h1>
+                    <h1>사람</h1>
                 </div>
                 <span>] 을 잇다</span>
             </TitleContainer>

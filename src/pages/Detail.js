@@ -155,7 +155,7 @@ export default Detail
 
 const Container = styled.div`
   height: 100%;
-  background-color: ${theme.color.gray6};
+  background-color: ${theme.color.gray7};
 `
 
 const HeadLine = styled.div`
@@ -172,7 +172,7 @@ const HeadLine = styled.div`
 `
 
 const ScheduleBox = styled.div`
-  background-color: #fff;
+  background-color: ${theme.color.white};
   border: none;
   border-radius: 5px;
   width: 90%;
@@ -183,17 +183,21 @@ const ScheduleBox = styled.div`
     padding: 16px 10px;
     font-size: 24px;
     font-weight: bold;
-  } h3 {
+  } 
+  h3 {
     font-size: 24px;
     font-weight: bold;
     padding: 0 10px 16px 10px
-  } p {
+  } 
+  p {
     padding: 10px;
   };
+  
   img: first-of-type {
     position: absolute;
     right: 42.67px;
-  } img {
+  } 
+  img {
     position: absolute;
     right: 0;
     margin: 8px;

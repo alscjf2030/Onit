@@ -126,7 +126,7 @@ export default Login
 const Container = styled.div`
   position: relative;
   height: 100%;
-  background-color: ${theme.color.gray6};
+  background-color: ${theme.color.gray7};
 
   .login-text {
     color: black;

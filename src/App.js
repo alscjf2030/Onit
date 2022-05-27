@@ -39,8 +39,8 @@ function App() {
             ) : (
                 <LaptopContainer>
                     <LeftWrap>
-                        {/*<LaptopBackground/>*/}
-                        <EventBackGround/>
+                        <LaptopBackground/>
+                        {/*<EventBackGround/>*/}
                     </LeftWrap>
                     <RightWrap>
                         <img className='phone-img' alt='phone' src={Phone}/>
@@ -61,7 +61,7 @@ const Container = styled.div`
   display: flex;
   width: 100vw;
   height: 100vh;
-  background-color: ${theme.color.gray5};
+  background-color: ${theme.color.BackGround};
 `
 
 const LaptopContainer = styled.div`
@@ -88,7 +88,7 @@ const RightWrap = styled.div`
   align-items: center;
   justify-content: center;
   margin-left: 150px;
-  background-color: ${theme.color.gray5};
+  background-color: ${theme.color.BackGround};
 
   .phone-img {
     position: absolute;

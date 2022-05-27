@@ -197,7 +197,7 @@ export default SignUp
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background-color: ${theme.color.gray6};
+  background-color: ${theme.color.gray7};
 `
 
 const HeadLine = styled.div`

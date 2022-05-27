@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import dayjs from "dayjs";
 
 import {getHistoryPlan} from "../redux/modules/plan";
+import theme from "../styles/theme";
 
 const PastPlan = (props) => {
     const navigate = useNavigate()
@@ -64,12 +65,12 @@ const PastPlan = (props) => {
 export default PastPlan
 
 const Container = styled.div`
-  background-color: #eee;
-  min-height: 100vh;
+  background-color: ${theme.color.gray7};
+  height: 100%;
 `
 
 const HeadLine = styled.div`
-  background-color: #fff;
+  background-color: ${theme.color.white};
   position: relative;
   width: 100%;
   text-align: center;

@@ -9,6 +9,7 @@ import {editPic} from "../img";
 import {ReactComponent as Logo} from '../img/icon/logo-619.svg'
 import MobilePortal from "./MobilePortal";
 import {changePic} from "../redux/modules/user";
+import theme from "../styles/theme";
 
 
 const SideMenu = (props) => {
@@ -189,9 +190,8 @@ const MenuTrigger = styled.div`
 
 const ShowMenu = styled.div`
   z-index: 2;
-  background-color: #ddd;
+  background-color: ${theme.color.gray7};
   width: 70%;
-  //height: calc(100% - 40px);
   visibility: ${({isOpen}) => isOpen ? 'visible' : 'hidden'};
   height: 100%;
   position: absolute;
@@ -204,7 +204,7 @@ const ShowMenu = styled.div`
   .side-bar-header {
     display: flex;
     justify-content: flex-end;
-    padding: 5px 0px 30px 0px;
+    padding: 5px 0 30px 0;
 
     .hamburger-btn {
       border: 0;
