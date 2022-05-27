@@ -6,10 +6,7 @@ import {Grid} from "../elements";
 import {editPlan, getOnePlan} from "../redux/modules/plan";
 import {ReactComponent as LeftArrow} from '../img/icon/arrowl.svg';
 import {formatDate, formatTime} from "../shared/utils/common";
-import Modal from "../components/Modal";
-import ModalPortal from "../components/ModalPortal";
 import dayjs from "dayjs";
-import Modal2 from "../components/Modal2";
 import {hourModel, minuteModel} from "../statics/time";
 import {DropdownList} from "react-widgets/cjs";
 import {penaltyModel} from "../statics/penalty";
@@ -251,7 +248,7 @@ export default EditPlan
 
 const Container = styled.div`
   height: 100%;
-  background-color: ${theme.color.gray6};
+  background-color: ${theme.color.gray7};
 `
 
 const HeadLine = styled.div`

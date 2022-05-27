@@ -9,6 +9,7 @@ import {editPic} from "../img";
 import {ReactComponent as Logo} from '../img/icon/logo-619.svg'
 import MobilePortal from "./MobilePortal";
 import {changePic} from "../redux/modules/user";
+import theme from "../styles/theme";
 
 
 const SideMenu = (props) => {
@@ -57,51 +58,53 @@ const SideMenu = (props) => {
                 </button>
             </div>
             <MobilePortal>
-                <ShowMenu isOpen={isOpen}>
-                    <div className="side-bar-header">
-                        <button className="hamburger-btn" onClick={toggleMenu}>
-                            <MenuTrigger active={isOpen}>
-                                <span/>
-                                <span/>
-                                <span/>
-                            </MenuTrigger>
-                        </button>
-                    </div>
-                    <div className='member'>
-                        <div className='member-img'
-                             style={{
-                            backgroundImage: `url(${userData?.profileImg})`,
-                            backgroundSize: 'cover',
-                        }}>
-                            <img
-                                alt='edit'
-                                src={editPic}
-                                style={{display: "flex", marginLeft: "auto"}}
-                                onClick={handleClick}
-                            />
+                <ShowSide isOpen={isOpen}>
+                    <ShowMenu isOpen={isOpen}>
+                        <div className="side-bar-header">
+                            <button className="hamburger-btn" onClick={toggleMenu}>
+                                <MenuTrigger active={isOpen}>
+                                    <span/>
+                                    <span/>
+                                    <span/>
+                                </MenuTrigger>
+                            </button>
                         </div>
-                        <p>{userData?.nickname || '손'} 님</p>
-                    </div>
-                    <div className='button'
-                         onClick={() => {
-                             navigate('/past')
-                         }}>
-                        <p>지난 일정</p>
-                    </div>
-                    <div className='button'
-                         onClick={logoutBtn}
-                    >
-                        <p>로그아웃</p>
-                    </div>
-                </ShowMenu>
-                <input
-                    type="file"
-                    onChange={selectFile}
-                    ref={hidden}
-                    id="fileUpload"
-                    accept="image/jpeg, image/png, image/jpg"
-                    style={{display: "none"}}
-                />
+                        <div className='member'>
+                            <div className='member-img'
+                                 style={{
+                                     backgroundImage: `url(${userData?.profileImg})`,
+                                     backgroundSize: 'cover',
+                                 }}>
+                                <img
+                                    alt='edit'
+                                    src={editPic}
+                                    style={{display: "flex", marginLeft: "auto"}}
+                                    onClick={handleClick}
+                                />
+                            </div>
+                            <p>{userData?.nickname || '손'} 님</p>
+                        </div>
+                        <div className='button'
+                             onClick={() => {
+                                 navigate('/past')
+                             }}>
+                            <p>지난 일정</p>
+                        </div>
+                        <div className='button'
+                             onClick={logoutBtn}
+                        >
+                            <p>로그아웃</p>
+                        </div>
+                    </ShowMenu>
+                    <input
+                        type="file"
+                        onChange={selectFile}
+                        ref={hidden}
+                        id="fileUpload"
+                        accept="image/jpeg, image/png, image/jpg"
+                        style={{display: "none"}}
+                    />
+                </ShowSide>
             </MobilePortal>
         </HeadBox>
     )
@@ -110,13 +113,12 @@ const SideMenu = (props) => {
 export default SideMenu;
 
 const HeadBox = styled.div`
-  background-color: #fff;
+  background-color: ${theme.color.gray7};
   width: 100%;
   height: 60px;
   padding: 10px 0;
   display: flex;
   justify-content: flex-end;
-  box-shadow: 0 0 10px #d1d1d1;
 
   .hamburger-bell {
     height: 100%;
@@ -187,11 +189,14 @@ const MenuTrigger = styled.div`
   }
 `
 
+const ShowSide = styled.div`
+  
+`
+
 const ShowMenu = styled.div`
   z-index: 2;
-  background-color: #ddd;
+  background-color: ${theme.color.gray7};
   width: 70%;
-  //height: calc(100% - 40px);
   visibility: ${({isOpen}) => isOpen ? 'visible' : 'hidden'};
   height: 100%;
   position: absolute;
@@ -204,7 +209,7 @@ const ShowMenu = styled.div`
   .side-bar-header {
     display: flex;
     justify-content: flex-end;
-    padding: 5px 0px 30px 0px;
+    padding: 5px 0 30px 0;
 
     .hamburger-btn {
       border: 0;

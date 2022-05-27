@@ -27,7 +27,7 @@ const NotFound = (props) => {
 export default NotFound;
 
 const Container = styled.div`
-  min-height: 100vh;
+  height: 100%;
 
   h2 {
     margin-top: 30px;
@@ -45,7 +45,6 @@ const Container = styled.div`
 
 const ImgBox = styled.div`
   width: 100%;
-  height: 50%;
 
   img {
     width: 70%;

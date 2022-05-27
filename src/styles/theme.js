@@ -29,6 +29,7 @@ const color = {
   gray4: '#C4C4C4',
   gray5: '#eee',
   gray6: '#F8F8F8',
+  gray7: '#F5F5F5',
   orange: '#F84914',
   green: '#A1ED00',
   black: '#292929',
@@ -36,7 +37,7 @@ const color = {
   white: '#fff',
   red1: '#FF3030',
   red2: '#FFF2F2',
-  BackGround: '#F5F5F5',
+  BackGround: '#FBFBFB',
   darkLine: '#3F4448',
   danger: '#ff8b6f',
 

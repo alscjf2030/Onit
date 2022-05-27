@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 import {Grid} from '../elements';
 import theme from '../styles/theme';
@@ -11,7 +11,6 @@ import KakaoMap from '../shared/KakaoMap';
 import {useDispatch} from 'react-redux';
 import {addPlan} from '../redux/modules/plan';
 import {useNavigate} from "react-router-dom";
-import MobilePortal from "../components/MobilePortal";
 import {bomb} from "../img";
 
 const AddPlans = (props) => {
@@ -153,7 +152,7 @@ export default AddPlans;
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background-color: ${theme.color.gray6}
+  background-color: ${theme.color.gray7}
 `
 
 const ContentWrap = styled.div`
@@ -161,7 +160,7 @@ const ContentWrap = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: ${theme.color.gray6};
+  background-color: ${theme.color.gray7};
 `
 
 const PlanDiv = styled.div`
@@ -173,31 +172,31 @@ const PlanDiv = styled.div`
 
   p:first-of-type {
     font-weight: bold;
-    padding: 15px 0 10px 15px;
+    padding: 15px 0 15px 15px;
     margin: 0;
   }
   
   p {
-    padding: 5px 0 5px 15px;
-    margin: 0 0 5px 0;
+    padding: 5px 0 15px 15px;
   }
 
   h2 {
     margin: 0;
-    padding: 0 0 5px 15px;
+    padding: 0 0 10px 15px;
     font-size: 20px;
     font-weight: bold;
   }
   
   h2 + h2 {
-    padding-bottom: 10px;
+    padding-bottom: 15px;
   }
   
   .penalty {
     display: flex;
     background: ${theme.color.gray5};
     border-radius: 10px;
-    margin: 0 0 20px 10px;
+    padding: 2px 2px 2px 5px;
+    margin: 0 0 30px 15px;
     width: fit-content;
     align-items: center;
     justify-content: center;
@@ -205,6 +204,6 @@ const PlanDiv = styled.div`
 
   span {
     font-size: 12px;
-    padding: 2px 4px;
+    padding: 0 5px;
   }
 `

@@ -16,76 +16,76 @@ import "slick-carousel/slick/slick-theme.css";
 import {
     OnBoard, OnBoard2, OnBoard3, OnBoard4, OnBoard5
 }
-from  '../img'
+    from '../img'
 import Logo from '../img/Logo.svg'
 
 const Home = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
     //캐러셀 설정
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-  };
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+    };
 
     return (
         <Container>
-          <StyledSlider {...settings}>
-            <div>
-              <TitleBox>
-                <img alt='logo' className='logo' src={Logo}/>
-              </TitleBox>
-            <OnBoardingBox>
-                <img alt='cover' src={OnBoard} style={{marginTop: "20%"}}/>
-            </OnBoardingBox>
-            </div>
-            <div>
-              <OnBoardingBox>
-                <Grid padding="20% 0px 40px 40px">
-                  <h2>Make</h2><br/>
-                  <h3>온잇에서, 만나고 싶은 사람들과</h3>
-                  <h3>일정과 만남 장소를 간단히</h3>
-                  <h3>만들어 볼 수 있어요. 👋🏻</h3>
-                 </Grid>
-                 <img alt='Onboard' src={OnBoard2} style={{width: "70%", marginLeft: "4%"}}/>
-              </OnBoardingBox>
-            </div>
-            <div>
-              <OnBoardingBox>
-                <Grid padding="20% 0px 40px 40px">
-                <h2>Choose</h2><br/>
-                <h3>어디서 만날지,</h3>
-                <h3>늦으면 어떤 무서운 벌칙을 당할지 🤑</h3>
-                <h3>정해보는 건 어때요?</h3>
-                </Grid>
-                <img alt='Onboard' src={OnBoard3} style={{width: "90%", margin:"0 auto"}}/>
-              </OnBoardingBox>
-            </div>
-            <div>
-              <OnBoardingBox>
-                <Grid padding="20% 0px 40px 40px">
-                <h2>Share</h2><br/>
-                <h3>친구들과 모임을 공유해봐요,</h3>
-                <h3>더 근사하고 재미있는 모임이 될거에요.! 🙌🏻</h3>
-                </Grid>
-                <img alt='Onboard' src={OnBoard4} style={{marginTop:"20%"}}/>
-              </OnBoardingBox>
-            </div>
-            <div>
-              <OnBoardingBox>
-                <Grid padding="20% 0px 40px 40px">
-                <h2>Location</h2><br/>
-                <h3>모임시간 임박,</h3>
-                <h3>과연 친구들은 오고있는게 맞을까..?🤔</h3>
-                <h3>친구들의 위치를 실시간으로 확인해보세요!</h3>
-                </Grid>
-                <img alt='Onboard' src={OnBoard5} style={{width: "80%", margin: "0 auto"}}/>
-              </OnBoardingBox>
-            </div>
-          </StyledSlider>
+            <StyledSlider {...settings}>
+                <div>
+                    <TitleBox>
+                        <img alt='logo' className='logo' src={Logo}/>
+                    </TitleBox>
+                    <OnBoardingBox>
+                        <img alt='cover' src={OnBoard} style={{marginTop: "20%"}}/>
+                    </OnBoardingBox>
+                </div>
+                <div>
+                    <OnBoardingBox>
+                        <Grid padding="20% 0px 40px 40px">
+                            <h2>Make</h2><br/>
+                            <h3>온잇에서, 만나고 싶은 사람들과</h3>
+                            <h3>일정과 만남 장소를 간단히</h3>
+                            <h3>만들어 볼 수 있어요. 👋🏻</h3>
+                        </Grid>
+                        <img alt='Onboard' src={OnBoard2} style={{width: "70%", marginLeft: "4%"}}/>
+                    </OnBoardingBox>
+                </div>
+                <div>
+                    <OnBoardingBox>
+                        <Grid padding="20% 0px 40px 40px">
+                            <h2>Choose</h2><br/>
+                            <h3>어디서 만날지,</h3>
+                            <h3>늦으면 어떤 무서운 벌칙을 당할지 🤑</h3>
+                            <h3>정해보는 건 어때요?</h3>
+                        </Grid>
+                        <img alt='Onboard' src={OnBoard3} style={{width: "90%", margin: "0 auto"}}/>
+                    </OnBoardingBox>
+                </div>
+                <div>
+                    <OnBoardingBox>
+                        <Grid padding="20% 0px 40px 40px">
+                            <h2>Share</h2><br/>
+                            <h3>친구들과 모임을 공유해봐요,</h3>
+                            <h3>더 근사하고 재미있는 모임이 될거에요.! 🙌🏻</h3>
+                        </Grid>
+                        <img alt='Onboard' src={OnBoard4} style={{marginTop: "20%"}}/>
+                    </OnBoardingBox>
+                </div>
+                <div>
+                    <OnBoardingBox>
+                        <Grid padding="20% 0px 40px 40px">
+                            <h2>Location</h2><br/>
+                            <h3>모임시간 임박,</h3>
+                            <h3>과연 친구들은 오고있는게 맞을까..?🤔</h3>
+                            <h3>친구들의 위치를 실시간으로 확인해보세요!</h3>
+                        </Grid>
+                        <img alt='Onboard' src={OnBoard5} style={{width: "80%", margin: "0 auto"}}/>
+                    </OnBoardingBox>
+                </div>
+            </StyledSlider>
             <LoginDiv>
                 <KakaoButton/>
                 <LoginBox>
@@ -112,7 +112,7 @@ export default Home;
 
 const Container = styled.div`
   height: 100%;
-  background-color: ${theme.color.gray6};
+  background-color: ${theme.color.gray7};
 
   .logo {
     width: 30%;
@@ -124,18 +124,22 @@ const StyledSlider = styled(Slider)`
   .slick-track {
     height: 560px;
   }
+
   .slick-slide div {
     width: 100%;
     margin: 0 auto;
     z-index: 999;
     cursor: pointer;
   }
+
   .slick-dots {
     bottom: 1em;
   }
+
   .slick-dots li button:before {
     color: gray;
   }
+
   .slick-dots li.slick-active button:before {
     color: black;
   }

@@ -8,6 +8,7 @@ import {bomb} from '../img'
 import dayjs from "dayjs";
 import 'dayjs/locale/ko'
 import Weather from "./Weather";
+
 dayjs.locale('ko')
 
 const InvitedList = (props) => {
@@ -57,7 +58,7 @@ const InvitedList = (props) => {
         return 'loading...'
     }
 
- const first = [...planList].splice(0,1)[0]
+    const first = [...planList].splice(0, 1)[0]
     const rest = [...planList].splice(1)
     const planDay = dayjs(first?.planDate).format('MM월 DD일 dddd')
     const planTime = dayjs(first?.planDate).format(' A hh시 mm분')
@@ -129,17 +130,17 @@ const Content = styled.div`
 `;
 
 const Penalty = styled.div`
-display: flex;
-background: ${theme.color.gray5};
-border-radius: 9px;
-padding: 2px 8px;
-width: fit-content;
-align-items: center;
+  display: flex;
+  background: ${theme.color.gray5};
+  border-radius: 9px;
+  padding: 2px 8px;
+  width: fit-content;
+  align-items: center;
 
-span {
+  span {
     font-size: 12px;
     margin: 0 5px;
-}
+  }
 `;
 
 const List = styled.div`
@@ -194,9 +195,9 @@ const List = styled.div`
   }
 
   h2 {
-      font-weight: 700;
-      font-size: 18px;
-      line-height: 30px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 30px;
   }
 
   h1 {

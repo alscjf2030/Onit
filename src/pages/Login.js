@@ -94,8 +94,8 @@ const Login = (props) => {
                     onKeyPress={handleKeyPress}
                     onChange={(e) => setPw(e.target.value)}
                 />
-                {hidePassword && <img alt="hide" src={eyeOff} onClick={toggleHidePassword}/>}
-                {!hidePassword && <img alt="show" src={eyeOn} onClick={toggleHidePassword}/>}
+                {hidePassword && <img alt='eye-off' src={eyeOff} onClick={toggleHidePassword}/>}
+                {!hidePassword && <img alt='eye-on' src={eyeOn} onClick={toggleHidePassword}/>}
             </InputBox>
 
             <LoginBox>
@@ -131,7 +131,7 @@ export default Login
 const Container = styled.div`
   position: relative;
   height: 100%;
-  background-color: ${theme.color.gray6};
+  background-color: ${theme.color.gray7};
 
   .login-text {
     color: black;

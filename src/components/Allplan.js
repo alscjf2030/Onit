@@ -39,7 +39,7 @@ const Allplan = (props) => {
         }
     }
     useEffect(() => {
-        if(userData)
+        if (userData)
             dispatch(getPlan(page))
     }, [userData])
 
@@ -62,58 +62,58 @@ const Allplan = (props) => {
         }
     }, [])
 
-    const first = [...planList].splice(0,1)[0]
+    const first = [...planList].splice(0, 1)[0]
     const rest = [...planList].splice(1)
     const planDay = dayjs(first?.planDate).format('MM월 DD일 dddd')
     const planTime = dayjs(first?.planDate).format(' A hh시 mm분')
     const handleShared = (event) => {
-            event.stopPropagation()
-            if (navigator.share) {
-                navigator.share({
-                    title: first.planName,
-                    text: first.planName,
-                    url: `https://imonit.co.kr/detail/${first.url}`
-                })
-                    .then(() => console.log('성공'))
-                    .catch((err) => console.log(err))
-            } else {
-                Swal.fire({
-                    text: "공유하기가 지원되지 않는 환경 입니다.",
-                    icon: 'error'
-                })
-            }
+        event.stopPropagation()
+        if (navigator.share) {
+            navigator.share({
+                title: first.planName,
+                text: first.planName,
+                url: `https://imonit.co.kr/detail/${first.url}`
+            })
+                .then(() => console.log('성공'))
+                .catch((err) => console.log(err))
+        } else {
+            Swal.fire({
+                text: "공유하기가 지원되지 않는 환경 입니다.",
+                icon: 'error'
+            })
         }
+    }
 
     return (
         <>
             <List>
                 {planList.length > 0 ? (
                     <>
-                    <div className='first'
-                        key={first.planId}
-                        onClick={() => {
-                            navigate(`/detail/${first.url}`)
-                        }}
-                    >
-                        <Content>
-                            <h3>{planDay}</h3>
-                            <Share
-                                style={{
-                                    zIndex: 1,
-                                    marginLeft: "auto"
-                                }}
-                                onClick={handleShared}
-                            />
-                        </Content>
-                        <h3>{planTime}</h3>
-                        <h2>{first.planName}</h2>
-                        <p>{first.locationName}</p>
-                        <Weather props={first.description} />
-                        <Penalty style={{position: "absolute", bottom: "1rem"}}>
-                            <img alt='penalty icon' src={bomb}/>
-                            <span>{first.penalty}</span>
-                        </Penalty>
-                    </div>
+                        <div className='first'
+                             key={first.planId}
+                             onClick={() => {
+                                 navigate(`/detail/${first.url}`)
+                             }}
+                        >
+                            <Content>
+                                <h3>{planDay}</h3>
+                                <Share
+                                    style={{
+                                        zIndex: 1,
+                                        marginLeft: "auto"
+                                    }}
+                                    onClick={handleShared}
+                                />
+                            </Content>
+                            <h3>{planTime}</h3>
+                            <h2>{first.planName}</h2>
+                            <p>{first.locationName}</p>
+                            <Weather props={first.description}/>
+                            <Penalty style={{position: "absolute", bottom: "1rem"}}>
+                                <img alt='penalty icon' src={bomb}/>
+                                <span>{first.penalty}</span>
+                            </Penalty>
+                        </div>
                         {rest.map((plan, idx) => {
                             const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd,')
                             const planTime = dayjs(plan?.planDate).format(' A hh시 mm분')
@@ -194,17 +194,17 @@ const Content = styled.div`
 `;
 
 const Penalty = styled.div`
-display: flex;
-background: ${theme.color.gray5};
-border-radius: 9px;
-padding: 2px 8px;
-width: fit-content;
-align-items: center;
+  display: flex;
+  background: ${theme.color.gray5};
+  border-radius: 9px;
+  padding: 2px 8px;
+  width: fit-content;
+  align-items: center;
 
-span {
+  span {
     font-size: 12px;
     margin: 0 5px;
-}
+  }
 `;
 
 const List = styled.div`
@@ -259,9 +259,9 @@ const List = styled.div`
   }
 
   h2 {
-      font-weight: 700;
-      font-size: 18px;
-      line-height: 30px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 30px;
   }
 
   h1 {
@@ -273,7 +273,7 @@ const List = styled.div`
     font-weight: bold;
     font-size: 14px;
     line-height: 21px;
-    padding: 0px 0px 8px 0px;
+    padding: 0 0 8px 0;
   }
 
   .no-list {
