@@ -86,6 +86,7 @@ const TextBox = styled.div`
 const ImgBox = styled.div`
   width: 100%;
   margin-top: 50px;
+  overflow: hidden;
   
   img {
     width: 100%;

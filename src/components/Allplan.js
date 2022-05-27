@@ -260,7 +260,7 @@ const List = styled.div`
 
   h2 {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 30px;
   }
 

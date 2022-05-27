@@ -94,8 +94,8 @@ const Login = (props) => {
                     onKeyPress={handleKeyPress}
                     onChange={(e) => setPw(e.target.value)}
                 />
-                {hidePassword && <img src={eyeOff} onClick={toggleHidePassword}/>}
-                {!hidePassword && <img src={eyeOn} onClick={toggleHidePassword}/>}
+                {hidePassword && <img alt='eye-off' src={eyeOff} onClick={toggleHidePassword}/>}
+                {!hidePassword && <img alt='eye-on' src={eyeOn} onClick={toggleHidePassword}/>}
             </InputBox>
 
             <LoginBox>

@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import React, {forwardRef, useEffect, useImperativeHandle, useMemo, useRef, useState,} from 'react';
 import styled from 'styled-components';
-import theme from '../styles/theme.js';
 import Headerbar from '../shared/Headerbar.js';
 import {useNavigate} from 'react-router-dom';
 

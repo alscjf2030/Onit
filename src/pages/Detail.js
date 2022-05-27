@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import {useNavigate, useParams} from "react-router-dom";
-import {editPlan, deletePlan, getOnePlan, joinPlan} from "../redux/modules/plan";
+import {deletePlan, getOnePlan, joinPlan} from "../redux/modules/plan";
 import {useDispatch, useSelector} from "react-redux";
 import {ReactComponent as LeftArrow} from '../img/icon/arrowl.svg';
-import {deleteIcon, editIcon} from "../img";
+import {bomb, deleteIcon, editIcon} from "../img";
 import DetailMap from "./DetailMap";
 import dayjs from "dayjs";
 import Swal from "sweetalert2";
@@ -74,8 +74,6 @@ const Detail = (props) => {
         return <div>loading...</div>
     }
 
-    // console.log(plan)
-
     return (
         <Container>
             <HeadLine>
@@ -105,11 +103,15 @@ const Detail = (props) => {
                         <img alt="delete" src={deleteIcon} onClick={deletePlanBtn}/>
                     </div>
                 )}
+                <p>{plan.planName}</p>
                 <h3>{planDay}</h3>
                 <h3>{planTime}</h3>
-                <p>{plan.planName}</p>
                 <p>{plan?.locationDetail?.name}</p>
-                <p>{plan?.penalty}</p>
+                <Penalty>
+                    <img className='bomb' alt='penalty icon' src={bomb}/>
+                    <span>{plan?.penalty}</span>
+                </Penalty>
+                {/*<p>{plan?.penalty}</p>*/}
             </ScheduleBox>
             <MapBox>
                 {plan.locationDetail ? (
@@ -173,6 +175,7 @@ const HeadLine = styled.div`
 
 const ScheduleBox = styled.div`
   background-color: ${theme.color.white};
+  position: relative;
   border: none;
   border-radius: 5px;
   width: 90%;
@@ -180,32 +183,61 @@ const ScheduleBox = styled.div`
   margin: auto;
 
   h3: first-of-type {
-    padding: 16px 10px;
+    padding: 0 0 15px 15px;
     font-size: 24px;
     font-weight: bold;
-  } 
+  };
+  
   h3 {
     font-size: 24px;
     font-weight: bold;
-    padding: 0 10px 16px 10px
-  } 
+    padding: 0 0 15px 15px
+  }
+;
+
+  p:first-of-type {
+    padding: 20px 0 20px 15px;
+    font-weight: bold;
+  }
+
   p {
-    padding: 10px;
-  };
-  
+    padding: 10px 0 10px 15px;
+  }
+;
+
   img: first-of-type {
     position: absolute;
-    right: 42.67px;
-  } 
-  img {
+    right: 40px;
+  } img {
     position: absolute;
     right: 0;
     margin: 8px;
   }
 `
 
+const Penalty = styled.div`
+  display: flex;
+  background: ${theme.color.gray5};
+  border-radius: 10px;
+  padding: 5px 5px 5px 15px;
+  width: fit-content;
+  align-items: center;
+  bottom: 1rem;
+  margin-left: 15px;
+  margin-top: 10px;
+
+  .bomb {
+    left: 10px;
+  }
+
+  span {
+    font-size: 12px;
+    margin: 0 5px;
+  }
+`;
+
 const MapBox = styled.div`
-  background-color: #ddd;
+  background-color: ${theme.color.gray7};
   border: none;
   border-radius: 5px;
   width: 90%;
@@ -226,9 +258,11 @@ const ButtonBox = styled.div`
     color: black;
     border: none;
     border-radius: 10px;
+    font-weight: bold;
   }
 
   button + button {
+    font-weight: bold;
     margin-left: 10px;
   }
 `
