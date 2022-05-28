@@ -200,7 +200,7 @@ const ScheduleBox = styled.div`
   margin: auto;
 
   h3: first-of-type {
-    padding: 0 0 15px 15px;
+    padding: 0 0 15px 30px;
     font-size: 24px;
     font-weight: bold;
   };
@@ -208,17 +208,17 @@ const ScheduleBox = styled.div`
   h3 {
     font-size: 24px;
     font-weight: bold;
-    padding: 0 0 15px 15px
+    padding: 0 0 15px 30px
   }
 ;
 
   p:first-of-type {
-    padding: 20px 0 20px 15px;
+    padding: 30px 0 20px 30px;
     font-weight: bold;
   }
 
   p {
-    padding: 10px 0 10px 15px;
+    padding: 10px 0 10px 30px;
   }
 ;
 
@@ -236,15 +236,15 @@ const Penalty = styled.div`
   display: flex;
   background: ${theme.color.gray5};
   border-radius: 10px;
-  padding: 5px 5px 5px 15px;
+  padding: 5px 10px 5px 25px;
   width: fit-content;
   align-items: center;
   bottom: 1rem;
-  margin-left: 15px;
+  margin-left: 30px;
   margin-top: 10px;
 
   .bomb {
-    left: 10px;
+    left: 30px;
   }
 
   span {
