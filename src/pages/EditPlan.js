@@ -62,10 +62,10 @@ const EditPlan = (props) => {
             const minuteData = minuteModel.find((model) => model.value === _minute.toString())
             setHour(hourData)
             setMinute(minuteData?.id)
-            setAddress(plan.locationDetail.address)
-            setLat(plan.locationDetail.lat)
-            setLng(plan.locationDetail.lng)
-            setPlaceName(plan.locationDetail.name)
+            setAddress(plan.locationDetail?.address)
+            setLat(plan.locationDetail?.lat)
+            setLng(plan.locationDetail?.lng)
+            setPlaceName(plan.locationDetail?.name)
         }
     }, [plan])
 
@@ -73,7 +73,7 @@ const EditPlan = (props) => {
         if (hour && minute && amPmType) {
             const _hour = hourModel.find((model) => model.id === hour)
             const _minute = minuteModel.find((model) => model.id === minute)
-            setTime(`${amPmType === 'pm' ? parseInt(_hour.value) + 12 : _hour.value}:${_minute.value}`)
+            setTime(`${amPmType === 'pm' ? parseInt(_hour?.value) + 12 : _hour?.value}:${_minute?.value}`)
         }
     }, [hour, minute, amPmType])
 
@@ -192,7 +192,7 @@ const EditPlan = (props) => {
 
             <InputBox>
                 <Input
-                    placeholder={placeName ? placeName : plan.locationDetail.name}
+                    placeholder={placeName ? placeName : plan.locationDetail?.name}
                     _onClick={() => {
                         setShowMap(true);
                     }}

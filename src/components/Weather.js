@@ -43,7 +43,7 @@ const Sunny = styled.img`
 const Cloudy = styled.img`
     position: absolute;
     left: 12.5rem;
-    top: 1.563rem;
+    top: 2.5rem;
 `;
 const Rainy = styled.img`
     position: absolute;

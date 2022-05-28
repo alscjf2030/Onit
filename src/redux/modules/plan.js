@@ -23,8 +23,8 @@ export const getTotalPlan = createAsyncThunk(
         console.log('page : ', page);
         try {
             const res = await getApi(`/member/totalplans/${page}`)
-            console.log(res.data.planLists)
-            return res.data.planLists
+            console.log(res.data)
+            return res.data
         } catch (err) {
             console.log(err)
             return rejectedWithValue(err.response)
@@ -224,8 +224,8 @@ export const planSlice = createSlice({
             .addCase(getTotalPlan.fulfilled, (state, action) => {
                 if (state.loading === 'pending') {
                     state.loading = 'succeeded'
-                    state.all.plans = [...state.all.plans.totalPlanList, ...action.payload.totalPlanList];
-                    state.all.totalPage = [...state.all.totalPage.totalPlanList, ...action.payload.totalPlanList];
+                    state.all.plans = [...action.payload.planLists];
+                    state.all.totalPage = [state.all.totalPage, action.payload.totalPage];
                 }
             })
             .addCase(getTotalPlan.rejected, state => {

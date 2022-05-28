@@ -152,7 +152,7 @@ const Detail = (props) => {
             </MapBox>
             <ButtonBox>
                 {plan.writer === user.nickname ?
-                    <button onClick={handleShared}>
+                    <button onClick={handleShared} style={{fontSize: "16px"}}>
                         공유하기
                     </button>
                     :
