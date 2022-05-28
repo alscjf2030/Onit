@@ -53,39 +53,43 @@ const Detail = (props) => {
                 text: '작성자만 수정 가능합니다.',
                 icon: 'error',
             })
+            return
         } else {
             navigate(`/edit/${planUrl}`)
         }
     }
 
     const deletePlanBtn = () => {
+        if (user.nickname === plan.writer) {
+            Swal.fire({
+                text:"정말로 삭제하시겠습니까?",
+                icon: "question",
+                showCancelButton: true,
+                showConfirmButton: true,
+                confirmButtonText: '삭제하기',
+                cancelButtonText: '취소하기'
+            }).then((res) => {
+                if (res.isConfirmed){
+                    dispatch(deletePlan({planUrl, navigate}))
+                } else {
+                    return
+                }
+            })}
         if (user.nickname !== plan.writer) {
             Swal.fire({
-                text: '작성자만 수정 가능합니다.',
-                icon: 'error',
-            })
-        } else {
-            Swal.fire({
-                title: '약속을 지우시겠습니까?',
-                text: '삭제하신 약속은 복구가 불가능 합니다.',
-                icon: 'warning',
+                text:"정말로 나가시겠습니까?",
+                icon: "question",
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '삭제',
-                cancelButtonText: '취소'
-            }).then((result) => {
-                if (result.isConfirmed) {
+                showConfirmButton: true,
+                confirmButtonText: '나가기',
+                cancelButtonText: '취소하기'
+            }).then((res) => {
+                if (res.isConfirmed){
                     dispatch(deletePlan({planUrl, navigate}))
-                    Swal.fire(
-                        '삭제 완료!',
-                        '다음 약속에서 만나요!',
-                        'success'
-                    )
+                } else {
+                    return
                 }
-            })
-            // dispatch(deletePlan({planUrl, navigate}))
-        }
+            })}
     }
 
     if (!plan) {
@@ -204,7 +208,7 @@ const ScheduleBox = styled.div`
     font-size: 24px;
     font-weight: bold;
   };
-  
+
   h3 {
     font-size: 24px;
     font-weight: bold;

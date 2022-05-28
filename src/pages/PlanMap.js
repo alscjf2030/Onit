@@ -10,9 +10,6 @@ import {dest_marker, my_marker} from '../img'
 
 /**
  * @param {*} props
- * @returns 리턴 설명 적어주기
- * @역할 무엇을 위한 컴포넌트인지 적어주기
- * @필수값 컴포넌트 사용을 위해 어떤 props가 필요한지 명시해주기
  */
 
 const PlanMap = forwardRef((props, ref) => {
@@ -57,9 +54,10 @@ const PlanMap = forwardRef((props, ref) => {
 
     //소켓관련
     const publicMaps = props.publicMaps;
+    // console.log(publicMaps)
 
-    const [info, setInfo] = useState();
     const [position, setPosition] = useState();
+
     const [userData, setUserData] = useState({
         sender: '',
         connected: false,
@@ -102,6 +100,7 @@ const PlanMap = forwardRef((props, ref) => {
     useInterval(() => {
         sendMyLocation();
     }, 3000);
+
     // eslint-disable-next-line no-unused-vars
     const bounds = useMemo(() => {
         const bounds = new kakao.maps.LatLngBounds();
@@ -110,7 +109,6 @@ const PlanMap = forwardRef((props, ref) => {
                 bounds.extend(new kakao.maps.LatLng(point.lat, point.lng));
             });
         }
-
         return bounds;
     }, [points]);
 
@@ -148,8 +146,8 @@ const PlanMap = forwardRef((props, ref) => {
         setPoints([myLocation]);
         return () => {
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        // eslint-disable-next-line
+    }, [publicMaps]);
 
     return (
         <>
@@ -159,28 +157,29 @@ const PlanMap = forwardRef((props, ref) => {
                     navigate('/main', {replace: true});
                 }}
             ></Headerbar>
-            <Map // 지도를 표시할 Container
+            <Map
                 center={myLocation.center}
                 style={{
-                    // 지도의 크기
                     width: '100%',
                     height: '90%',
                     position: "absolute",
                     bottom: 0
                 }}
-                level={3} // 지도의 확대 레벨
+                level={3}
                 onCreate={setMap}
             >
-                {!myLocation.isLoading && <MapMarker image={{
+                {/* <MapMarker image={{
                     src: my_marker,
                     size: {width: 33, height: 33},
-                }} position={myLocation.center}/>}
+                }} position={myLocation.center}/> */}
+
                 {publicMaps &&
                     publicMaps.map((chat, index) => (
                         <>
                             {chat.type === 'MAP' && (
                                 <>
                                     {chat.sender === props.usernick ? (
+                                        //나의 위치
                                         <>
                                             <MapMarker
                                                 key={'map' + index}
@@ -195,6 +194,7 @@ const PlanMap = forwardRef((props, ref) => {
                                             </CustomOverlayMap>
                                         </>
                                     ) : (
+                                        //남의 위치
                                         <>
                                             <MapMarker
                                                 key={'map' + index}
@@ -212,6 +212,7 @@ const PlanMap = forwardRef((props, ref) => {
                                 </>
                             )}
                             {chat.type === 'DEST' && (
+                                //도착 위치
                                 <>
                                     <MapMarker
                                         key={'DEST' + index}

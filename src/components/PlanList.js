@@ -90,7 +90,7 @@ const PlanList = (props) => {
                         <div className='first'
                              key={first.planId}
                              onClick={() => {
-                                 navigate(`/detail/${plan.url}`)
+                                 navigate(`/detail/${first.url}`)
                              }}
                         >
                             <Content>

@@ -11,9 +11,7 @@ import EventBackGround from "./components/EventBackGround";
 import LaptopBackground from "./components/LaptopBackground";
 import Phone from './img/Phone.png'
 
-
 function App() {
-
     useEffect(() => {
         if (localStorage.getItem('FCMtoken')) {
             console.log("이미 토큰이 발급됨!")
@@ -29,7 +27,6 @@ function App() {
             })
         }
     }, [])
-
     const isMobile = useIsMobile()
 
     return (

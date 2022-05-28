@@ -23,8 +23,6 @@ const Main = (props) => {
         dispatch(updateUser())
     }, [])
 
-    console.log(userData)
-
     return (
         <Container>
             <FCMtoken/>

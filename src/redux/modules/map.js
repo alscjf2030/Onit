@@ -34,12 +34,13 @@ export const mapSlice = createSlice({
       );
       if (index !== -1) {
         state.publicMaps[index] = action.payload;
-      } else {
+      }
+      else {
         state.publicMaps.push(action.payload) ;
       }
-      if (index !== -1) {
-        state.publicChats.push(action.payload);
-      } else state.publicMaps[index] = action.payload;
+      // if (index !== -1) {
+      //   state.publicChats.push(action.payload);
+      // } else state.publicMaps[index] = action.payload;
     },
     setPublicChats: (state, action) => {
       if (!state.is_public_send) {

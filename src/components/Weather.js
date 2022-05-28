@@ -58,6 +58,6 @@ const Snowy = styled.img`
 const Unknown = styled.img`
     position: absolute;
     left: 12.5rem;
-    top: 1.813rem;
+    top: 2.5rem;
 `;
 export default Weather;

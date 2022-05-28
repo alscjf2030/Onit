@@ -49,7 +49,6 @@ export const getMyPlan = createAsyncThunk(
 export const getInvitePlan = createAsyncThunk(
     'plan/getTotalPlan',
     async ({page}, {rejectedWithValue}) => {
-        console.log('page : ', page);
         try {
             const res = await getApi(`/invitation/plans/${page}`)
             return res.data.planLists
@@ -65,8 +64,7 @@ export const getOnePlan = createAsyncThunk(
     async (planUrl, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/member/plan/${planUrl}`)
-            const {data} = res.data
-            return data
+            return res.data
         } catch (err) {
             console.log(err)
             return rejectedWithValue(err.response)
@@ -96,7 +94,7 @@ export const addPlan = createAsyncThunk(
             const res = await postApi('/member/plan', data)
             setTimeout(() => {
                 history.push("/main");
-              }, "600")
+            }, "600")
             return res.data
         } catch (err) {
             Swal.fire({
@@ -134,10 +132,8 @@ export const joinPlan = createAsyncThunk(
 export const editPlan = createAsyncThunk(
     'plan/editPlan',
     async ({data, navigate}, {rejectedWithValue}) => {
-        console.log(data)
         try {
             const res = await putApi(`/member/plan/${data.planUrl}`, data)
-            console.log(res)
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -165,7 +161,6 @@ export const editPlan = createAsyncThunk(
 export const deletePlan = createAsyncThunk(
     'plan/deletePlan',
     async ({planUrl, navigate}, {rejectedWithValue}) => {
-        // console.log(planId)
         try {
             const res = await deleteApi(`/member/plan/${planUrl}`)
             console.log(res)
@@ -238,8 +233,11 @@ export const planSlice = createSlice({
                     state.loading = 'failed'
                 }
             })
+            .addCase(getOnePlan.pending, (state, action) => {
+                state.showplan = []
+            })
             .addCase(getOnePlan.fulfilled, (state, action) => {
-                state.showplan = action.payload;
+                state.showplan = action.payload.data;
             })
             .addCase(addPlan.fulfilled, (state, action) => {
 
