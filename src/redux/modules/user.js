@@ -2,7 +2,6 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import {getApi, postApi, putApi} from "../../shared/api/client";
 import history from "../../index"
 import Swal from "sweetalert2";
-import { async } from '@firebase/util';
 
 const initialState = {
     loading: 'idle',
@@ -285,7 +284,6 @@ export const userSlice = createSlice({
 })
 
 
-// 2
 export const {setUserName, setLoading, resetUser, setError} = userSlice.actions
 
 const actionCreators = {kakaoLogin};

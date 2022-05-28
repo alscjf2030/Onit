@@ -99,6 +99,17 @@ const SignUp = (props) => {
                         onKeyPress={handleKeyPress}
                         onChange={(e) => setUsername(e.target.value)}
                     /> :
+                    error === '아이디는 영어 or 숫자로 3자리 이상 ~10자리 이하로 입력하셔야 합니다!' ?
+                        <input
+                            style={{
+                                border: `1px solid ${theme.color.red1}`,
+                                backgroundColor: `${theme.color.red2}`
+                            }}
+                            value={username}
+                            placeholder='아이디는 영어와 숫자 3~9자리 입니다.'
+                            onKeyPress={handleKeyPress}
+                            onChange={(e) => setUsername(e.target.value)}
+                        /> :
                     <input
                         value={username}
                         placeholder='아이디는 영어와 숫자 3~9자리 입니다.'
@@ -106,7 +117,10 @@ const SignUp = (props) => {
                         onChange={(e) => setUsername(e.target.value)}
                     />
                 }
-                {error === '이미 사용중인 아이디 입니다!' && <ErrorBox>{error}</ErrorBox>}
+                {error === '이미 사용중인 아이디 입니다!' ? <ErrorBox>{error}</ErrorBox> :
+                    error === '아이디는 영어 or 숫자로 3자리 이상 ~10자리 이하로 입력하셔야 합니다!' ?
+                        <ErrorBox>'아이디는 영어,숫자 3~10자리 입니다.'</ErrorBox> : null
+                }
             </InputBox>
 
             <InputBox>
@@ -122,6 +136,17 @@ const SignUp = (props) => {
                         onKeyPress={handleKeyPress}
                         onChange={(e) => setNickname(e.target.value)}
                     /> :
+                    error === '닉네임은 한글 or 영어 or 숫자로 2자리 이상 ~8자리 이하로 입력하셔야 합니다!' ?
+                        <input
+                            style={{
+                                border: `1px solid ${theme.color.red1}`,
+                                backgroundColor: `${theme.color.red2}`
+                            }}
+                            value={nickname}
+                            placeholder='닉네임은 2~8자리 입니다.'
+                            onKeyPress={handleKeyPress}
+                            onChange={(e) => setNickname(e.target.value)}
+                        /> :
                     <input
                         value={nickname}
                         placeholder='닉네임은 2~8자리 입니다.'
@@ -129,7 +154,10 @@ const SignUp = (props) => {
                         onChange={(e) => setNickname(e.target.value)}
                     />
                 }
-                {error === '이미 사용중인 닉네임 입니다!' && <ErrorBox>{error}</ErrorBox>}
+                {error === '이미 사용중인 닉네임 입니다!' ? <ErrorBox>{error}</ErrorBox> :
+                    error === '닉네임은 한글 or 영어 or 숫자로 2자리 이상 ~8자리 이하로 입력하셔야 합니다!' ?
+                    <ErrorBox>'닉네임은 한글,영어,숫자 2~8자리 입니다.'</ErrorBox> : null
+                }
             </InputBox>
 
             <PasswordBox>
@@ -146,6 +174,18 @@ const SignUp = (props) => {
                         onKeyPress={handleKeyPress}
                         onChange={(e) => setPw(e.target.value)}
                     /> :
+                    error === '비밀번호는 영어 or 숫자로 4자리 이상 ~12자리 이하로 입력하셔야 합니다!' ?
+                        <input
+                            style={{
+                                border: `1px solid ${theme.color.red1}`,
+                                backgroundColor: `${theme.color.red2}`
+                            }}
+                            value={pw}
+                            placeholder='비밀번호는 영어와 숫자로 4~12자리 입니다.'
+                            type={hidePassword ? 'password' : 'text'}
+                            onKeyPress={handleKeyPress}
+                            onChange={(e) => setPw(e.target.value)}
+                        /> :
                     <input
                         value={pw}
                         placeholder='비밀번호는 영어와 숫자로 4~12자리 입니다.'
@@ -171,6 +211,18 @@ const SignUp = (props) => {
                         onKeyPress={handleKeyPress}
                         onChange={(e) => setPwCheck(e.target.value)}
                     /> :
+                    error === '비밀번호는 영어 or 숫자로 4자리 이상 ~12자리 이하로 입력하셔야 합니다!' ?
+                        <input
+                            style={{
+                                border: `1px solid ${theme.color.red1}`,
+                                backgroundColor: `${theme.color.red2}`
+                            }}
+                            value={pwCheck}
+                            placeholder='비밀번호는 영어와 숫자로 4~12자리 입니다.'
+                            type={hidePassword ? 'password' : 'text'}
+                            onKeyPress={handleKeyPress}
+                            onChange={(e) => setPwCheck(e.target.value)}
+                        /> :
                     <input
                         value={pwCheck}
                         placeholder='비밀번호는 영어와 숫자로 4~12자리 입니다.'
@@ -181,7 +233,10 @@ const SignUp = (props) => {
                 }
                 {hidePasswordCheck && <img alt='eyeOff' src={eyeOff} onClick={toggleHidePasswordCheck}/>}
                 {!hidePasswordCheck && <img alt='eyeOn' src={eyeOn} onClick={toggleHidePasswordCheck}/>}
-                {error === '비밀번호가 일치하지 않습니다!' && <ErrorBox>{error}</ErrorBox>}
+                {error === '비밀번호가 일치하지 않습니다!' ? <ErrorBox>{error}</ErrorBox> :
+                    error === '비밀번호는 영어 or 숫자로 4자리 이상 ~12자리 이하로 입력하셔야 합니다!' ?
+                        <ErrorBox>'비밀번호는 영어, 숫자 4~12자리 입니다.'</ErrorBox> : null
+                }
             </PwCheckBox>
             <Grid padding="0px 1rem 1rem 1rem">
                 <Agreement checked={checked} setChecked={setChecked}/>

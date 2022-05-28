@@ -19,6 +19,13 @@ const PlanName = ({clickHandler, name, setName}) => {
             })
             return
         }
+        if (_name.length < 2 || _name.length > 10){
+            Swal.fire({
+                text: '약속 이름은 2~10자로 정해주세요',
+                icon: 'error'
+            })
+            return
+        }
         setName(_name)
         clickHandler()
     }
