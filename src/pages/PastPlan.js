@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import {ReactComponent as LeftArrow } from '../img/icon/arrowl.svg';
 import {useNavigate} from "react-router-dom";
@@ -12,12 +12,14 @@ const PastPlan = (props) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const [page, setPage] = useState(1)
+
     const pastPlan = useSelector(state => state.plan.plans)
     // console.log(pastPlan)
 
     useEffect(() => {
-        if (pastPlan?.status === -1) {
-            dispatch(getHistoryPlan())
+        if (pastPlan?.status === 1) {
+            dispatch(getHistoryPlan(page))
         }
     }, [pastPlan])
 
@@ -77,7 +79,7 @@ const HeadLine = styled.div`
   margin-bottom: 16px;
 
   h2 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     padding-top: 20px;
     padding-bottom: 20px;

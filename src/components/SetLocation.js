@@ -3,6 +3,7 @@ import PlanSelectMap from './PlanSelectMap';
 import {Grid, Input} from '../elements';
 import theme from '../styles/theme';
 import styled from "styled-components";
+import Swal from "sweetalert2";
 
 const SetLocation = ({clickHandler, setPlace, place}) => {
     const [showMap, setShowMap] = useState(false);
@@ -13,6 +14,12 @@ const SetLocation = ({clickHandler, setPlace, place}) => {
 
     const handleNext = () => {
         if (!name) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                text: '장소를 선택해 주세요',
+                showConfirmButton: false,
+            })
             alert('장소를 선택해 주세요')
             return
         }

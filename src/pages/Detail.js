@@ -53,14 +53,39 @@ const Detail = (props) => {
                 text: '작성자만 수정 가능합니다.',
                 icon: 'error',
             })
-            return
         } else {
             navigate(`/edit/${planUrl}`)
         }
     }
 
     const deletePlanBtn = () => {
-        dispatch(deletePlan({planUrl, navigate}))
+        if (user.nickname !== plan.writer) {
+            Swal.fire({
+                text: '작성자만 수정 가능합니다.',
+                icon: 'error',
+            })
+        } else {
+            Swal.fire({
+                title: '약속을 지우시겠습니까?',
+                text: '삭제하신 약속은 복구가 불가능 합니다.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '삭제',
+                cancelButtonText: '취소'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    dispatch(deletePlan({planUrl, navigate}))
+                    Swal.fire(
+                        '삭제 완료!',
+                        '다음 약속에서 만나요!',
+                        'success'
+                    )
+                }
+            })
+            // dispatch(deletePlan({planUrl, navigate}))
+        }
     }
 
     if (!plan) {
@@ -158,7 +183,7 @@ const HeadLine = styled.div`
   text-align: center;
 
   h2 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     padding-top: 20px;
     padding-bottom: 20px;

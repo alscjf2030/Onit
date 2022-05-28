@@ -10,7 +10,7 @@ import theme from "../styles/theme";
 import {ReactComponent as Plus} from '../img/icon/Plus.svg'
 import {ReactComponent as Share} from '../img/icon/share-icon.svg'
 import {bomb} from '../img'
-import plan, {getMorePlan, getPlan, setLoading} from "../redux/modules/plan";
+import plan, {getMyPlan, getPlan, setLoading} from "../redux/modules/plan";
 import Swal from "sweetalert2";
 import Weather from "./Weather";
 
@@ -22,14 +22,14 @@ const PlanList = (props) => {
 
     const [page, setPage] = useState(1);
     const userData = useSelector(state => state.user.user_info);
-    const totalPage = useSelector(state => state.plan.created.totalPage);
+    const createPage = useSelector(state => state.plan.created.totalPage);
     const loading = useSelector((state) => state.plan.loading)
     const planList = useSelector(state => state.plan.created.plans);
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight
         const scrollTop = document.documentElement.scrollTop
         const clientHeight = document.documentElement.clientHeight
-        if (scrollTop + clientHeight >= scrollHeight && loading === 'idle' && totalPage >= page) {
+        if (scrollTop + clientHeight >= scrollHeight && loading === 'idle' && createPage >= page) {
             setPage(page + 1)
         }
     }
@@ -41,7 +41,7 @@ const PlanList = (props) => {
     useEffect(() => {
         // if (userData && page <= totalPage)
         if (userData && page) {
-            dispatch(getMorePlan({page: page}))
+            dispatch(getMyPlan({page: page}))
         }
     }, [userData, page])
 

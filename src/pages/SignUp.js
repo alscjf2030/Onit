@@ -41,9 +41,16 @@ const SignUp = (props) => {
                 icon: 'error'
             })
         }
+        if (!checked) {
+            Swal.fire({
+                // title: 'Error!',
+                text: '약관에 모두 동의해 주세요!',
+                icon: 'error'
+            })
+            return
+        }
         if (pw !== pwCheck) {
             dispatch(setError('비밀번호가 일치하지 않습니다!'))
-            return
         } else {
             const data = {
                 username,
@@ -269,7 +276,7 @@ const HeadLine = styled.div`
     font-size: 24px;
     font-weight: bold;
     padding-top: 20px;
-    padding-bottom: 50px;
+    padding-bottom: 25px;
   }
 `
 
@@ -389,6 +396,13 @@ const SignUpBox = styled.div`
 const ErrorBox = styled.div`
   font-size: 14px;
   color: ${theme.color.orange};
+  margin-top: 8px;
+  margin-left: 2px;
+`
+
+const SuccessBox = styled.div`
+  font-size: 14px;
+  color: ${theme.color.green3};
   margin-top: 8px;
   margin-left: 2px;
 `

@@ -37,17 +37,14 @@ const Main = (props) => {
                      }}/>
                 <p>{userData?.nickname ? userData.nickname : '손'} 님 <br/>{nowDate} 입니다.</p>
             </UserInfo>
-            <Tab>
+            <div>
                 <PlanTab/>
-            </Tab>
+            </div>
         </Container>
     )
 }
 
 export default Main
-
-const Tab = styled.div`
-`;
 
 const Container = styled.div`
   width: 100%;

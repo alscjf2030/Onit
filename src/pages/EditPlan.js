@@ -257,7 +257,7 @@ const HeadLine = styled.div`
   text-align: center;
 
   h3 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     padding-top: 20px;
     padding-bottom: 20px;

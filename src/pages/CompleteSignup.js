@@ -109,6 +109,5 @@ const ImgBox = styled.div`
   img {
     width: 100%;
     height: 100%;
-    transform: rotate(45deg);
   }
 `

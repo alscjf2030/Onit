@@ -32,6 +32,8 @@ const color = {
   gray7: '#F5F5F5',
   orange: '#F84914',
   green: '#A1ED00',
+  green2: '#E6FFE2',
+  green3: '#73C496',
   black: '#292929',
   realblack: '#000000',
   white: '#fff',
@@ -40,7 +42,6 @@ const color = {
   BackGround: '#FBFBFB',
   darkLine: '#3F4448',
   danger: '#ff8b6f',
-
 };
 
 export const DeviceSizes = {

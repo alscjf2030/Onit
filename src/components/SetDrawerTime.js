@@ -5,14 +5,8 @@ import {hourModel, minuteModel} from "../statics/time";
 import theme from "../styles/theme";
 import Swal from "sweetalert2";
 import "react-widgets/styles.css";
-// import {Dropdown} from "semantic-ui-react";
 
 const SetDrawerTime = ({open, onClose, hour, minute, setHour, setMinute, amPmType, setAmPmType}) => {
-
-    // const styleLink = document.createElement("link");
-    // styleLink.rel = "stylesheet";
-    // styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
-    // document.head.appendChild(styleLink);
 
     const [_hour, _setHour] = useState(hour);
     const [_minute, _setMinute] = useState(minute);

@@ -95,6 +95,11 @@ const SideMenu = (props) => {
                         >
                             <p>로그아웃</p>
                         </div>
+                        <div className='link'
+                             onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdWEil2no-Yr36o5IdMrNLpLfgvt1DPUyUC3cPyQ72GFoBSPQ/viewform', '_blank')}
+                        >
+                            <p>설문조사 참여하고 <br/> 선물 받아 가세요!</p>
+                        </div>
                     </ShowMenu>
                     <input
                         type="file"
@@ -260,6 +265,18 @@ const ShowMenu = styled.div`
     width: 80%;
     height: 40px;
     background-color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    cursor: pointer;
+  }
+
+  .link {
+    width: 80%;
+    height: 40px;
+    background-color: ${theme.color.green};
     border-radius: 10px;
     display: flex;
     align-items: center;

@@ -6,7 +6,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import PlanList from './PlanList';
 import InvitedList from './InvitedList';
-import Allplan from './Allplan';
+import AllPlan from './AllPlan';
 
 const StyledTabs = styled((props) => (
     <Tabs
@@ -107,7 +107,7 @@ const PlanTab = () => {
                 </StyledTabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <Allplan/>
+                <AllPlan/>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <PlanList/>

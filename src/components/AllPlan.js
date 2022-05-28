@@ -6,18 +6,17 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 import 'dayjs/locale/ko'
 
-
 import theme from "../styles/theme";
 import {ReactComponent as Plus} from '../img/icon/Plus.svg'
 import {ReactComponent as Share} from '../img/icon/share-icon.svg'
 import {bomb} from '../img'
-import {getMorePlan, getPlan, setLoading} from "../redux/modules/plan";
+import {getPlan, getTotalPlan, setLoading} from "../redux/modules/plan";
 import Swal from "sweetalert2";
 import Weather from "./Weather";
 
 dayjs.locale('ko')
 
-const Allplan = (props) => {
+const AllPlan = (props) => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -28,13 +27,11 @@ const Allplan = (props) => {
     const loading = useSelector((state) => state.plan.loading)
     const planList = useSelector(state => state.plan.all.plans);
 
-    // console.log(planList)
-
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight
         const scrollTop = document.documentElement.scrollTop
         const clientHeight = document.documentElement.clientHeight
-        if (scrollTop + clientHeight >= scrollHeight && loading === 'idle' && totalPage >= page) {
+        if (scrollTop + clientHeight >= scrollHeight && totalPage >= page) {
             setPage(page + 1)
         }
     }
@@ -45,7 +42,7 @@ const Allplan = (props) => {
 
     useEffect(() => {
         if (userData && page) {
-            dispatch(getMorePlan({page: page}))
+            dispatch(getTotalPlan({page: page}))
         }
     }, [userData, page])
 
@@ -186,7 +183,7 @@ const Allplan = (props) => {
     )
 }
 
-export default Allplan;
+export default AllPlan;
 
 const Content = styled.div`
   display: flex;
@@ -209,8 +206,8 @@ const Penalty = styled.div`
 
 const List = styled.div`
   overflow: hidden;
-  height: 36rem;
-  padding: 24px 24px 0px 24px;
+  height: 100%;
+  padding: 24px 24px 0 24px;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */

@@ -112,7 +112,7 @@ const AddPlans = (props) => {
                 />
                 <p
                     style={{
-                        fontSize: '24px',
+                        fontSize: '20px',
                         fontWeight: 'bold',
                     }}>약속이 생성되었습니다!</p>
             </div>

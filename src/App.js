@@ -87,7 +87,6 @@ const RightWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 150px;
   background-color: ${theme.color.BackGround};
 
   .phone-img {
@@ -105,4 +104,14 @@ const PhoneFrame = styled.div`
   position: relative;
   width: 375px;
   height: 812px;
+  
+  @media (min-width: 360px) and (max-width: 480px) {
+    width: 100%;
+    height: 75%;
+  }
+  
+  @media (min-width: 480px) and (max-width: 768px) {
+    width: 100%;
+    height: 90%;
+  }
 `

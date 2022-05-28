@@ -1,4 +1,4 @@
-import {getMorePlan, getPlan, setLoading} from "../redux/modules/plan";
+import {getInvitePlan, getPlan, setLoading} from "../redux/modules/plan";
 import {useSelector, useDispatch} from "react-redux";
 import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
@@ -17,14 +17,14 @@ const InvitedList = (props) => {
 
     const [page, setPage] = useState(1);
     const userData = useSelector(state => state.user.user_info);
-    const totalPage = useSelector(state => state.plan.invited.totalPage);
+    const invitedPage = useSelector(state => state.plan.invited.totalPage);
     const loading = useSelector((state) => state.plan.loading)
     const planList = useSelector(state => state.plan.invited?.plans);
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight
         const scrollTop = document.documentElement.scrollTop
         const clientHeight = document.documentElement.clientHeight
-        if (scrollTop + clientHeight >= scrollHeight && loading === 'idle' && totalPage >= page) {
+        if (scrollTop + clientHeight >= scrollHeight && loading === 'idle' && invitedPage >= page) {
             setPage(page + 1)
         }
     }
@@ -37,7 +37,7 @@ const InvitedList = (props) => {
 
     useEffect(() => {
         if (userData && page > 1) {
-            dispatch(getMorePlan({page: page}))
+            dispatch(getInvitePlan({page: page}))
         }
     }, [userData, page])
 
@@ -54,9 +54,9 @@ const InvitedList = (props) => {
         }
     }, [])
 
-    if (!planList.length && loading === 'pending') {
-        return 'loading...'
-    }
+    // if (!planList.length && loading === 'pending') {
+    //     return 'loading...'
+    // }
 
     const first = [...planList].splice(0, 1)[0]
     const rest = [...planList].splice(1)
