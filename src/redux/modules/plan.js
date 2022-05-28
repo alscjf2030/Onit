@@ -35,8 +35,7 @@ export const getOnePlan = createAsyncThunk(
     async (planUrl, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/member/plan/${planUrl}`)
-            const {data} = res.data
-            return data
+            return res.data
         } catch (err) {
             console.log(err)
             return rejectedWithValue(err.response)
@@ -214,8 +213,11 @@ export const planSlice = createSlice({
             //         state.loading = 'failed'
             //     }
             // })
+            .addCase(getOnePlan.pending, (state, action) => {
+                state.showplan = []
+            })
             .addCase(getOnePlan.fulfilled, (state, action) => {
-                state.showplan = action.payload;
+                state.showplan = action.payload.data;
             })
             .addCase(addPlan.fulfilled, (state, action) => {
 
