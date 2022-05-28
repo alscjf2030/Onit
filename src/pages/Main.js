@@ -10,10 +10,13 @@ import FCMtoken from "../components/FCMtoken";
 import PlanTab from "../components/PlanTab";
 import SideMenu from "../components/SideMenu";
 import theme from "../styles/theme";
+import {ReactComponent as Plus} from "../img/icon/Plus.svg";
+import {useNavigate} from "react-router-dom";
 
 dayjs.locale('ko')
 
 const Main = (props) => {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const userData = useSelector(state => state.user.user_info)
     const nowDate = dayjs()
@@ -38,6 +41,10 @@ const Main = (props) => {
             <div>
                 <PlanTab/>
             </div>
+            <Plus className='plus-icon' src='Plus.svg'
+                  onClick={() => {
+                      navigate('/add')
+                  }}/>
         </Container>
     )
 }
@@ -46,7 +53,6 @@ export default Main
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
   background-color: ${theme.color.gray7};
   position: relative;
 
@@ -54,6 +60,13 @@ const Container = styled.div`
     position: absolute;
     left: 24px;
     top: 20px;
+  }
+
+  .plus-icon {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    z-index: 1;
   }
 `
 

@@ -109,6 +109,6 @@ const PhoneFrame = styled.div`
   
   @media (min-width: 480px) and (max-width: 768px) {
     width: 100%;
-    height: 90%;
+    height: 85%;
   }
 `

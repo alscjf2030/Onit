@@ -7,7 +7,6 @@ import dayjs from "dayjs";
 import 'dayjs/locale/ko'
 
 import theme from "../styles/theme";
-import {ReactComponent as Plus} from '../img/icon/Plus.svg'
 import {ReactComponent as Share} from '../img/icon/share-icon.svg'
 import {bomb} from '../img'
 import {getPlan, getTotalPlan, setLoading} from "../redux/modules/plan";
@@ -156,10 +155,6 @@ const AllPlan = (props) => {
                                 </div>
                             )
                         })}
-                        <Plus className='plus-icon' src='Plus.svg'
-                              onClick={() => {
-                                  navigate('/add')
-                              }}/>
                     </>
                 ) : (
                     <div className='no-list'>
@@ -286,10 +281,4 @@ const List = styled.div`
     color: ${theme.color.gray1};
   }
 
-  .plus-icon {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    z-index: 1;
-  }
 `

@@ -57,6 +57,12 @@ const MobileScrollBar = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  ::-webkit-scrollbar {
+    display: none; /* Chrome , Safari , Opera */
+  }
 `
 
 export default MainContents;

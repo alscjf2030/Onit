@@ -33,7 +33,7 @@ const EditPlan = (props) => {
     const [hour, setHour] = useState(null)
     const [minute, setMinute] = useState(null)
     const [amPmType, setAmPmType] = useState('')
-    const [placename, setplaceName] = useState(place?.name || '');
+    const [placeName, setPlaceName] = useState(place?.name || '');
     const [address, setAddress] = useState(place?.address || '')
     const [lat, setLat] = useState(place?.lat || '');
     const [lng, setLng] = useState(place?.lng || '');
@@ -65,7 +65,7 @@ const EditPlan = (props) => {
             setAddress(plan.locationDetail.address)
             setLat(plan.locationDetail.lat)
             setLng(plan.locationDetail.lng)
-            setplaceName(plan.locationDetail.name)
+            setPlaceName(plan.locationDetail.name)
         }
     }, [plan])
 
@@ -93,7 +93,7 @@ const EditPlan = (props) => {
             planName: name,
             planDate: `${formatDate(date)} ${time}`,
             location: {
-                name: placename,
+                name: placeName,
                 lat: lat,
                 lng: lng,
                 address: address
@@ -192,16 +192,16 @@ const EditPlan = (props) => {
 
             <InputBox>
                 <Input
-                    placeholder={placename ? placename : plan.locationDetail.name}
+                    placeholder={placeName ? placeName : plan.locationDetail.name}
                     _onClick={() => {
                         setShowMap(true);
                     }}
-                    value={placename}
+                    value={placeName}
                 />
                 {showMap && (
                     <PlanSelectMap
                         setShowMap={setShowMap}
-                        setName={setplaceName}
+                        setName={setPlaceName}
                         setAddress={setAddress}
                         setLat={setLat}
                         setLng={setLng}
