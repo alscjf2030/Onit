@@ -45,7 +45,7 @@ const Detail = (props) => {
             navigate(`/login/${planUrl}`)
         }
         dispatch(getOnePlan(planUrl))
-    }, [])
+    }, [plan])
 
     const handleModify = () => {
         if (user.nickname !== plan.writer) {

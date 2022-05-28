@@ -10,7 +10,7 @@ import {ReactComponent as Logo} from '../img/icon/logo-619.svg'
 import MobilePortal from "./MobilePortal";
 import {changePic} from "../redux/modules/user";
 import theme from "../styles/theme";
-
+import Swal from "sweetalert2";
 
 const SideMenu = (props) => {
     const dispatch = useDispatch();
@@ -31,8 +31,16 @@ const SideMenu = (props) => {
         setMenu(isOpen => !isOpen);
     }
     const selectFile = (e) => {
+      if(e.target.files[0].size > 1000000) {
+        Swal.fire({
+                title: "이미지 크기가 너무 큽니다",
+                text: "1MB 이하의 크기여야 합니다",
+                icon: 'error'
+            })
+      }
         dispatch(changePic(e.target.files[0]))
     }
+
     const handleClick = (e) => {
         hidden.current.click();
     }

@@ -77,17 +77,18 @@ const Plansocket = props => {
   //보낸정보 서버에서 응답값 받기
   const onMessageReceived2 = payload => {
     let payloadData = JSON.parse(payload.body);
+    // console.log(payloadData)
     // console.log('payloadDataMap=', payloadData);
-    if (payloadData.chats && payloadData.sender === usernick) {
-      // eslint-disable-next-line array-callback-return
-      payloadData.chats.map((chat, index) => {
-        dispatch(setPublicChats(chat));
-      });
-    }
-    if (payloadData.type === 'ENTER' || payloadData.type === 'CHAT') {
-      dispatch(setPublicChats(payloadData));
-      // if (MapRef.current) MapRef.current.sendMyLocation();
-    }
+    // if (payloadData.chats && payloadData.sender === usernick) {
+    //   // eslint-disable-next-line array-callback-return
+    //   payloadData.chats.map((chat, index) => {
+    //     dispatch(setPublicChats(chat));
+    //   });
+    // }
+    // if (payloadData.type === 'ENTER' || payloadData.type === 'CHAT') {
+    //   dispatch(setPublicChats(payloadData));
+    //   // if (MapRef.current) MapRef.current.sendMyLocation();
+    // }
 
     if (payloadData.type === 'MAP' || payloadData.type === 'DEST') {
       dispatch(setPublicMaps(payloadData));
