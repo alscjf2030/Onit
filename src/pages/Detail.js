@@ -60,7 +60,36 @@ const Detail = (props) => {
     }
 
     const deletePlanBtn = () => {
-        dispatch(deletePlan({planUrl, navigate}))
+      if (user.nickname === plan.writer) {
+        Swal.fire({
+          text:"정말로 삭제하시겠습니까?",
+          icon: "question",
+          showCancelButton: true,
+          showConfirmButton: true,
+          confirmButtonText: '삭제하기',
+          cancelButtonText: '취소하기'
+        }).then((res) => {
+          if (res.isConfirmed){
+            dispatch(deletePlan({planUrl, navigate}))
+          } else {
+            return
+          }
+      })}
+      if (user.nickname !== plan.writer) {
+        Swal.fire({
+          text:"정말로 나가시겠습니까?",
+          icon: "question",
+          showCancelButton: true,
+          showConfirmButton: true,
+          confirmButtonText: '나가기',
+          cancelButtonText: '취소하기'
+        }).then((res) => {
+          if (res.isConfirmed){
+            dispatch(deletePlan({planUrl, navigate}))
+          } else {
+            return
+          }
+      })}
     }
 
     if (!plan) {

@@ -8,7 +8,6 @@ export const getPlan = createAsyncThunk(
     async (page, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/member/plans/${page}`)
-            // console.log(res)
             return res.data
         } catch (err) {
             console.log(err.response)
@@ -102,10 +101,8 @@ export const joinPlan = createAsyncThunk(
 export const editPlan = createAsyncThunk(
     'plan/editPlan',
     async ({data, navigate}, {rejectedWithValue}) => {
-        console.log(data)
         try {
             const res = await putApi(`/member/plan/${data.planUrl}`, data)
-            console.log(res)
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -133,10 +130,8 @@ export const editPlan = createAsyncThunk(
 export const deletePlan = createAsyncThunk(
     'plan/deletePlan',
     async ({planUrl, navigate}, {rejectedWithValue}) => {
-        // console.log(planId)
         try {
-            const res = await deleteApi(`/member/plan/${planUrl}`)
-            console.log(res)
+            await deleteApi(`/member/plan/${planUrl}`)
             Swal.fire({
                 position: 'center',
                 icon: 'success',
