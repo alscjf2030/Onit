@@ -399,10 +399,3 @@ const ErrorBox = styled.div`
   margin-top: 8px;
   margin-left: 2px;
 `
-
-const SuccessBox = styled.div`
-  font-size: 14px;
-  color: ${theme.color.green3};
-  margin-top: 8px;
-  margin-left: 2px;
-`

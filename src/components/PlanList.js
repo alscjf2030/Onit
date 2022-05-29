@@ -10,7 +10,7 @@ import theme from "../styles/theme";
 import {ReactComponent as Plus} from '../img/icon/Plus.svg'
 import {ReactComponent as Share} from '../img/icon/share-icon.svg'
 import {bomb} from '../img'
-import plan, {getMyPlan, getPlan, setLoading} from "../redux/modules/plan";
+import {getMyPlan, getPlan, setLoading} from "../redux/modules/plan";
 import Swal from "sweetalert2";
 import Weather from "./Weather";
 
