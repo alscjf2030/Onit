@@ -9,13 +9,19 @@ import {dest_marker, my_marker} from '../img'
 
 const PlanSelectMap = props => {
     const inputref = useRef(); //인풋데이터
-    const [keyword, setKeyword] = useState('맛집'); //defult값 빼면 에러남..
+    const [keyword, setKeyword] = useState(''); //defult값 빼면 에러남..
     const [info, setInfo] = useState(); //클릭시 나올 정보==>하단 바로 빼기
     // const [markers, setMarkers] = useState([]); //마커들
     const [map, setMap] = useState(); //지도 데이터
     const [datas, setDatas] = useState(); //리스트 검색 시 들어오는 데이터
     const [isInput, setIsInput] = useState(false); //인풋 눌럿는지 체크
     const [isdata, setIsData] = useState(false);
+    const [nearMe, setNearMe] = useState({
+        position: {
+            lat: null,
+            lng: null,
+        }
+    })
     const [selectlist, setSelectlist] = useState({
         //리스트 클릭시 들어갈 데이터
         position: {
@@ -27,6 +33,34 @@ const PlanSelectMap = props => {
         road_address_name: '',
         place_url: '',
     });
+
+    useEffect(() => {
+        //현재 내위치 얻기
+        if (navigator.geolocation) {
+            // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    setSelectlist(prev => ({
+                        ...prev,
+                        position: {
+                            lat: position.coords.latitude.toFixed(10), // 위도
+                            lng: position.coords.longitude.toFixed(10), // 경도
+                        },
+                        isLoading: false,
+                    }));
+                },
+            )}
+    }, []);
+
+    var geocoder = new kakao.maps.services.Geocoder();
+    searchAddrFromCoords(selectlist.position, address);
+    function searchAddrFromCoords(coords, callback) {
+    // 좌표로 행정동 주소 정보를 요청합니다
+    geocoder.coord2RegionCode(coords.lng, coords.lat, callback);
+    }
+    function address(callback) {
+        setKeyword(callback[0].region_3depth_name)
+    }
 
     useEffect(() => {
         if (!map) return;

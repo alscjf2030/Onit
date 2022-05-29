@@ -92,7 +92,7 @@ const AllPlan = (props) => {
                              }}
                         >
                             <Content>
-                                <h3>{planDay}</h3>
+                                <h4>{planDay}</h4>
                                 <Share
                                     style={{
                                         zIndex: 1,
@@ -101,7 +101,7 @@ const AllPlan = (props) => {
                                     onClick={handleShared}
                                 />
                             </Content>
-                            <h3>{planTime}</h3>
+                            <h4>{planTime}</h4>
                             <h2>{first.planName}</h2>
                             <p>{first.locationName}</p>
                             <Weather props={first.description}/>
@@ -245,6 +245,11 @@ const List = styled.div`
     font-size: 16px;
   }
 
+  h4 {
+    font-weight: bold;
+    font-size: 22px;
+  }
+
   h3 {
     font-weight: bold;
     font-size: 18px;
@@ -253,7 +258,7 @@ const List = styled.div`
 
   h2 {
     font-weight: 700;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 30px;
   }
 
@@ -266,7 +271,7 @@ const List = styled.div`
     font-weight: bold;
     font-size: 14px;
     line-height: 21px;
-    padding: 0 0 8px 0;
+    padding: 0px 0px 8px 0px;
   }
 
   .no-list {

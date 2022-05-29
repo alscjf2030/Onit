@@ -12,6 +12,7 @@ import SideMenu from "../components/SideMenu";
 import theme from "../styles/theme";
 import {ReactComponent as Plus} from "../img/icon/Plus.svg";
 import {useNavigate} from "react-router-dom";
+import Swal from "sweetalert2";
 
 dayjs.locale('ko')
 
@@ -23,7 +24,17 @@ const Main = (props) => {
         .format('YYYY년MM월DD일 dddd')
 
     useEffect(() => {
+      if(userData){
         dispatch(updateUser())
+      }
+      if(!localStorage.getItem('token')){
+        Swal.fire({
+          text: '로그인을 해주세요!',
+          icon: 'error',
+          timer: 2000
+        })
+        navigate('/login')
+      }
     }, [])
 
     return (

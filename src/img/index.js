@@ -19,6 +19,8 @@ import cloudy from './icon/cloud.svg';
 import rainy from './icon/cloud-drizzle.svg';
 import snowy from './icon/cloud-snow.svg';
 import unknown from './icon/unknown.svg'
+import ol_marker from './map/my_markerL.png'
+
 export {
     dest_marker,
     my_marker,
@@ -41,4 +43,5 @@ export {
     rainy,
     cloudy,
     unknown,
+    ol_marker,
 };

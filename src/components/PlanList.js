@@ -94,7 +94,7 @@ const PlanList = (props) => {
                              }}
                         >
                             <Content>
-                                <h3>{planDay}</h3>
+                                <h4>{planDay}</h4>
                                 <Share
                                     style={{
                                         zIndex: 1,
@@ -103,7 +103,7 @@ const PlanList = (props) => {
                                     onClick={handleShared}
                                 />
                             </Content>
-                            <h3>{planTime}</h3>
+                            <h4>{planTime}</h4>
                             <h2>{first.planName}</h2>
                             <p>{first.locationName}</p>
                             <Weather props={first.description}/>
@@ -251,6 +251,11 @@ const List = styled.div`
     font-size: 16px;
   }
 
+  h4 {
+    font-weight: bold;
+    font-size: 22px;
+  }
+
   h3 {
     font-weight: bold;
     font-size: 18px;
@@ -287,10 +292,4 @@ const List = styled.div`
     color: ${theme.color.gray1};
   }
 
-  .plus-icon {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    z-index: 1;
-  }
 `
