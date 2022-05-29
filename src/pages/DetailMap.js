@@ -48,6 +48,7 @@ const DetailMap = (props) => {
                     // 지도의 크기
                     width: "100%",
                     height: "100%",
+                    position:'relative',
                 }}
                 level={4} // 지도의 확대 레벨
             >
@@ -101,14 +102,15 @@ const Share = styled.button`
   position: absolute;
   left: 33%;
   right: 33%;
-  bottom: 14%;
+  bottom: 16%;
   z-index: 2;
   background: ${theme.color.green};
   color: ${theme.color.black};
   font-weight: bold;
-  border: 0px;
+  border: none;
   border-radius: 7px;
   padding: 6px;
   box-shadow: 0 0 10px ${theme.color.gray3};
 `;
+
 export default DetailMap;
