@@ -36,7 +36,7 @@ function App() {
             ) : (
                 <LaptopContainer>
                     <LeftWrap>
-                        {/* <LaptopBackground /> */}
+                         {/*<LaptopBackground />*/}
                         <EventBackGround/>
                     </LeftWrap>
                     <RightWrap>

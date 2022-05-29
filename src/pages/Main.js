@@ -64,10 +64,11 @@ const Container = styled.div`
   }
 
   .plus-icon {
-    position: fixed;
+    position: absolute;
     bottom: 15px;
     right: 15px;
     z-index: 1;
+    cursor: pointer;
   }
 `
 

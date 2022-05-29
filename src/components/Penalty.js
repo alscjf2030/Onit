@@ -74,6 +74,7 @@ export default Penalty;
 
 const Container = styled.div`
   display: block;
+  height: 100%;
 `
 
 const PenaltyBox = styled.div`
@@ -81,6 +82,7 @@ const PenaltyBox = styled.div`
   flex-wrap: wrap;
   margin: 8px auto;
   width: 90%;
+  height: 100%;
 `
 
 const PenaltyItemCard = styled.div`
@@ -90,7 +92,7 @@ const PenaltyItemCard = styled.div`
   text-align: center;
   align-items: center;
   width: calc(50% - 16px);
-  height: 15vh;
+  height: 40%;
   border: none;
   border-radius: 10px;
   margin: 8px 8px 16px 8px;
