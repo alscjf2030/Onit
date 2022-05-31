@@ -12,6 +12,7 @@ import MobilePortal from "./MobilePortal";
 import {changePic} from "../redux/modules/user";
 import theme from "../styles/theme";
 import Swal from "sweetalert2";
+import imageCompression from 'browser-image-compression';
 
 const SideMenu = (props) => {
     const dispatch = useDispatch();
@@ -20,7 +21,6 @@ const SideMenu = (props) => {
     const userData = useSelector(state => state.user.user_info)
     const [isOpen, setMenu] = useState(false);
     const hidden = useRef(null);
-
 
 
     const logoutBtn = () => {
@@ -35,16 +35,27 @@ const SideMenu = (props) => {
     const toggleMenu = () => {
         setMenu(isOpen => !isOpen);
     }
-    const selectFile = (e) => {
-      if(e.target.files[0].size > 1000000) {
-        Swal.fire({
+    async function selectFile(e) {
+        const imageFile = e.target.files[0];
+        console.log(imageFile)
+        const options = {
+          maxSizeMB: 1,
+          maxWidthOrHeight: 100,
+          useWebWorker: true,
+          fileType: "image/jpeg, image/png, image/jpg"
+        }
+        try {
+          const compressedFile = await imageCompression(imageFile, options);
+          const profileImg = new File([compressedFile], `${compressedFile.name}`, {type: "image/jpeg, image/png, image/jpg"});
+          console.log(profileImg)
+          dispatch(changePic(profileImg))
+        } catch (error) {
+          Swal.fire({
                 title: "이미지 크기가 너무 큽니다",
-                text: "1MB 이하의 크기여야 합니다",
                 icon: 'error'
             })
+        }
       }
-        dispatch(changePic(e.target.files[0]))
-    }
 
     const handleClick = (e) => {
         hidden.current.click();
