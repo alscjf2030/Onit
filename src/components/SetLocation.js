@@ -20,7 +20,6 @@ const SetLocation = ({clickHandler, setPlace, place}) => {
                 text: '장소를 선택해 주세요',
                 showConfirmButton: false,
             })
-            alert('장소를 선택해 주세요')
             return
         }
         setPlace({name, address, lat, lng})

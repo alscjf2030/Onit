@@ -5,6 +5,7 @@ import {DropdownList} from "react-widgets/cjs";
 import {Grid} from "../elements";
 import {hourModel, minuteModel} from "../statics/time";
 import theme from "../styles/theme";
+import Swal from "sweetalert2";
 
 const SetDropdown = ({onClose, hour, minute, setHour, setMinute, amPmType, setAmPmType}) => {
     const [_hour, _setHour] = useState(hour);
@@ -24,7 +25,10 @@ const SetDropdown = ({onClose, hour, minute, setHour, setMinute, amPmType, setAm
 
     const handleConfirm = () => {
         if (!_amPmType || !_hour || !_minute || _hour === '시' || _minute === '분') {
-            alert('시간을 선택해 주세요')
+            Swal.fire({
+                text: '시간을 선택해 주세요',
+                icon: 'error',
+            })
             return
         }
         setHour(_hour)
