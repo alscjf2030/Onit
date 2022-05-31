@@ -73,7 +73,7 @@ export const getHistoryPlan = createAsyncThunk(
     async (page, {rejectedWithValue}) => {
         console.log(page)
         try {
-            const res = await getApi('/member/history/1')
+            const res = await getApi(`/member/history/${page}`)
             return res.data
         } catch (err) {
             console.log(err)

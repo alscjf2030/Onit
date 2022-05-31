@@ -7,7 +7,7 @@ import {logout} from "../redux/modules/user";
 import {useNavigate} from "react-router-dom";
 import {editPic} from "../img";
 import {ReactComponent as Logo} from '../img/icon/logo-619.svg'
-import Standard from '../img/icon/Standard.svg'
+import Standard from '../img/icon/Standard.png'
 import MobilePortal from "./MobilePortal";
 import {changePic} from "../redux/modules/user";
 import theme from "../styles/theme";
@@ -108,11 +108,9 @@ const SideMenu = (props) => {
                         >
                             <p>로그아웃</p>
                         </div>
-                        <div className='link'
+                        <img className='standard' alt='standard' src={Standard}
                              onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdWEil2no-Yr36o5IdMrNLpLfgvt1DPUyUC3cPyQ72GFoBSPQ/viewform', '_blank')}
-                        >
-                        </div>
-                        <img className='standard' alt='standard' src={Standard}/>
+                        />
                     </ShowMenu>
                     <input
                         type="file"
