@@ -8,7 +8,7 @@ export const getPlanId = createAsyncThunk(
       const res = await getApi(`/map/${data}`)
       return res.data.data
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return rejectWithValue(error.response.data);
     }
   },

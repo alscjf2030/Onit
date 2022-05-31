@@ -73,8 +73,8 @@ const PlanList = (props) => {
                 text: first.planName,
                 url: `https://imonit.co.kr/detail/${first.url}`
             })
-                .then(() => console.log('성공'))
-                .catch((err) => console.log(err))
+                .then(() => {})
+                .catch((err) => {})
         } else {
             Swal.fire({
                 text: "공유하기가 지원되지 않는 환경 입니다.",
@@ -123,8 +123,6 @@ const PlanList = (props) => {
                                         text: plan.planName,
                                         url: `https://imonit.co.kr/detail/${plan.url}`
                                     })
-                                        .then(() => console.log('성공'))
-                                        .catch((err) => console.log(err))
                                 } else {
                                     Swal.fire({
                                         text: "공유하기가 지원되지 않는 환경 입니다.",

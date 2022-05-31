@@ -29,7 +29,7 @@ export const signUp = createAsyncThunk(
                 status: res.status
             }
         } catch (err) {
-            console.log(err.response.data)
+            // console.log(err.response.data)
             return rejectWithValue(err.response.data)
         }
     }
@@ -53,7 +53,7 @@ export const signUp2 = createAsyncThunk(
                 status: res.status
             }
         } catch (err) {
-            console.log(err.response.data)
+            // console.log(err.response.data)
             return rejectWithValue(err.response.data)
         }
     }
@@ -124,7 +124,7 @@ export const logout = createAsyncThunk(
                 data: res.data,
             }
         } catch (err) {
-            console.log(err)
+            // console.log(err)
             return rejectedWithValue(err.response)
         }
     }
@@ -133,7 +133,7 @@ export const logout = createAsyncThunk(
 export const changePic = createAsyncThunk(
     'member/profile',
     async (file, {rejectWithValue}) => {
-        console.log(file)
+        // console.log(file)
         const profileImg = new FormData();
         profileImg.append("profileImg", file);
         try {
@@ -169,7 +169,7 @@ export const setFCMToken = createAsyncThunk(
             return await postApi(`/member/devices`, data)
                 .then(response => response.data.data);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return rejectWithValue(error.response.data);
         }
     },
@@ -182,7 +182,7 @@ export const isFCMToken = createAsyncThunk(
             return await postApi(`/member/alarms`, data)
                 .then(response => response.data.data);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return rejectWithValue(error.response.data);
         }
     },
@@ -193,12 +193,12 @@ export const getUserToken = createAsyncThunk(
     async (_, {rejectedWithValue}) => {
         try {
             const res = await getApi('/users/kakao/callback')
-            console.log(res)
+            // console.log(res)
             return {
                 data: res.data.data,
             }
         } catch (err) {
-            console.log(err)
+            // console.log(err)
             return rejectedWithValue(err.response)
         }
     }
@@ -219,7 +219,7 @@ export const kakaoLogin = createAsyncThunk(
             }
             return
         } catch (err) {
-            console.log("카카오 로그인 실패")
+            // console.log("카카오 로그인 실패")
             history.push("/login")
             return rejectedWithValue(err)
         }

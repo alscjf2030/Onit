@@ -10,7 +10,7 @@ export const getPlan = createAsyncThunk(
             const res = await getApi(`/member/plans/${page}`)
             return res.data
         } catch (err) {
-            console.log(err.response)
+            // console.log(err.response)
             return rejectedWithValue(err.response)
         }
     }
@@ -23,7 +23,7 @@ export const getTotalPlan = createAsyncThunk(
             const res = await getApi(`/member/totalplans/${page}`)
             return res.data
         } catch (err) {
-            console.log(err)
+            // console.log(err)
             return rejectedWithValue(err.response)
         }
     }
@@ -36,7 +36,7 @@ export const getMyPlan = createAsyncThunk(
             const res = await getApi(`/member/myplans/${page}`)
             return res.data.planLists
         } catch (err) {
-            console.log(err)
+            // console.log(err)
             return rejectedWithValue(err.response)
         }
     }
@@ -49,7 +49,7 @@ export const getInvitePlan = createAsyncThunk(
             const res = await getApi(`/invitation/plans/${page}`)
             return res.data.planLists
         } catch (err) {
-            console.log(err)
+            // console.log(err)
             return rejectedWithValue(err.response)
         }
     }
@@ -62,7 +62,7 @@ export const getOnePlan = createAsyncThunk(
             const res = await getApi(`/member/plan/${planUrl}`)
             return res.data
         } catch (err) {
-            console.log(err)
+            // console.log(err)
             return rejectedWithValue(err.response)
         }
     }
@@ -71,12 +71,12 @@ export const getOnePlan = createAsyncThunk(
 export const getHistoryPlan = createAsyncThunk(
     'plan/getHistoryPlan',
     async (page, {rejectedWithValue}) => {
-        console.log(page)
+        // console.log(page)
         try {
             const res = await getApi(`/member/history/${page}`)
             return res.data
         } catch (err) {
-            console.log(err)
+            // console.log(err)
             return rejectedWithValue(err.response)
         }
     }
@@ -118,7 +118,7 @@ export const joinPlan = createAsyncThunk(
             })
             return res.data
         } catch (err) {
-            console.log(err.response.data.error)
+            // console.log(err.response.data.error)
             return rejectWithValue(err.response)
         }
     }
@@ -139,7 +139,6 @@ export const editPlan = createAsyncThunk(
             navigate(`/detail/${data.planUrl}`)
             return res.data
         } catch (err) {
-            console.log(err)
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -158,11 +157,10 @@ export const deletePlan = createAsyncThunk(
     async ({planUrl, navigate}, {rejectedWithValue}) => {
         try {
             const res = await deleteApi(`/member/plan/${planUrl}`)
-            console.log(res)
             navigate('/main')
             return planUrl
         } catch (err) {
-            console.log(err)
+            // console.log(err)
             return rejectedWithValue(err.response)
         }
     }

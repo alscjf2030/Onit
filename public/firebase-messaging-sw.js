@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-globals */
 self.addEventListener('install', e => {
-  console.log('서비스워커 install함!', e);
+  // console.log('서비스워커 install함!', e);
 });
 self.addEventListener('activate', e => {
-  console.log('서비스워커 activate 시작됨!', e);
+  // console.log('서비스워커 activate 시작됨!', e);
 });
 self.addEventListener('fetch', e => {
   // console.log("데이터 요청!(fetch)", e.request);
@@ -16,8 +16,8 @@ self.addEventListener('fetch', e => {
 // });
 // Any other custom service worker logic can go here.
 self.addEventListener('push', function (event) {
-  console.log(event);
-  console.log(event.data.json())
+  // console.log(event);
+  // console.log(event.data.json())
   const title = event.data.json().notification.title
   const options = {
     body: event.data.json().notification.body,

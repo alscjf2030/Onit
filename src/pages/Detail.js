@@ -26,8 +26,6 @@ const Detail = (props) => {
                 text: plan.planName,
                 url: window.location.href
             })
-                .then(() => console.log('성공'))
-                .catch((err) => console.log(err))
         } else {
             Swal.fire({
                 text: '공유하기가 지원되지 않는 환경 입니다.',
