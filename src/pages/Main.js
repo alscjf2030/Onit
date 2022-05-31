@@ -13,6 +13,7 @@ import theme from "../styles/theme";
 import {ReactComponent as Plus} from "../img/icon/Plus.svg";
 import {useNavigate} from "react-router-dom";
 import Swal from "sweetalert2";
+import SSE from "../components/SSE";
 
 dayjs.locale('ko')
 
@@ -40,6 +41,7 @@ const Main = (props) => {
 
     return (
         <Container>
+            {/* <SSE/> */}
             <FCMtoken/>
             <SideMenu/>
             <UserInfo>
