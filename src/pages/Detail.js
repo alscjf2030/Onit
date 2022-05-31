@@ -96,6 +96,11 @@ const Detail = (props) => {
         }
     }
 
+    const joinPlanBtn = () => {
+        dispatch(joinPlan(planUrl))
+        navigate('/main')
+    }
+
     if (!plan) {
         return <div>loading...</div>
     }
@@ -174,7 +179,7 @@ const Detail = (props) => {
                             </>
                             :
                             <>
-                                <button onClick={() => dispatch(joinPlan(planUrl))}>
+                                <button onClick={joinPlanBtn}>
                                     참석하기
                                 </button>
                                 <button
