@@ -137,10 +137,8 @@ const EditPlan = (props) => {
                 <LeftArrow
                     style={{
                         position: 'absolute',
-                        display: 'flex',
-                        justifyContent: 'flex-start',
-                        alignItems: 'flex-start',
-                        top: 12,
+                        top: 10,
+                        left: 20,
                     }}
                     size="20px"
                     cursor="pointer"

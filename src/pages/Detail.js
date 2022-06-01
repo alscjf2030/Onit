@@ -19,7 +19,7 @@ const Detail = (props) => {
     const token = localStorage.getItem("token")
     const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd')
     const planTime = dayjs(plan?.planDate).format('A hh시 mm분')
-    console.log(plan)
+
     const handleShared = () => {
         if (navigator.share) {
             navigator.share({
