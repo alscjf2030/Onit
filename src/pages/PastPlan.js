@@ -15,7 +15,7 @@ const PastPlan = (props) => {
     const [page, setPage] = useState(1)
 
     const pastPlan = useSelector(state => state.plan.past.plans)
-    console.log(pastPlan)
+    // console.log(pastPlan)
 
     useEffect(() => {
         dispatch(getHistoryPlan(page))
