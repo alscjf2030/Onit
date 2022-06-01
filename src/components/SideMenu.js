@@ -12,6 +12,7 @@ import MobilePortal from "./MobilePortal";
 import {changePic} from "../redux/modules/user";
 import theme from "../styles/theme";
 import Swal from "sweetalert2";
+import imageCompression from 'browser-image-compression';
 
 const SideMenu = (props) => {
     const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const SideMenu = (props) => {
         try {
           const compressedFile = await imageCompression(imageFile, options);
           const profileImg = new File([compressedFile], `${compressedFile.name}`, {type: "image/jpeg, image/png, image/jpg"});
-          // console.log(profileImg)
+          const Image = new File([profileImg], profileImg.name, {type: "image/jpeg, image/png, image/jpg"})
           dispatch(changePic(profileImg))
         } catch (error) {
           Swal.fire({
