@@ -133,6 +133,7 @@ export const logout = createAsyncThunk(
 export const changePic = createAsyncThunk(
     'member/profile',
     async (file, {rejectWithValue}) => {
+        // console.log(file)
         const profileImg = new FormData();
         profileImg.append("profileImg", file);
         try {
