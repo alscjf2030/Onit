@@ -24,8 +24,8 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
         }
         const _hour = hourModel.find((model) => model.id === hour)
         const _minute = minuteModel.find((model) => model.id === minute)
-        // return `${amPmType === 'pm' ? parseInt(_hour.value) + 12 : _hour.value}:${_minute.value}`
-        return `${amPmType === 'pm' ? '오후' +' '+ _hour.value : amPmType === 'am' ? '오전'+' '+ _hour.value : _hour.value}:${_minute.value}`
+        return `${amPmType === 'pm' ? parseInt(_hour.value) + 12 : _hour.value}:${_minute.value}`
+        // return `${amPmType === 'pm' ? '오후' +' '+ _hour.value : amPmType === 'am' ? '오전'+' '+ _hour.value : _hour.value}:${_minute.value}`
     }, [amPmType, hour, minute])
 
     // 2

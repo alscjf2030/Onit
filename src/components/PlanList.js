@@ -40,8 +40,7 @@ const PlanList = (props) => {
     // }, [userData])
 
     useEffect(() => {
-        // if (userData && page <= totalPage)
-        if (userData && page) {
+        if (userData && page <= createPage) {
             dispatch(getMyPlan({page: page}))
         }
     }, [userData, page])

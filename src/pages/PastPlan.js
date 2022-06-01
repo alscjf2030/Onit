@@ -59,7 +59,7 @@ const PastPlan = (props) => {
                     {pastPlan?.map((plan, list) => {
                         const planDate = plan.planDate.substring(0, 6)
                         const planTime = plan.planDate.substring(10)
-                        console.log(plan.planId)
+                        // console.log(plan)
                         return (
                             <Schedules
                                 key={list}
@@ -80,6 +80,9 @@ const PastPlan = (props) => {
                     })}
                 </SchedulesDiv>
             }
+            <TextDiv>
+                <p>최근 6개월 이내의 지난 약속만 보여집니다.</p>
+            </TextDiv>
         </Container>
     )
 }
@@ -89,6 +92,15 @@ export default PastPlan
 const Container = styled.div`
   background-color: ${theme.color.gray7};
   height: 100%;
+`
+
+const TextDiv = styled.div`
+  margin-top: 30px;
+  p {
+    color: ${theme.color.gray1};
+    display: flex;
+    justify-content: center;
+  }
 `
 
 const HeadLine = styled.div`
