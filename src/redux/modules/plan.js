@@ -74,7 +74,8 @@ export const getHistoryPlan = createAsyncThunk(
         // console.log(page)
         try {
             const res = await getApi(`/member/history/${page}`)
-            return res.data
+            // console.log(res.data.data)
+            return res.data.data
         } catch (err) {
             // console.log(err)
             return rejectedWithValue(err.response)
@@ -179,6 +180,10 @@ const initialState = {
         plans:[],
         totalPage: 0
     },
+    past: {
+        plans:[],
+        totalPage: 0
+    },
     showplan: null,
     loading: 'idle',
 }
@@ -236,6 +241,10 @@ export const planSlice = createSlice({
 
             })
             .addCase(joinPlan.fulfilled, (state, action) => {
+            })
+            .addCase(getHistoryPlan.fulfilled, (state, action) => {
+                state.past.plans = action.payload.recordResList
+                state.past.totalPage = action.payload.totalPage
             })
             .addCase(editPlan.fulfilled, (state, action) => {
                 const data = {...state.showplan, ...action.payload}

@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import {ReactComponent as LeftArrow } from '../img/icon/arrowl.svg';
+import {ReactComponent as LeftArrow} from '../img/icon/arrowl.svg';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import dayjs from "dayjs";
 
 import {getHistoryPlan} from "../redux/modules/plan";
 import theme from "../styles/theme";
+import {bomb} from "../img";
 
 const PastPlan = (props) => {
     const navigate = useNavigate()
@@ -14,12 +14,11 @@ const PastPlan = (props) => {
 
     const [page, setPage] = useState(1)
 
-    const pastPlan = useSelector(state => state.plan.plans)
-    // console.log(pastPlan)
+    const pastPlan = useSelector(state => state.plan.past.plans)
 
     useEffect(() => {
         dispatch(getHistoryPlan(page))
-    }, [pastPlan])
+    }, [])
 
     return (
         <Container>
@@ -40,24 +39,47 @@ const PastPlan = (props) => {
                 />
                 <h2>나의 지난 일정</h2>
             </HeadLine>
-            {pastPlan?.map((plan, list) => {
-                const planDate = dayjs(plan.planDate).format('YYYY년 MM월 DD일')
-                const planTime = dayjs(plan.planDate).format('HH시 mm분')
-                return (
-                    <Schedules
-                        key={list}
-                        onClick={() => {
-                            navigate(`/detail/${plan.planId}`)
-                        }}
-                    >
-                        <h3>{planDate}</h3>
-                        <h3>{planTime}</h3>
-                        <p>{plan.planName}</p>
-                        <p>{plan.locationDetail?.name}</p>
-                        <p>{plan.penalty}</p>
-                    </Schedules>
-                )
-            })}
+            {pastPlan.length === 0 ? (
+                    <NoList>
+                        <p>
+                            아직 약속이 없습니다!
+                        </p>
+                        <p>
+                            즐거운 모임 온잇에서 어떠신가요?
+                        </p>
+                        <button
+                            className='create-on-it'
+                            onClick={() => {
+                                navigate('/add')
+                            }}
+                        >온잇으로 모임 만들기
+                        </button>
+                    </NoList>
+                ) :
+                <SchedulesDiv>
+                    {pastPlan?.map((plan, list) => {
+                        const planDate = plan.planDate.substring(0, 6)
+                        const planTime = plan.planDate.substring(10)
+                        return (
+                            <Schedules
+                                key={list}
+                                onClick={() => {
+                                    navigate(`/detail/${plan.planId}`)
+                                }}
+                            >
+                                <h3>{planDate}</h3>
+                                <h3>{planTime}</h3>
+                                <p>{plan.planName}</p>
+                                <p>{plan.address}</p>
+                                <Penalty>
+                                    <img className='bomb' alt='penalty icon' src={bomb}/>
+                                    <span>{plan.penalty}</span>
+                                </Penalty>
+                            </Schedules>
+                        )
+                    })}
+                </SchedulesDiv>
+            }
         </Container>
     )
 }
@@ -84,15 +106,84 @@ const HeadLine = styled.div`
   }
 `
 
+const NoList = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: auto 0;
+  height: 80%;
+
+  p {
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    color: ${theme.color.gray1};
+  }
+
+  .create-on-it {
+    width: 70%;
+    height: 45px;
+    background-color: ${theme.color.green};
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #181818;
+    font-size: 16px;
+  }
+`
+
+const SchedulesDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 90%;
+  margin: 0 auto;
+`
+
 const Schedules = styled.div`
   background-color: white;
-  
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 auto 16px auto;
-  width: 90%;
-  border: 1px none #ddd;
+  margin: 0 auto 20px auto;
+  width: 45%;
+  border: none;
   border-radius: 10px;
-  padding: 16px 10px;
+  padding: 20px;
+  box-shadow: 0 0 15px #d1d1d1;
+
+  h3 {
+    font-weight: bold;
+    font-size: 18px;
+    padding-bottom: 5px;
+  }
+
+  h3:last-of-type {
+    padding-bottom: 15px;
+  }
+
+  p {
+    padding-bottom: 5px;
+  }
+
+  p:last-of-type {
+    padding-bottom: 15px;
+  }
 `
+
+const Penalty = styled.div`
+  display: flex;
+  background: ${theme.color.gray5};
+  border-radius: 10px;
+  padding: 5px 10px 5px 15px;
+  width: fit-content;
+  align-items: center;
+  bottom: 1rem;
+
+  span {
+    font-size: 12px;
+    margin: 0 5px;
+  }
+`;
