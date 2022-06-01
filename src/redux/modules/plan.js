@@ -30,11 +30,12 @@ export const getTotalPlan = createAsyncThunk(
 )
 
 export const getMyPlan = createAsyncThunk(
-    'plan/getTotalPlan',
+    'plan/getMyPlan',
     async ({page}, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/member/myplans/${page}`)
-            return res.data.planLists
+            // console.log(res.data)
+            return res.data
         } catch (err) {
             // console.log(err)
             return rejectedWithValue(err.response)
@@ -43,7 +44,7 @@ export const getMyPlan = createAsyncThunk(
 )
 
 export const getInvitePlan = createAsyncThunk(
-    'plan/getTotalPlan',
+    'plan/getInvitePlan',
     async ({page}, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/invitation/plans/${page}`)
@@ -229,6 +230,13 @@ export const planSlice = createSlice({
             .addCase(getTotalPlan.rejected, state => {
                 if (state.loading === 'pending') {
                     state.loading = 'failed'
+                }
+            })
+            .addCase(getMyPlan.fulfilled, (state, action) => {
+                if (state.loading === 'pending') {
+                    state.loading = 'succeeded'
+                    state.created.plans = [...action.payload.planLists];
+                    state.created.totalPage = [...state.created.totalPage, action.payload.totalPage];
                 }
             })
             .addCase(getOnePlan.pending, (state, action) => {

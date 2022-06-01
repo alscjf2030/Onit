@@ -19,6 +19,7 @@ const Detail = (props) => {
     const token = localStorage.getItem("token")
     const planDay = dayjs(plan?.planDate).format('MM월 DD일 dddd')
     const planTime = dayjs(plan?.planDate).format('A hh시 mm분')
+    // console.log(plan)
     const handleShared = () => {
         if (navigator.share) {
             navigator.share({
@@ -111,10 +112,8 @@ const Detail = (props) => {
                 <LeftArrow
                     style={{
                         position: 'absolute',
-                        display: 'flex',
-                        justifyContent: 'flex-start',
-                        alignItems: 'flex-start',
-                        top: 12,
+                        top: 10,
+                        left: 20,
                     }}
                     size="64px"
                     cursor="pointer"
@@ -144,14 +143,14 @@ const Detail = (props) => {
                         <span>{plan?.penalty}</span>
                     </Penalty>
                     {plan.participantList?.length > 1 ?
-                    <List>
-                        <Writer style={{backgroundImage: `url(${user.profileImg})`}}/>
-                        <Participants>
-                            <h5>+{plan.participantList?.length - 1}</h5>
-                        </Participants>
-                    </List>
-                    :
-                    null
+                        <List>
+                            <Writer style={{backgroundImage: `url(${user.profileImg})`}}/>
+                            <Participants>
+                                <h5>+{plan.participantList?.length - 1}</h5>
+                            </Participants>
+                        </List>
+                        :
+                        null
                     }
                 </div>
             </ScheduleBox>
@@ -198,36 +197,36 @@ const Detail = (props) => {
 export default Detail
 
 const List = styled.div`
-position: relative;
-display: flex;
-margin: 0px 16px 0px auto;
-justify-content: flex-end;
+  position: relative;
+  display: flex;
+  margin: 0px 16px 0px auto;
+  justify-content: flex-end;
 `;
 
 const Writer = styled.div`
-display: flex;
-margin-right: 16px;
-width: 32px;
-height: 32px;
-background-size: cover;
-border-radius: 16px;
+  display: flex;
+  margin-right: 16px;
+  width: 32px;
+  height: 32px;
+  background-size: cover;
+  border-radius: 16px;
 `;
 
 const Participants = styled.div`
-position: absolute;
-width: 32px;
-height: 32px;
-background: ${theme.color.gray5};
-border-radius: 16px;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: ${theme.color.gray5};
+  border-radius: 16px;
 
- h5 {
+  h5 {
     position: absolute;
     font-size: 12px;
     font-color: #747474;
     font-weight: 700;
     left: 25%;
     top: 33%;
- }
+  }
 `;
 
 const Container = styled.div`

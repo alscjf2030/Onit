@@ -15,6 +15,7 @@ const PastPlan = (props) => {
     const [page, setPage] = useState(1)
 
     const pastPlan = useSelector(state => state.plan.past.plans)
+    console.log(pastPlan)
 
     useEffect(() => {
         dispatch(getHistoryPlan(page))
@@ -26,10 +27,8 @@ const PastPlan = (props) => {
                 <LeftArrow
                     style={{
                         position: 'absolute',
-                        display: 'flex',
-                        justifyContent: 'flex-start',
-                        alignItems: 'flex-start',
-                        top: 12,
+                        top: 10,
+                        left: 20,
                     }}
                     size="64px"
                     cursor="pointer"
@@ -60,6 +59,7 @@ const PastPlan = (props) => {
                     {pastPlan?.map((plan, list) => {
                         const planDate = plan.planDate.substring(0, 6)
                         const planTime = plan.planDate.substring(10)
+                        console.log(plan.planId)
                         return (
                             <Schedules
                                 key={list}

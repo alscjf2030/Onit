@@ -37,7 +37,7 @@ const SideMenu = (props) => {
     }
     async function selectFile(e) {
         const imageFile = e.target.files[0];
-        console.log(imageFile)
+        // console.log(imageFile)
         const options = {
           maxSizeMB: 1,
           maxWidthOrHeight: 100,
@@ -47,7 +47,7 @@ const SideMenu = (props) => {
         try {
           const compressedFile = await imageCompression(imageFile, options);
           const profileImg = new File([compressedFile], `${compressedFile.name}`, {type: "image/jpeg, image/png, image/jpg"});
-          console.log(profileImg)
+          // console.log(profileImg)
           dispatch(changePic(profileImg))
         } catch (error) {
           Swal.fire({

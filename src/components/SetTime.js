@@ -12,10 +12,6 @@ import MobilePortal from "./MobilePortal";
 
 const SetTime = ({setDate, setTime, clickHandler}) => {
     let today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    const yyyy = today.getFullYear();
-    const timePlaceholder = `${today.getHours()}:${today.getMinutes()}`
     const [_date, _setDate] = useState(today)
     const [hour, setHour] = useState('시')
     const [minute, setMinute] = useState('분')
@@ -28,7 +24,8 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
         }
         const _hour = hourModel.find((model) => model.id === hour)
         const _minute = minuteModel.find((model) => model.id === minute)
-        return `${amPmType === 'pm' ? parseInt(_hour.value) + 12 : _hour.value}:${_minute.value}`
+        // return `${amPmType === 'pm' ? parseInt(_hour.value) + 12 : _hour.value}:${_minute.value}`
+        return `${amPmType === 'pm' ? '오후' +' '+ _hour.value : amPmType === 'am' ? '오전'+' '+ _hour.value : _hour.value}:${_minute.value}`
     }, [amPmType, hour, minute])
 
     // 2
@@ -83,7 +80,7 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
                     readonly
                     labelColor={theme.color.gray1}
                     labelText="먼저 날짜를 알려주세요"
-                    placeholder={today = yyyy + '년 ' + mm + '월 ' + dd + '일 '}
+                    placeholder={'누르고 날짜 선택하기'}
                     value={formatDate(_date)}
                     _onClick={toggleCalendar}
                 />
@@ -94,7 +91,7 @@ const SetTime = ({setDate, setTime, clickHandler}) => {
                     labelColor={theme.color.gray1}
                     labelText="시간은 몇시가 좋을까요?"
                     value={_time}
-                    placeholder={timePlaceholder}
+                    placeholder={'누르고 시간 선택하기'}
                     _onClick={toggleMenu}
                 />
             </Grid>

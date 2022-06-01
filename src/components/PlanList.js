@@ -25,6 +25,7 @@ const PlanList = (props) => {
     const createPage = useSelector(state => state.plan.created.totalPage);
     const loading = useSelector((state) => state.plan.loading)
     const planList = useSelector(state => state.plan.created.plans);
+
     const handleScroll = () => {
         const scrollHeight = document.documentElement.scrollHeight
         const scrollTop = document.documentElement.scrollTop
@@ -33,10 +34,10 @@ const PlanList = (props) => {
             setPage(page + 1)
         }
     }
-    useEffect(() => {
-        if (userData)
-            dispatch(getPlan(page))
-    }, [userData])
+    // useEffect(() => {
+    //     if (userData)
+    //         dispatch(getPlan(page))
+    // }, [userData])
 
     useEffect(() => {
         // if (userData && page <= totalPage)
