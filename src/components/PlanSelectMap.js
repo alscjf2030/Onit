@@ -46,7 +46,6 @@ const PlanSelectMap = props => {
             )}
     }, []);
 
-
     // var geocoder = new kakao.maps.services.Geocoder();
     // searchAddrFromCoords(selectlist.position, address);
     // function searchAddrFromCoords(coords, callback) {
