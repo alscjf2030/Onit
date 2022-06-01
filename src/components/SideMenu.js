@@ -46,7 +46,6 @@ const SideMenu = (props) => {
         try {
             const compressedFile = await imageCompression(imageFile, options);
             const profileImg = new File([compressedFile], `${compressedFile.name}`, {type: "image/jpeg, image/png, image/jpg"});
-            const Image = new File([profileImg], profileImg.name, {type: "image/jpeg, image/png, image/jpg"})
             dispatch(changePic(profileImg))
         } catch (error) {
             Swal.fire({
