@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const client = axios.create({
-    baseURL: 'https://imonint.shop',
+    baseURL: process.env.REACT_APP_URL,
     withCredentials: true
 })
 
