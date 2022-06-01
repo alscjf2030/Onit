@@ -21,8 +21,7 @@
     <title>On it</title>
     <!-- Kakao Map / login -->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <!-- <script>Kakao.init("%REACT_APP_KAKAO_KEY%");</script> -->
-    <script>Kakao.init("0864879d1c569edb376dcee44f154f7");</script>
+    <script>Kakao.init("%REACT_APP_KAKAO_KEY%");</script>
     <script type="text/javascript" src="%REACT_APP_KAKAO_MAP%"></script>
     <!-- PWA update/register -->
     <script type="module">
@@ -30,7 +29,6 @@
       const el = document.createElement('pwa-update');
       document.body.appendChild(el);
     </script>
-
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JL1CSHLEB1"></script>
     <script>
@@ -54,8 +52,7 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-
-  <script type="text/javascript" src="./firebase-messaging-sw.js"></script>
+  <script type="text/babel" src="./firebase-messaging-sw.js"></script>
   </body>
   <script>
     if ('serviceWorker' in navigator) {
@@ -65,7 +62,7 @@
           console.log("FCM 설정완료")
         })
         .catch(err => {
-          console.log("에러남")
+          console.log("alright!")
         });
     }
   </script>
