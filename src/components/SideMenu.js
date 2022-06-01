@@ -12,7 +12,6 @@ import MobilePortal from "./MobilePortal";
 import {changePic} from "../redux/modules/user";
 import theme from "../styles/theme";
 import Swal from "sweetalert2";
-import imageCompression from 'browser-image-compression';
 
 const SideMenu = (props) => {
     const dispatch = useDispatch();
@@ -21,6 +20,7 @@ const SideMenu = (props) => {
     const userData = useSelector(state => state.user.user_info)
     const [isOpen, setMenu] = useState(false);
     const hidden = useRef(null);
+
 
 
     const logoutBtn = () => {
@@ -294,7 +294,7 @@ const ShowMenu = styled.div`
     margin: 20px auto;
     cursor: pointer;
   }
-  
+
   .standard {
     width: 80%;
     margin: 20px auto;

@@ -56,6 +56,18 @@ const AddPlans = (props) => {
         dispatch(addPlan(data));
     }
 
+    // const getContent = () => {
+    //     switch (comp) {
+    //         case 0:
+    //             return <PlanName value={Name} eventHandler={eventHandler} clickHandler={clickHandler}/>
+    //         case 1:
+    //             return <SetLocation setPlace={setPlace} clickHandler={clickHandler}/>
+    //         //...
+    //         default:
+    //             return null
+    //     }
+    // }
+
     if (comp <= 3) {
         return (
             <ContentWrap>
@@ -163,7 +175,7 @@ const PlanDiv = styled.div`
     padding: 15px 0 15px 15px;
     margin: 0;
   }
-
+  
   p {
     padding: 5px 0 15px 15px;
   }
@@ -174,11 +186,11 @@ const PlanDiv = styled.div`
     font-size: 20px;
     font-weight: bold;
   }
-
+  
   h2 + h2 {
     padding-bottom: 15px;
   }
-
+  
   .penalty {
     display: flex;
     background: ${theme.color.gray5};

@@ -1,14 +1,13 @@
 /* eslint-disable no-undef */
 import React, {useEffect, useRef, useState} from 'react';
-import {Map, MapMarker, CustomOverlayMap} from 'react-kakao-maps-sdk';
+import {Map, MapMarker} from 'react-kakao-maps-sdk';
 import {Button, Grid, Text} from '../elements';
 import styled from 'styled-components';
 import Headerbar from '../shared/Headerbar';
 import theme from '../styles/theme';
-import {dest_marker, my_marker} from '../img'
+import {dest_marker} from '../img'
 
 const PlanSelectMap = props => {
-
     const inputref = useRef(); //인풋데이터
     const [keyword, setKeyword] = useState(''); //defult값 빼면 에러남..
     const [info, setInfo] = useState(); //클릭시 나올 정보==>하단 바로 빼기
@@ -47,22 +46,10 @@ const PlanSelectMap = props => {
             )}
     }, []);
 
-    const geocoder = new kakao.maps.services.Geocoder();
-    function searchAddrFromCoords(coords, callback) {
-    // 좌표로 행정동 주소 정보를 요청합니다
-    geocoder.coord2RegionCode(coords.lng, coords.lat, callback);
-        }
-    useEffect(() => {
-        searchAddrFromCoords(selectlist.position, address);
-        function address(callback) {
-            setKeyword(callback[0].region_3depth_name)
-        }
-    }, [])
-
     useEffect(() => {
         if (!map) return;
         const ps = new kakao.maps.services.Places();
-
+        if (keyword !== ''){
         ps.keywordSearch(keyword, (data, status, _pagination) => {
             if (status === kakao.maps.services.Status.OK) {
                 // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
@@ -91,7 +78,7 @@ const PlanSelectMap = props => {
                 map.setBounds(bounds);
             }
         });
-    }, [map, keyword]);
+    }}, [map, keyword]);
     const inputdatabutton = event => {
         setKeyword(inputref.current.value);
     };
