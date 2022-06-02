@@ -16,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
   button, img {
     cursor: pointer;
   }
+  
   @font-face {
     font-family: 'Pretendard' ;
     font-weight: 700;

@@ -18,7 +18,7 @@ export const getPlan = createAsyncThunk(
 
 export const getTotalPlan = createAsyncThunk(
     'plan/getTotalPlan',
-    async ({page}, {rejectedWithValue}) => {
+    async (page, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/member/totalplans/${page}`)
             return res.data
@@ -31,7 +31,7 @@ export const getTotalPlan = createAsyncThunk(
 
 export const getMyPlan = createAsyncThunk(
     'plan/getMyPlan',
-    async ({page}, {rejectedWithValue}) => {
+    async (page, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/member/myplans/${page}`)
             // console.log(res.data)
@@ -45,10 +45,10 @@ export const getMyPlan = createAsyncThunk(
 
 export const getInvitePlan = createAsyncThunk(
     'plan/getInvitePlan',
-    async ({page}, {rejectedWithValue}) => {
+    async (page, {rejectedWithValue}) => {
         try {
             const res = await getApi(`/invitation/plans/${page}`)
-            return res.data.planLists
+            return res.data
         } catch (err) {
             // console.log(err)
             return rejectedWithValue(err.response)
@@ -223,8 +223,8 @@ export const planSlice = createSlice({
             .addCase(getTotalPlan.fulfilled, (state, action) => {
                 if (state.loading === 'pending') {
                     state.loading = 'succeeded'
-                    state.all.plans = [...action.payload.planLists];
-                    state.all.totalPage = [state.all.totalPage, action.payload.totalPage];
+                    state.all.plans = [...state.all.plans, ...action.payload.planLists];
+                    state.all.totalPage = action.payload.totalPage;
                 }
             })
             .addCase(getTotalPlan.rejected, state => {
@@ -232,11 +232,38 @@ export const planSlice = createSlice({
                     state.loading = 'failed'
                 }
             })
+            .addCase(getMyPlan.pending, state => {
+                if (state.loading === 'idle'){
+                    state.loading = 'pending'
+                }
+            })
             .addCase(getMyPlan.fulfilled, (state, action) => {
                 if (state.loading === 'pending') {
                     state.loading = 'succeeded'
-                    state.created.plans = [...action.payload.planLists];
-                    state.created.totalPage = [...state.created.totalPage, action.payload.totalPage];
+                    state.created.plans = [...state.created.plans, ...action.payload.planLists];
+                    state.created.totalPage = action.payload.totalPage;
+                }
+            })
+            .addCase(getMyPlan.rejected, state => {
+                if (state.loading === 'pending') {
+                    state.loading = 'failed'
+                }
+            })
+            .addCase(getInvitePlan.pending, state => {
+                if (state.loading === 'idle'){
+                    state.loading = 'pending'
+                }
+            })
+            .addCase(getInvitePlan.fulfilled, (state, action) => {
+                if (state.loading === 'pending') {
+                    state.loading = 'succeeded'
+                    state.invited.plans = [...state.invited.plans, ...action.payload.planLists];
+                    state.invited.totalPage = action.payload.totalPage;
+                }
+            })
+            .addCase(getInvitePlan.rejected, state => {
+                if (state.loading === 'pending') {
+                    state.loading = 'failed'
                 }
             })
             .addCase(getOnePlan.pending, (state, action) => {

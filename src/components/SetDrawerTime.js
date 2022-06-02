@@ -71,25 +71,6 @@ const SetDrawerTime = ({open, onClose, hour, minute, setHour, setMinute, amPmTyp
                     </button>
                 </ButtonBox>
                 <DropBox>
-                    {/*<Dropdown*/}
-                    {/*    style={{marginRight: '12px'}}*/}
-                    {/*    defaultValue={_hour}*/}
-                    {/*    // dataKey="id"*/}
-                    {/*    // text="value"*/}
-                    {/*    placeholder="시"*/}
-                    {/*    onChange={handleHour}*/}
-                    {/*    selection*/}
-                    {/*    options={hourModel}*/}
-                    {/*/>*/}
-                    {/*<Dropdown*/}
-                    {/*    defaultValue={_minute}*/}
-                    {/*    // dataKey="id"*/}
-                    {/*    // textField="value"*/}
-                    {/*    placeholder="분"*/}
-                    {/*    onChange={handleMinute}*/}
-                    {/*    selection*/}
-                    {/*    options={minuteModel}*/}
-                    {/*/>*/}
                     <DropdownList
                         style={{
                             flex: 1,
