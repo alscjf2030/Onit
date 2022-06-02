@@ -168,11 +168,6 @@ const PlanMap = forwardRef((props, ref) => {
                 level={3}
                 onCreate={setMap}
             >
-                {/* <MapMarker image={{
-                    src: my_marker,
-                    size: {width: 33, height: 33},
-                }} position={myLocation.center}/> */}
-
                 {publicMaps &&
                     publicMaps.map((chat, index) => (
                         <>

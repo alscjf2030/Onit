@@ -22,7 +22,6 @@ const AddPlans = (props) => {
     const [time, setTime] = useState('');
     const [date, setDate] = useState('');
     const [penalty, setPenalty] = useState('');
-
     const clickHandler = () => {
         setComp(comp + 1)
     }
@@ -36,9 +35,6 @@ const AddPlans = (props) => {
     let [comp, setComp] = useState(0)
     let obj = {
         0: <SetPlan name={name} setName={setName} place={place} setPlace={setPlace} setTime={setTime} setDate={setDate} clickHandler={clickHandler}/>,
-        // 0: <PlanName name={name} setName={setName} clickHandler={clickHandler}/>,
-        // 1: <SetLocation place={place} setPlace={setPlace} clickHandler={clickHandler}/>,
-        // 2: <SetTime setTime={setTime} setDate={setDate} clickHandler={clickHandler}/>,
         1: <Penalty setPenalty={setPenalty} clickHandler={clickHandler}/>,
     }
 
@@ -47,7 +43,7 @@ const AddPlans = (props) => {
             planName: name,
             planDate: `${date} ${time}`,
             location: {
-                name: place.name,
+                name: place.placeName,
                 lat: place.lat,
                 lng: place.lng,
                 address: place.address
@@ -56,18 +52,6 @@ const AddPlans = (props) => {
         }
         dispatch(addPlan(data));
     }
-
-    // const getContent = () => {
-    //     switch (comp) {
-    //         case 0:
-    //             return <PlanName value={Name} eventHandler={eventHandler} clickHandler={clickHandler}/>
-    //         case 1:
-    //             return <SetLocation setPlace={setPlace} clickHandler={clickHandler}/>
-    //         //...
-    //         default:
-    //             return null
-    //     }
-    // }
 
     if (comp <= 1) {
         return (
@@ -176,7 +160,7 @@ const PlanDiv = styled.div`
     padding: 15px 0 15px 15px;
     margin: 0;
   }
-  
+
   p {
     padding: 5px 0 15px 15px;
   }
@@ -187,7 +171,7 @@ const PlanDiv = styled.div`
     font-size: 20px;
     font-weight: bold;
   }
-  
+
   h2 + h2 {
     padding-bottom: 15px;
   }

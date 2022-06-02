@@ -37,8 +37,8 @@ function App() {
             ) : (
                 <LaptopContainer>
                     <LeftWrap>
-                         {/*<LaptopBackground />*/}
-                        <EventBackGround/>
+                         <LaptopBackground />
+                        {/* <EventBackGround/> */}
                     </LeftWrap>
                     <RightWrap>
                         <img className='phone-img' alt='phone' src={Phone} />
