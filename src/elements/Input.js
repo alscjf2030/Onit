@@ -75,6 +75,7 @@ const Input = props => {
           onChange={_onChange}
           width={width}
           onClick={_onClick}
+          value={value}
         />
       </Grid>
     </React.Fragment>

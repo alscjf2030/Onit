@@ -12,6 +12,7 @@ import {useDispatch} from 'react-redux';
 import {addPlan} from '../redux/modules/plan';
 import {useNavigate} from "react-router-dom";
 import {bomb} from "../img";
+import SetPlan from '../components/SetPlan';
 
 const AddPlans = (props) => {
     const navigate = useNavigate()
@@ -32,13 +33,13 @@ const AddPlans = (props) => {
             navigate(-1)
         }
     }
-    // console.log(Name, place, time, date)
     let [comp, setComp] = useState(0)
     let obj = {
-        0: <PlanName name={name} setName={setName} clickHandler={clickHandler}/>,
-        1: <SetLocation place={place} setPlace={setPlace} clickHandler={clickHandler}/>,
-        2: <SetTime setTime={setTime} setDate={setDate} clickHandler={clickHandler}/>,
-        3: <Penalty setPenalty={setPenalty} clickHandler={clickHandler}/>,
+        0: <SetPlan name={name} setName={setName} place={place} setPlace={setPlace} setTime={setTime} setDate={setDate} clickHandler={clickHandler}/>,
+        // 0: <PlanName name={name} setName={setName} clickHandler={clickHandler}/>,
+        // 1: <SetLocation place={place} setPlace={setPlace} clickHandler={clickHandler}/>,
+        // 2: <SetTime setTime={setTime} setDate={setDate} clickHandler={clickHandler}/>,
+        1: <Penalty setPenalty={setPenalty} clickHandler={clickHandler}/>,
     }
 
     const create = () => {
@@ -68,7 +69,7 @@ const AddPlans = (props) => {
     //     }
     // }
 
-    if (comp <= 3) {
+    if (comp <= 1) {
         return (
             <ContentWrap>
                 <Grid padding="16px">
@@ -114,7 +115,7 @@ const AddPlans = (props) => {
                     style={{
                         fontSize: '20px',
                         fontWeight: 'bold',
-                    }}>약속이 생성되었습니다!</p>
+                    }}>모임이 완성됐어요!</p>
             </div>
             <PlanDiv>
                 <p>{name}</p>
@@ -127,7 +128,7 @@ const AddPlans = (props) => {
                     <img alt='penalty icon' src={bomb}/>
                     <span>{penalty}</span>
                 </div>
-                <KakaoMap place={place.name} lat={place.lat} lng={place.lng}/>
+                <KakaoMap place={place.placeName} lat={place.lat} lng={place.lng}/>
             </PlanDiv>
             <Grid bottom="0" padding="16px">
                 <button
@@ -140,7 +141,7 @@ const AddPlans = (props) => {
                         border: 'none',
                         borderRadius: '10px',
                     }}
-                    onClick={create}>완성!
+                    onClick={create}>만들기!
                 </button>
             </Grid>
         </Container>
