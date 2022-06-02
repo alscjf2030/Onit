@@ -1,5 +1,5 @@
 import {useSelector, useDispatch} from "react-redux";
-import { updateUser } from "../redux/modules/user";
+import {updateUser} from "../redux/modules/user";
 import styled from "styled-components";
 import React, {useEffect} from "react";
 import dayjs from "dayjs";
@@ -25,39 +25,47 @@ const Main = (props) => {
         .format('YYYY년MM월DD일 dddd')
 
     useEffect(() => {
-      if(userData){
-        dispatch(updateUser())
-      }
-      if(!token){
-        Swal.fire({
-          text: '로그인을 해주세요!',
-          icon: 'error',
-          timer: 2000
-        })
-        navigate('/login')
-      }
+        if (userData) {
+            dispatch(updateUser())
+        }
+        if (!token) {
+            Swal.fire({
+                text: '로그인을 해주세요!',
+                icon: 'error',
+                timer: 2000
+            })
+            navigate('/login')
+        }
     }, [userData?.profileImg])
 
     return (
-        <Container>
-            <FCMtoken/>
-            <SideMenu/>
-            <UserInfo>
-                <div className='member-profile'
-                     style={{
-                         backgroundImage: `url(${userData?.profileImg})`,
-                         backgroundSize: 'cover',
-                     }}/>
-                <p>{userData?.nickname ? userData.nickname : '손'} 님 <br/>{nowDate} 입니다.</p>
-            </UserInfo>
-            <div>
-                <PlanTab/>
-            </div>
-            <Plus className='plus-icon' src='Plus.svg'
+        <>
+            <Container>
+                <FCMtoken/>
+                <SideMenu/>
+                <UserInfo>
+                    <div className='member-profile'
+                         style={{
+                             backgroundImage: `url(${userData?.profileImg})`,
+                             backgroundSize: 'cover',
+                         }}/>
+                    <p>{userData?.nickname ? userData.nickname : '손'} 님 <br/>{nowDate} 입니다.</p>
+                </UserInfo>
+                <div>
+                    <PlanTab/>
+                </div>
+            </Container>
+            <Plus style={{
+                position: 'absolute',
+                bottom: '15px',
+                right: '15px',
+                zIndex: 2,
+                cursor: 'pointer'
+            }} src='Plus.svg'
                   onClick={() => {
                       navigate('/add')
                   }}/>
-        </Container>
+        </>
     )
 }
 
@@ -74,15 +82,8 @@ const Container = styled.div`
     left: 24px;
     top: 20px;
   }
-
-  .plus-icon {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    z-index: 1;
-    cursor: pointer;
-  }
 `
+
 
 const UserInfo = styled.div`
   background-color: transparent;

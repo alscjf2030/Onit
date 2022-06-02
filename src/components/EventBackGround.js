@@ -75,12 +75,21 @@ const Container = styled.div`
   width: 100%;
   margin-bottom: 50px;
   margin-left: 100px;
+  padding-left: 100px;
+  @media (max-width: 1520px) {
+    margin-left: 0;
+    padding-left: 50px;
+  }
+  @media (max-width: 1400px) {
+    margin-left: 0;
+    padding-left: 0;
+  }
 `
 
 const HeadContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-left: 100px;
+  //margin-left: 100px;
 
   img {
     width: 50%;
@@ -100,7 +109,7 @@ const HeadContainer = styled.div`
 const Text = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 20px 0 25px 100px;
+  margin: 20px 0 25px 0;
 
   p {
     padding: 5px;
@@ -110,10 +119,10 @@ const Text = styled.div`
 
 const EventContainer = styled.div`
   display: flex;
-  margin-left: 100px;
+  //margin-left: 100px;
   margin-bottom: 25px;
   min-width: 640px;
-  
+
   div {
     display: flex;
     align-items: center;
@@ -135,6 +144,7 @@ const EventContainer = styled.div`
     margin-left: 40px;
     padding-bottom: 6px;
     min-width: 600px;
+    line-height: 50px;
   }
 
   img:last-of-type {
@@ -147,13 +157,14 @@ const EventContainer = styled.div`
 const EventDateContainer = styled.div`
   display: flex;
   margin-bottom: 25px;
-  margin-left: 100px;
-  
+  //margin-left: 100px;
+
   h5 {
     width: 15%;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 24px;
     min-width: 155px;
+    line-height: 30px;
   }
 
   p {
@@ -162,19 +173,21 @@ const EventDateContainer = styled.div`
     font-weight: bold;
     font-size: 20px;
     margin-left: 30px;
+    line-height: 30px;
   }
 `
 
 const EventJoinContainer = styled.div`
   display: flex;
   margin-bottom: 25px;
-  margin-left: 100px;
+  //margin-left: 100px;
 
   h5 {
     width: 15%;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 24px;
     min-width: 155px;
+    line-height: 30px;
   }
 
   .step {
@@ -192,7 +205,7 @@ const EventJoinContainer = styled.div`
     height: 50px;
     margin-bottom: 10px;
     border-radius: 10px;
-    box-shadow: 0 0 10px 0 rgba(132, 132, 132, 0.4); 
+    box-shadow: 0 0 10px 0 rgba(132, 132, 132, 0.4);
   }
 
   button {
@@ -221,7 +234,7 @@ const EventJoinContainer = styled.div`
 
 const GiftContainer = styled.div`
   display: flex;
-  margin-left: 100px;
+  //margin-left: 100px;
 
   .img-container {
     min-width: 660px;
@@ -231,8 +244,9 @@ const GiftContainer = styled.div`
   h5 {
     width: 15%;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 24px;
     min-width: 155px;
+    line-height: 30px;
   }
 
   img {

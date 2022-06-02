@@ -19,7 +19,7 @@ function MainContents(props) {
     return (
         <MobileContainer>
             <div id="mobile-portal"/>
-            <MobileScrollBar>
+            <MobileScrollBar className='scroll-bar'>
                 <Routes>
                     <Route path='/' element={<Home/>}/>
                     <Route path="/login" element={<Login/>}>
