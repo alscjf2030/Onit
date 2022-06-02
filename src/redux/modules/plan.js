@@ -159,8 +159,9 @@ export const deletePlan = createAsyncThunk(
     async ({planUrl, navigate}, {rejectedWithValue}) => {
         try {
             const res = await deleteApi(`/member/plan/${planUrl}`)
+            // console.log(res)
             navigate('/main')
-            return planUrl
+            return res
         } catch (err) {
             // console.log(err)
             return rejectedWithValue(err.response)
@@ -289,7 +290,11 @@ export const planSlice = createSlice({
             })
             .addCase(deletePlan.fulfilled, (state, action) => {
                 state.showplan = null
-                state.plans = state.plans.filter((plan) => plan.planId !== action.payload)
+                state.all.plans = state.all.plans.filter((plan) => plan?.planId !== action.payload)
+
+                state.showplan = null
+                state.created.plans = state.created.plans.filter((plan) => plan?.planId !== action.payload)
+
             })
     }
 })

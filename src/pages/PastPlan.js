@@ -168,7 +168,7 @@ const Schedules = styled.div`
 
   h3 {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     padding-bottom: 5px;
   }
 
@@ -177,6 +177,7 @@ const Schedules = styled.div`
   }
 
   p {
+    font-size: 14px;
     padding-bottom: 5px;
   }
 
