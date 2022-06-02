@@ -37,8 +37,8 @@ function App() {
             ) : (
                 <LaptopContainer>
                     <LeftWrap>
-                         <LaptopBackground />
-                        {/*<EventBackGround/>*/}
+                        <LaptopBackground />
+                        {/* <EventBackGround/> */}
                     </LeftWrap>
                     <RightWrap>
                         <img className='phone-img' alt='phone' src={Phone} />
@@ -75,7 +75,7 @@ const LeftWrap = styled.div`
   justify-content: flex-end;
   min-width: 980px;
   transform: scale(1);
-  
+
   @media (max-width: 1520px) {
     min-width: auto;
     transform: scale(0.9);
@@ -84,7 +84,7 @@ const LeftWrap = styled.div`
   @media (max-width: 1400px) {
     transform: scale(0.8);
   }
-  
+
   @media (max-width: 768px) {
     display: none;
   }
