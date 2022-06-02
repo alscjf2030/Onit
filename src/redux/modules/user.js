@@ -1,43 +1,227 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import axios from "axios";
-import {postApi} from "../../shared/api/client";
+import {getApi, postApi, putApi} from "../../shared/api/client";
+import history from "../../index"
+import Swal from "sweetalert2";
 
 const initialState = {
-    user: null,
-    loading: 'idle'
+    loading: 'idle',
+    is_login: false,
+    user_info: null,
+    error: null,
+    url: null
 }
 
 export const signUp = createAsyncThunk(
     'user/signup',
-    async (data, {rejectedWithValue}) => {
-        // console.log(data)
+    async ({data, navigate}, {rejectWithValue}) => {
         try {
             const res = await postApi('/user/signup', data)
-            window.location.assign('/login')
-            return res
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '회원가입 성공',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            navigate('/complete')
+            return {
+                data: res.data,
+                status: res.status
+            }
         } catch (err) {
-            // window.alert(err.response.data.message)
+            // console.log(err.response.data)
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
 
-            console.log(err)
-            return rejectedWithValue(err.response)
+export const signUp2 = createAsyncThunk(
+    'user/signup',
+    async ({data, join, navigate}, {rejectWithValue}) => {
+        try {
+            const res = await postApi('/user/signup', data)
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '회원가입 성공',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            navigate(`/complete/${join}`)
+            return {
+                data: res.data,
+                status: res.status
+            }
+        } catch (err) {
+            // console.log(err.response.data)
+            return rejectWithValue(err.response.data)
         }
     }
 )
 
 export const login = createAsyncThunk(
     'user/login',
-    async (data, {rejectedWithValue}) => {
-        // console.log(data)
+    async ({data, navigate}, {rejectedWithValue}) => {
         try {
-            const res = await postApi('/user/login', data, {
-                withCredentials: true,
+            const res = await postApi('/user/login', data)
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '로그인 성공',
+                showConfirmButton: false,
+                timer: 1500
             })
             localStorage.setItem('token', res.headers.authorization)
-            window.location.assign('/main')
-            return res
+            navigate('/main')
+            return res.data
         } catch (err) {
-            console.log(err)
+            Swal.fire({
+                text: err.response.data.exception,
+                icon: 'error'
+            })
             return rejectedWithValue(err.response)
+        }
+    }
+)
+
+export const login2 = createAsyncThunk(
+    'user/login',
+    async ({data, join, navigate}, {rejectedWithValue}) => {
+        try {
+            const res = await postApi('/user/login', data)
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '로그인 성공',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            localStorage.setItem('token', res.headers.authorization)
+            navigate(`/detail/${join}`)
+            return res.data
+        } catch (err) {
+            Swal.fire({
+                text: err.response.data.exception,
+                icon: 'error'
+            })
+            return rejectedWithValue(err.response)
+        }
+    }
+)
+
+
+export const logout = createAsyncThunk(
+    'user/logout',
+    async (navigate, {rejectedWithValue}) => {
+        const data = {
+            data: '',
+        }
+        try {
+            const res = await postApi('/user/logout', data);
+            localStorage.removeItem('token');
+            setTimeout(() => navigate('/login'), 30)
+            return {
+                data: res.data,
+            }
+        } catch (err) {
+            // console.log(err)
+            return rejectedWithValue(err.response)
+        }
+    }
+)
+
+export const changePic = createAsyncThunk(
+    'member/profile',
+    async (file, {rejectWithValue}) => {
+        // console.log(file)
+        const profileImg = new FormData();
+        profileImg.append("profileImg", file);
+        try {
+            await putApi('/member/profile', profileImg, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }
+            }).then(
+                window.location.reload()
+            )
+        } catch (err) {
+            return rejectWithValue(err.response.data.msg)
+        }
+    }
+)
+
+export const updateUser = createAsyncThunk(
+    'member/info',
+    async (_, {rejectWithValue}) => {
+        try {
+            const res = await getApi('/member/info')
+            return res.data
+        } catch (err) {
+            return rejectWithValue(err.response.data.msg)
+        }
+    }
+)
+
+export const setFCMToken = createAsyncThunk(
+    'plan/setFCMToken',
+    async (data, {rejectWithValue}) => {
+        try {
+            return await postApi(`/member/devices`, data)
+                .then(response => response.data.data);
+        } catch (error) {
+            // console.log(error);
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
+export const isFCMToken = createAsyncThunk(
+    'plan/isFCMToken',
+    async (data, {rejectWithValue}) => {
+        try {
+            return await postApi(`/member/alarms`, data)
+                .then(response => response.data.data);
+        } catch (error) {
+            // console.log(error);
+            return rejectWithValue(error.response.data);
+        }
+    },
+);
+
+export const getUserToken = createAsyncThunk(
+    'user/getUserToken',
+    async (_, {rejectedWithValue}) => {
+        try {
+            const res = await getApi('/users/kakao/callback')
+            // console.log(res)
+            return {
+                data: res.data.data,
+            }
+        } catch (err) {
+            // console.log(err)
+            return rejectedWithValue(err.response)
+        }
+    }
+)
+
+export const kakaoLogin = createAsyncThunk(
+    'user/kakaoLogin',
+    async (code, {rejectedWithValue}) => {
+        try {
+            const res = await getApi(`/users/kakao/callback?code=${code}`)
+            if(res.headers.authorization){
+                const ACCESS_TOKEN = res.headers.authorization;
+                localStorage.setItem('token', ACCESS_TOKEN);
+                history.push("/main");
+                return res.data
+            } else {
+                history.push("/login")
+            }
+            return
+        } catch (err) {
+            // console.log("카카오 로그인 실패")
+            history.push("/login")
+            return rejectedWithValue(err)
         }
     }
 )
@@ -51,6 +235,12 @@ export const userSlice = createSlice({
         },
         setLoading: (state, action) => {
             state.loading = action.payload
+        },
+        resetUser: (state) => {
+            Object.assign(state, initialState)
+        },
+        setError: (state, action) => {
+            state.error = action.payload
         }
     },
     extraReducers: {
@@ -64,46 +254,39 @@ export const userSlice = createSlice({
         [signUp.fulfilled]: (state, action) => {
             if (state.loading === 'pending') {
                 state.loading = 'succeeded'
-                state.user = action.payload
             }
         },
         // user/signUp/rejected === signUp.rejected
         [signUp.rejected]: (state, action) => {
             if (state.loading === 'pending') {
-                state.loading = 'failed'
+                state.error = action.payload.msg
+                state.loading = 'idle'
             }
         },
-        // user/login/pending === signUp.pending
-        [login.pending]: (state, action) => {
-            if (state.loading === 'idle') {
-                state.loading = 'pending'
-            }
-        },
-        // user/login/fulfilled === signUp.fulfilled
+        // user/login/fulfilled === login.fulfilled
         [login.fulfilled]: (state, action) => {
-            if (state.loading === 'pending') {
-                state.loading = 'succeeded'
-                state.user = action.payload
-            }
+            state.user_info = action.payload
         },
-        // user/login/rejected === signUp.rejected
-        [login.rejected]: (state, action) => {
-            if (state.loading === 'pending') {
-                state.loading = 'failed'
-            }
+        [setFCMToken.fulfilled]: (state, action) => {
+        },
+        [isFCMToken.fulfilled]: (state, action) => {
+        },
+        [getUserToken.fulfilled]: (state, action) => {
+            state.is_login = true
+        },
+        [kakaoLogin.fulfilled]: (state, action) => {
+            state.user_info = action.payload
+        },
+        [updateUser.fulfilled]: (state, action) => {
+            state.user_info = action.payload
         },
     },
 })
 
-// 1
-// export const setUserName = userSlice.actions.setUserName
-// export const setUserName1 = userSlice.actions.setUserName1
-// export const setUserName2 = userSlice.actions.setUserName2
 
-// 2
-export const {setUserName, setLoading} = userSlice.actions
+export const {setUserName, setLoading, resetUser, setError} = userSlice.actions
 
-// 3
-// export const actions = userSlice.actions
+const actionCreators = {kakaoLogin};
+export {actionCreators};
 
 export default userSlice.reducer

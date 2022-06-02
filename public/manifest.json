@@ -1,6 +1,9 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "온잇",
+  "name": "온잇",
+  "permissions": ["geolocation"],
+  "orientation": "portrait-primary",
+  "categories": ["lifestyle", "navigation", "social"],
   "icons": [
     {
       "src": "favicon.ico",
@@ -15,7 +18,8 @@
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "maskable"
     }
   ],
   "start_url": ".",

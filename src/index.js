@@ -1,24 +1,32 @@
-import React from "react";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import * as ReactDOMClient from "react-dom/client";
-import { Provider } from "react-redux";
-import { store } from "./redux/configureStore";
-import { BrowserRouter } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import CustomRouter from './customRouter';
+import { createBrowserHistory } from 'history';
+import {Provider} from "react-redux";
+import {persistor, store} from "./redux/configureStore";
+import {PersistGate} from "redux-persist/integration/react"
+import GlobalStyle from './styles/GlobalStyle';
 
-const rootElement = document.getElementById("root");
-const root = ReactDOMClient.createRoot(rootElement);
+const history = createBrowserHistory();
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
+  // <React.StrictMode>
     <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>,
+      <GlobalStyle/>
+      <PersistGate loading={null} persistor={persistor}>
+        <CustomRouter history={history}>
+          <App />
+        </CustomRouter>
+      </PersistGate>
+    </Provider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+export default history;
 reportWebVitals();

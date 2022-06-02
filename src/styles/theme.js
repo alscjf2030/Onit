@@ -1,0 +1,70 @@
+const calRem = size => `${size / 16}rem`;
+
+const fontSize = {
+  12: calRem(12),
+  14: calRem(14),
+  18: calRem(18),
+  20: calRem(20),
+  30: calRem(30),
+  40: calRem(40),
+
+  //모바일 폰트
+  11: calRem(11),
+  16: calRem(16),
+  22: calRem(22),
+  28: calRem(28),
+};
+
+const fontWeight = {
+  extraBold: 800,
+  semiBold: 600,
+  regular: 400,
+};
+
+const color = {
+  // 가장 진한 색이 1이며, 숫자가 커질수록 점점 옅은 색으로 셋팅해두었습니다.
+  gray1: '#5A5A5A',
+  gray2: '#8C8C8C',
+  gray3: '#9E9E9E',
+  gray4: '#C4C4C4',
+  gray5: '#eee',
+  gray6: '#F8F8F8',
+  gray7: '#F5F5F5',
+  orange: '#F84914',
+  green: '#A1ED00',
+  green2: '#E6FFE2',
+  green3: '#73C496',
+  black: '#292929',
+  realblack: '#000000',
+  white: '#fff',
+  red1: '#FF3030',
+  red2: '#FFF2F2',
+  BackGround: '#FBFBFB',
+  darkLine: '#3F4448',
+  danger: '#ff8b6f',
+};
+
+export const DeviceSizes = {
+  mobile: 375,
+  laptop: 768
+}
+
+const deviceSizes = {
+  mobile: `${DeviceSizes.mobile}px`,
+  laptop: `${DeviceSizes.laptop}px`,
+};
+
+const device = {
+  mobile: `screen and (min-width: ${deviceSizes.mobile})`,
+  laptop: `screen and (min-width: ${deviceSizes.laptop})`,
+};
+
+const theme = {
+  fontSize,
+  fontWeight,
+  color,
+  calRem,
+  device,
+};
+
+export default theme;
