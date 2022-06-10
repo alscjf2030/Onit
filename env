@@ -1,0 +1,6 @@
+REACT_APP_URL="https://imonint.shop"
+REACT_APP_REST_API="3b9abf3ba78dbe030d6f9e62b0269ddb"
+REACT_APP_KAKAO_KEY="0864879d1c569edb376dcee44f154f7a"
+REACT_APP_KAKAO_MAP="//dapi.kakao.com/v2/maps/sdk.js?appkey=0864879d1c569edb376dcee44f154f7a&libraries=services,clusterer,drawing"
+REACT_APP_FIREBASE="BLg2NeG06gdfa1DbdDn1E6VFSD8a82zuaxgPXS5drdMaqUSf_lY421iglOkbev53HaDsl2jkw5vxgMaA4b6wfug"
+REACT_APP_FIREBASE_API="AIzaSyDTVH8fDXdgPh1vzMVd6_ihrSVCeYO6I4Q"
